@@ -11,8 +11,8 @@ import Foundation
 
 class News: Decodable {
     var id: Int
-    var banner_image: String?
-    var transition_url: String?
+    var banner_image: String
+    var transition_url: String
     
     
     private enum CodingKeys: String, CodingKey  {

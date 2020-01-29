@@ -20,7 +20,6 @@ class TileView: UIView {
     lazy var favouriteButton: UIButton = {
         let button = UIButton()
         button.setImage(#imageLiteral(resourceName: "Path 8890.1"), for: .normal)
-        
         return button
     }()
     

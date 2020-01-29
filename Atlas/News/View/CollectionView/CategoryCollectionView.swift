@@ -18,7 +18,7 @@ class CategoryCollectionView: UIView {
     // MARK: - Properties
     lazy var productLabel: UILabel = {
         let label = UILabel()
-        label.text = "products"
+        label.text = "Продукты"
         label.font = .getMullerBoldFont(on: 30) //UIFont(name: Font.GTWalsheimBold, size: 30)
         label.textColor = #colorLiteral(red: 0.3176470588, green: 0.3607843137, blue: 0.4352941176, alpha: 1)
         label.numberOfLines = 0
@@ -29,8 +29,8 @@ class CategoryCollectionView: UIView {
         collectionViewFlowLayout.scrollDirection = .horizontal
         collectionViewFlowLayout.estimatedItemSize = .init(width: 215, height: 295)
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: collectionViewFlowLayout)
-        collectionView.register(FavoriteCollectionViewCell.self, forCellWithReuseIdentifier: "cell")
-        collectionView.backgroundColor = .white//#colorLiteral(red: 0.9411764706, green: 0.9490196078, blue: 0.9568627451, alpha: 1)
+        collectionView.register(ProductCollectionCell.self, forCellWithReuseIdentifier: "cell")
+        collectionView.backgroundColor = .white
         collectionView.delegate = self
         collectionView.dataSource = self
         collectionView.showsHorizontalScrollIndicator = false
@@ -86,7 +86,7 @@ UICollectionViewDelegateFlowLayout {
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as! FavoriteCollectionViewCell
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as! ProductCollectionCell
 //        cell.setCategory(category: catsList[indexPath.item])
         return cell
     }

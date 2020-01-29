@@ -21,7 +21,7 @@ class Product: Codable {
     
     
     static func getImageUrl(url: String) -> URL {
-        let url = "http://194.4.58.28:9999/\(url)"
+        let url = "http://37.46.133.192:781/\(url)"
         return URL.init(string: url)!
     }
     

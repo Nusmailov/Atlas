@@ -26,7 +26,7 @@ class ProductCollectionViewCell: UICollectionViewCell {
     public var delegate: ProductAddingDelegate?
     lazy var productImageView:UIImageView = {
         let view = UIImageView()
-        view.image = #imageLiteral(resourceName: "gift")
+        view.image = #imageLiteral(resourceName: "plitka 1")
         view.contentMode = .scaleAspectFit
         view.isUserInteractionEnabled = true
         return view
@@ -36,6 +36,7 @@ class ProductCollectionViewCell: UICollectionViewCell {
         label.font = .getMullerBoldFont(on: 16)
         label.textColor = #colorLiteral(red: 0.3176470588, green: 0.3607843137, blue: 0.4352941176, alpha: 1)
         label.lineBreakMode = .byCharWrapping
+        label.text = "Клинкер «Амстердам»"
         return label
     }()
     lazy var descriptionProductLabel: UILabel = {
@@ -43,6 +44,7 @@ class ProductCollectionViewCell: UICollectionViewCell {
         label.font = .getMullerRegularFont(on: 15)
         label.textColor = #colorLiteral(red: 0.3176470588, green: 0.3607843137, blue: 0.4352941176, alpha: 1)
         label.numberOfLines = 2
+        label.text = ""
         return label
     }()
     lazy var priceView: UIView = {

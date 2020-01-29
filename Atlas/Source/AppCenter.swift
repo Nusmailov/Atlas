@@ -29,7 +29,7 @@ class AppCenter {
     }
     
     func makeRootController() -> Void {
-        if UserManager.shared.getCurrentUser() != nil {
+        if UserManager.getCurrentUser() != nil {
             let vc = TabBarViewController()
             setRootController(controller: vc)
         } else {

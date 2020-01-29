@@ -30,13 +30,4 @@ class LoaderBaseViewController: ScrollViewController {
             make.width.height.equalTo(80)
         }
     }
-    
-
-    func showLoader() -> Void {
-        self.loader.startAnimating()
-    }
-    
-    func hideLoader() -> Void {
-        self.loader.stopAnimating()
-    }
 }

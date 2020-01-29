@@ -22,7 +22,7 @@ class DiscountCollectionViewCell: UICollectionViewCell {
     var news: News! {
         didSet {
             imageView.sd_imageIndicator = SDWebImageActivityIndicator.gray
-//            imageView.sd_setImage(with: Product.getImageUrl(url: news.image))
+            imageView.sd_setImage(with: Product.getImageUrl(url: news.banner_image))
         }
     }
     // MARK: - Lifecycle

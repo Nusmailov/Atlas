@@ -1,59 +1,58 @@
 //
 //  UserManager.swift
-//  JTI
+//  InMaster
 //
-//  Created by Nursultan on 10/17/19.
-//  Copyright © 2019 Nursultan. All rights reserved.
+//  Created by Nurzhigit Smailov on 8/16/19.
+//  Copyright © 2019 Nurzhigit Smailov. All rights reserved.
 //
 
 import Foundation
+
 class UserManager {
-
-    //    MARK: - Properties
-    static let shared = UserManager()
-    private let userDefaults = UserDefaults.standard
-
-    //    MARK: - Keys
-    private let deviceTokenIdentifier = "deviceTokenIdentifier"
-    private let userIdentifier = "userIdentifier"
-
-    private init() {}
-
-    //    MARK: - Creation of user session
-
-    func createSession(withUser user: User) {
-        let encoder = JSONEncoder()
-        if let userData = try? encoder.encode(user) {
-            userDefaults.set(userData, forKey: userIdentifier)
-            userDefaults.synchronize()
-        } else {
-            print("can't save user session")
+    static let userDefaults = UserDefaults.standard
+    
+    static func createSessionWithUser(_ user: User) throws {
+        let jsonEncoder = JSONEncoder()
+        do {
+            let userData = try jsonEncoder.encode(user)
+            setCurrentToken(to: user.token)
+            userDefaults.set(userData, forKey: Key.currentUser)
+        } catch {
+            throw error
         }
     }
-
-    //    MARK: - Receive current user
-
-    func getCurrentUser() -> User? {
-        let decoder = JSONDecoder()
-
-        if let data = userDefaults.data(forKey: userIdentifier) {
-            if let user = try? decoder.decode(User.self, from: data) {
-                return user
+    
+    private static func setCurrentToken(to token: String) {
+        userDefaults.set(token, forKey: Key.currentToken)
+    }
+    
+    static func getCurrentToken() -> String? {
+        return userDefaults.string(forKey: Key.currentToken)
+    }
+    
+    static func getCurrentUser() -> User? {
+        let jsonDecoder = JSONDecoder()
+        if let userData = userDefaults.value(forKey: Key.currentUser) as? Data {
+            do {
+                let currentUser = try jsonDecoder.decode(User.self, from: userData)
+                return currentUser
+            } catch {
+                print(error.localizedDescription)
             }
         }
-
         return nil
     }
-
-    //    MARK: - Session active
-
-    func isSessionActive() -> Bool {
-        return getCurrentUser() != nil
-    }
-
-    func deleteCurrentSession() {
-        userDefaults.set(nil, forKey: userIdentifier)
-        userDefaults.set(nil, forKey: deviceTokenIdentifier)
-        userDefaults.synchronize()
+    
+//    static func updateUserData(forToken token: String, completion: @escaping (Result<User>) -> ()) {
+//        let endpoint = Endpoints.auth(token: token)
+//        let networkManager = Router(parser: CustomParser())
+//        networkManager.request(endpoint) { (result: Result<SignInModel>) in
+//            completion(result)
+//        }
+//    }
+    
+    static func deleteCurrentSession() {
+        userDefaults.set(nil, forKey: Key.currentToken)
+        userDefaults.set(nil, forKey: Key.currentUser)
     }
 }

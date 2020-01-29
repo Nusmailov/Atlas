@@ -8,7 +8,7 @@
 
 import Foundation
 import UIKit
-
+import SVProgressHUD
 //MARK: - AlertMessageType
 
 enum AlertMessageType: String {
@@ -35,7 +35,6 @@ extension UIViewController {
 
     func inNavigation() -> UIViewController {
         self.navigationController?.navigationBar.tintColor = .mainColor
-//        self.navigationController?.navigationBar.tintColor = .white
         self.navigationController?.navigationBar.backgroundColor = .white
         return UINavigationController(rootViewController: self)
     }
@@ -50,18 +49,30 @@ extension UIViewController {
         view.endEditing(true)
     }
     
-    func showErrorMessage(_ message: String) -> Void {
-        
-        let alert = UIAlertController(title: title, message: message, preferredStyle: UIAlertController.Style.alert)
-        
-        let cancelAction = UIAlertAction(title: "Ок", style: .cancel, handler: nil)
-        
-        alert.addAction(cancelAction)
-        
-        self.present(alert, animated: true, completion: nil)
-        
+    func showLoader() {
+        SVProgressHUD.setBorderColor(.mainColor)
+        SVProgressHUD.setBorderWidth(0.8)
+        SVProgressHUD.setForegroundColor(.mainColor)
+        SVProgressHUD.setRingThickness(2)
+        SVProgressHUD.show()
     }
 
+    func hideLoader() {
+        SVProgressHUD.dismiss()
+    }
+    
+    func showErrorMessage(_ message: String) {
+        SVProgressHUD.setMinimumDismissTimeInterval(1)
+        SVProgressHUD.showError(withStatus: message)
+    }
+    
+    func showSuccess(_ message: String) {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
+            SVProgressHUD.setMinimumDismissTimeInterval(1)
+            SVProgressHUD.showSuccess(withStatus: message)
+        }
+    }
+    
     func showAlertWithAction(title: String, message: String, completion: @escaping (()->())) -> Void {
         let alert = UIAlertController(title: title, message: message, preferredStyle: UIAlertController.Style.alert)
         

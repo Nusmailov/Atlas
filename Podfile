@@ -5,9 +5,10 @@ target 'Atlas' do
   # Comment the next line if you don't want to use dynamic frameworks
   use_frameworks!
 
-    pod 'SnapKit'
-    pod 'IQKeyboardManager'
-    pod 'BEMCheckBox'
-    pod 'SDWebImage'
-
+  pod 'SnapKit'
+  pod 'IQKeyboardManager'
+  pod 'BEMCheckBox'
+  pod 'SDWebImage'
+  pod 'SVProgressHUD'
+  
 end

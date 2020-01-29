@@ -7,7 +7,7 @@
 //
 
 import UIKit
-class FavoriteCollectionViewCell: UICollectionViewCell {
+class ProductCollectionCell: UICollectionViewCell {
     
     //MARK:- Properties
     lazy var tileView: TileView = {

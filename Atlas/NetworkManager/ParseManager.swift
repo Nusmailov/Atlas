@@ -15,10 +15,10 @@ class ParseManager {
     let networkManager: NetworkManager = Router(parser: DefaultParserImpl())
     
     private init() {}
-    let token = UserManager.shared.getCurrentUser()?.token
+    let token = UserManager.getCurrentToken()
     
     func multipartFormData<T: Decodable>(url: String, parameters: Parameters? = nil,
-                                         success: @escaping (T?) -> (), error: @escaping (String) -> ()) {
+                                         success: @escaping (T) -> (), error: @escaping (String) -> ()) {
         let endpoint = Endpoints.multipartFormData(url: url, parameters: parameters, token: token)
         let dispatch = DispatchQueue.global(qos: .utility)
         dispatch.async {
@@ -36,7 +36,7 @@ class ParseManager {
     }
     
     func postRequest<T: Decodable>(url: String, parameters: Parameters? = nil,
-                                   success: @escaping (T?) -> (), error: @escaping (String) -> ()) {
+                                   success: @escaping (T) -> (), error: @escaping (String) -> ()) {
         let endpoint = Endpoints.post(url: url, parameters: parameters, token: token)
         self.networkManager.request(endpoint) { (result: Result<GeneralResult<T>>) in
             DispatchQueue.main.async {
@@ -51,7 +51,7 @@ class ParseManager {
     }
     
     func getRequest<T: Decodable>(url: String, parameters: Parameters? = nil,
-                                  success: @escaping (T?) -> (), error: @escaping (String) -> ()) {
+                                  success: @escaping (T) -> (), error: @escaping (String) -> ()) {
         let endpoint = Endpoints.get(url: url, parameters: parameters, token: token)
         self.networkManager.request(endpoint) { (result: Result<GeneralResult<T>>) in
             DispatchQueue.main.async {

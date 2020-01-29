@@ -16,7 +16,7 @@ class FavoriteViewController: ViewController {
         
         let collection = UICollectionView(frame: .zero, collectionViewLayout: layout)
         
-        collection.register(FavoriteCollectionViewCell.self, forCellWithReuseIdentifier: FavoriteCollectionViewCell.cellIdentifier())
+        collection.register(ProductCollectionCell.self, forCellWithReuseIdentifier: ProductCollectionCell.cellIdentifier())
         collection.delegate = self
         collection.dataSource = self
         
@@ -52,7 +52,6 @@ class FavoriteViewController: ViewController {
         collectionView.snp.makeConstraints { (make) in
             make.edges.equalToSuperview()
         }
-        
     }
     
     func setupBackground() -> Void {
@@ -69,7 +68,7 @@ extension FavoriteViewController: UICollectionViewDelegate, UICollectionViewData
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: FavoriteCollectionViewCell.cellIdentifier(), for: indexPath) as! FavoriteCollectionViewCell
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ProductCollectionCell.cellIdentifier(), for: indexPath) as! ProductCollectionCell
         cell.configure(item: indexPath.row)
         return cell
     }

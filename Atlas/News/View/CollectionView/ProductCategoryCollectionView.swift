@@ -13,9 +13,10 @@ class ProductCategoryCollectionView: UIView {
     // MARK: - Properties
     lazy var headerLabel: UILabel = {
         let label = UILabel()
-        label.font = .getMullerBoldFont(on: 20)// UIFont(name: Font.GTWalsheimBold, size: 20)
-        label.textColor = #colorLiteral(red: 0.3176470588, green: 0.3607843137, blue: 0.4352941176, alpha: 1)
+        label.font = .getMullerRegularFont(on: 12)
+        label.textColor = UIColor(red: 0.771, green: 0.771, blue: 0.771, alpha: 1)
         label.numberOfLines = 0
+        label.text = "Выберите категорию:"
         return label
     }()
     lazy var collectionView: UICollectionView = {
@@ -24,12 +25,12 @@ class ProductCategoryCollectionView: UIView {
         collectionViewFlowLayout.estimatedItemSize = CGSize(width: 120, height: 50)
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: collectionViewFlowLayout)
         collectionView.register(CategoryCell.self, forCellWithReuseIdentifier: String.init(describing: CategoryCell.self))
-        collectionView.backgroundColor = .white//#colorLiteral(red: 0.9411764706, green: 0.9490196078, blue: 0.9568627451, alpha: 1)
+        collectionView.backgroundColor = .white
         collectionView.alwaysBounceHorizontal = true
         collectionView.showsHorizontalScrollIndicator = false
         return collectionView
     }()
-    var catsList = [Cats]()
+    var sectionList = [Section]()
     
     // MARK: - Lifecycle
     override init(frame: CGRect) {
@@ -41,8 +42,8 @@ class ProductCategoryCollectionView: UIView {
         super.layoutSubviews()
     }
     
-    func setCatsList(catsList: [Cats]) {
-        self.catsList = catsList
+    func setSectionList(sectionList: [Section]) {
+        self.sectionList = sectionList
         collectionView.reloadData()
     }
     
@@ -52,18 +53,19 @@ class ProductCategoryCollectionView: UIView {
     
     // MARK: - SetupViews
     func setupViews() {
-        addSubview(collectionView)
         addSubview(headerLabel)
+        addSubview(collectionView)
         
         headerLabel.snp.makeConstraints { (make) in
             make.top.right.equalToSuperview()
             make.left.equalToSuperview().offset(16)
         }
+        
         collectionView.snp.makeConstraints { (make) in
-            make.top.equalTo(headerLabel.snp.bottom)
-            make.left.equalToSuperview().offset(8)
-            make.right.equalToSuperview().offset(-8)
-            make.height.equalTo(60)
+            make.top.equalTo(headerLabel.snp.bottom).offset(4)
+            make.left.equalToSuperview().offset(12)
+            make.right.equalToSuperview().offset(-12)
+            make.height.equalTo(30)
             make.bottom.equalToSuperview()
         }
     }

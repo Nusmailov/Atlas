@@ -99,10 +99,12 @@ class LoginViewController: LoaderBaseViewController {
         viewModel.setPhone(autorizationInputView.phoneTextField.phoneTextField.text!)
         viewModel.setPassword(autorizationInputView.passwordTextField.textField.text!)
         let parameters = viewModel.getParameters()
-        self.showLoader()
+        showLoader()
         ParseManager.shared.postRequest(url: AppConstants.API.authUrl, parameters: parameters, success: { (result: User?) in
             self.hideLoader()
-            UserManager.shared.createSession(withUser: result!)
+            do {
+                try? UserManager.createSessionWithUser(result!)
+            }
             AppCenter.shared.makeRootController()
         }) { (error) in
             self.hideLoader()
