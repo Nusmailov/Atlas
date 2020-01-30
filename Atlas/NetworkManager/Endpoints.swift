@@ -11,7 +11,8 @@ import Foundation
 enum Endpoints: EndpointType {
 
     case get(url: String, parameters: Parameters?, token: String?)
-    case post(url: String, parameters: Parameters?, token: String?)
+    case post(url: String, parameters: Parameters?,  token: String?)
+    case delete(url: String, parameters: Parameters?, url_parameters: Parameters?, token: String?)
     case multipartFormData(url: String, parameters: Parameters?, token: String?)
 
     var baseUrl: URL {
@@ -26,6 +27,8 @@ enum Endpoints: EndpointType {
             return url
         case .multipartFormData(let url, _, _):
             return url
+        case .delete(let url, _, _, _):
+            return url
         }
     }
 
@@ -35,6 +38,8 @@ enum Endpoints: EndpointType {
             return .post
         case .multipartFormData(_, _, _):
             return .post
+        case .delete(_, _, _, _):
+            return .del
         default:
             return .get
         }
@@ -52,6 +57,7 @@ enum Endpoints: EndpointType {
                 headers["Token"] = token
             }
             return .requestParametersAndHeaders(bodyParameters: nil, urlParameters: urlParameters, additionalHeaders: headers)
+            
         case .post(_, let parameters, let token):
             var bodyParameters: Parameters = [:]
             var headers: HTTPHeaders = [:]
@@ -62,6 +68,7 @@ enum Endpoints: EndpointType {
                 headers["Token"] = token
             }
             return .requestParametersAndHeaders(bodyParameters: bodyParameters, urlParameters: nil, additionalHeaders: headers)
+            
         case let .multipartFormData(_, parameters, token):
             var bodyParameters: Parameters = [:]
             var headers: HTTPHeaders = [:]
@@ -72,9 +79,13 @@ enum Endpoints: EndpointType {
                 headers["Token"] = token
             }
             return .multipartFormData(bodyParameters: bodyParameters, urlParameters: nil, additionalHeader: headers)
+            
+        case .delete(_, let parameters, let url_parameters, let token):
+            var headers: HTTPHeaders = [:]
+            if let token = token {
+                headers["Token"] = token
+            }
+            return .requestParametersAndHeaders(bodyParameters: parameters, urlParameters: url_parameters, additionalHeaders: headers)
         }
-
     }
-
-
 }

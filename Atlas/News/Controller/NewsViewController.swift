@@ -32,7 +32,7 @@ class NewsViewController: LoaderBaseViewController {
     }()
     var refreshControl = UIRefreshControl()
     lazy var basketCountButton = BasketCountButton()
-    lazy  var sortingCollectionView: ProductCategoryCollectionView = {
+    lazy var sortingCollectionView: ProductCategoryCollectionView = {
         let view = ProductCategoryCollectionView()
         view.collectionView.delegate = self
         view.collectionView.dataSource = self
@@ -43,21 +43,33 @@ class NewsViewController: LoaderBaseViewController {
         let viewModel = NewsViewModel()
         viewModel.bannerDelegate = self
         viewModel.categorySectionDelegate = self
+        viewModel.delegate = self
         return viewModel
     }()
+    lazy var favouriteViewModel: ProductFavouriteViewModel = {
+        let viewModel = ProductFavouriteViewModel()
+        viewModel.delegate = self
+        return viewModel
+    }()
+    lazy var basketViewModel: ProductBasketViewModel = {
+        let viewModel = ProductBasketViewModel()
+        viewModel.delegate = self
+        return viewModel
+    }()
+    let coordinator = NewsCoordinator()
     
     // MARK: - Lifecycle
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        setupViews()
+        loadData()
+    }
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         navigationController?.setNavigationBarHidden(true, animated: animated)
         navigationItem.title = "Главная"
         tabBarController?.tabBar.isHidden = false
-    }
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        setupViews()
-        loadData()
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -73,6 +85,7 @@ class NewsViewController: LoaderBaseViewController {
         leftSwipe.direction = .left
         view.addSubview(searchBarView)
         searchBarView.busketButton.addTarget(self, action: #selector(goToBusketView), for: .touchUpInside)
+        refreshControl.addTarget(self, action: #selector(loadData), for: .valueChanged)
         scrollView.refreshControl = self.refreshControl
         contentView.addGestureRecognizer(leftSwipe)
         scrollView.addSubview(discountCollectionView)
@@ -100,7 +113,6 @@ class NewsViewController: LoaderBaseViewController {
             make.top.equalTo(discountCollectionView.snp.bottom).offset(12)
             make.left.right.bottom.equalToSuperview()
         }
-        updateTableView()
     }
     
     // MARK: - Actions
@@ -108,7 +120,7 @@ class NewsViewController: LoaderBaseViewController {
         tableView.snp.remakeConstraints { (make) in
             make.top.equalTo(discountCollectionView.snp.bottom).offset(12)
             make.left.right.bottom.equalToSuperview()
-            make.height.equalTo(300 * 4)
+            make.height.equalTo(320 * newsViewModel.productKeys.count)
         }
     }
     
@@ -131,26 +143,28 @@ class NewsViewController: LoaderBaseViewController {
         self.navigationController?.pushViewController(vc, animated: true)
     }
     
-    func loadData() {
+    @objc func loadData() {
         newsViewModel.getBannerList()
         newsViewModel.getCategoryList()
+        newsViewModel.getProductList()
     }
 }
 
-// MARK: - Delegation Pattern
+// MARK: - UITableViewDelegate
 extension NewsViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 4
+        return newsViewModel.productKeys.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cellProduct", for: indexPath) as! ProductTableViewCell
         cell.productView.delegate = self
+        let key = newsViewModel.productKeys[indexPath.row]
+        let products = newsViewModel.productList[key]!
+        cell.productView.setProducts(products: products)
+        cell.productView.label.text = key
+        cell.productView.delegate = self
         return cell
-    }
-    
-    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return 300
     }
 }
 
@@ -160,23 +174,30 @@ extension NewsViewController: ProductDelegate {
         
     }
     
-    func addToBusket(product_id: Int) {
-        
+    func addToBasket(product_id: Int) {
+        basketViewModel.addToBasket(product_id: product_id)
+    }
+    
+    func removeBasket(product_id: Int) {
+        basketViewModel.removeBasket(product_id: product_id)
     }
     
     func addToFavorite(product_id: Int) {
-        
+        favouriteViewModel.addToFavorite(product_id: product_id)
+    }
+    
+    func removeFavorite(product_id: Int) {
+        favouriteViewModel.removeFavourite(product_id: product_id)
     }
     
     func didOpenDescriptionVC(product: Product) {
-
+        coordinator.routeDescriptionOrder(product: product, on: self)
     }
 }
 
 // MARK: - CategoryDelegate
 extension NewsViewController: CategoryDelegate {
-    func openCategoryProducts(products: [Product], category_id: Int) {
-    }
+    func openCategoryProducts(products: [Product], category_id: Int) {}
     
     func getSub(id: Int) { }    
 }
@@ -220,6 +241,7 @@ extension NewsViewController: BannerProcessDelegate {
     }
     
     func updateUI() {
+        updateTableView()
         tableView.reloadData()
     }
 }
@@ -228,5 +250,26 @@ extension NewsViewController: BannerProcessDelegate {
 extension NewsViewController: CategorySectionProcessDelegate {
     func updateSectionCollectionView() {
         sortingCollectionView.setSectionList(sectionList: newsViewModel.sectionList)
+        refreshControl.endRefreshing()
+    }
+}
+
+extension NewsViewController: ProductFavouriteDelegate {
+    func addedFavourite() {
+        
+    }
+    
+    func removedFavourite() {
+        
+    }
+}
+
+extension NewsViewController: ProductBasketDelegate {
+    func addedBasket() {
+        
+    }
+    
+    func removedBasket() {
+        
     }
 }

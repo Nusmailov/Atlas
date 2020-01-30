@@ -30,6 +30,7 @@ public class DefaultParserImpl: Parser {
             do {
                 let json = try JSONSerialization.jsonObject(with: data, options: .allowFragments)
                 print("JSON:", json)
+                
 //                print("MESSAGE: ", (json as! [String: Any])["message"] as! String)
             } catch {
                 print("Error with json:", error.localizedDescription)
@@ -61,7 +62,9 @@ public class DefaultParserImpl: Parser {
             let result = try decoder.decode(T.self, from: data)
             return .success(result)
         } catch {
+            
             if let response = try? decoder.decode(DefaultResponse.self, from: data) {
+                
                 return .failure("\(response.message)")
             }
             return .failure(error.localizedDescription)

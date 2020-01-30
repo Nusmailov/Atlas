@@ -12,11 +12,15 @@ protocol ProductDelegate: class {
     func didOpenDescriptionVC(product: Product)
     func openTwoDirectionVC(products: [Product], category_id: Int)
     
-    func addToBusket(product_id: Int)
+    func addToBasket(product_id: Int)
+    func removeBasket(product_id: Int)
+    
     func addToFavorite(product_id: Int)
+    func removeFavorite(product_id: Int)
 }
 
 class ProductCollectionView: UIView {
+    
     // MARK: - Properties
     private let cellId = "productCell"
     lazy var collectionView : UICollectionView = {
@@ -67,6 +71,7 @@ class ProductCollectionView: UIView {
     
     func setProducts(products: [Product]) {
         self.products = products
+        self.collectionView.reloadData()
     }
     
     func setPaginationInfo(category_id: Int) {
@@ -89,7 +94,7 @@ class ProductCollectionView: UIView {
         collectionView.snp.makeConstraints { (make) in
             make.top.equalTo(label.snp.bottom)
             make.leading.trailing.bottom.equalToSuperview()
-            make.height.equalTo(275)
+            make.height.equalTo(300)
         }
     }
     
@@ -104,14 +109,14 @@ extension ProductCollectionView: UICollectionViewDelegate, UICollectionViewDataS
                                     UICollectionViewDelegateFlowLayout {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 5//products.count
+        return products.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellId, for: indexPath) as! ProductCollectionCell
-//        cell.setProduct(product: products[indexPath.item])
-//        cell.setContstraint(index: indexPath.item)
-//        cell.delegate = self
+        cell.tileView.setProduct(product: products[indexPath.row])
+        cell.configure(item: indexPath.row)
+        cell.tileView.delegate = self
         return cell
     }
     
@@ -121,18 +126,35 @@ extension ProductCollectionView: UICollectionViewDelegate, UICollectionViewDataS
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        
-//        delegate?.didOpenDescriptionVC(product: products[indexPath.item])
+        delegate?.didOpenDescriptionVC(product: products[indexPath.row])
     }
 }
 
 
-extension ProductCollectionView: ProductAddingDelegate {
-    func addToBusket(product_id: Int) {
-        delegate?.addToBusket(product_id: product_id)
+
+extension ProductCollectionView: ProductDelegate {
+    func removeBasket(product_id: Int) {
+        delegate?.removeBasket(product_id: product_id)
+    }
+    
+    func removeFavorite(product_id: Int) {
+        delegate?.removeFavorite(product_id: product_id)
+    }
+    
+    func addToBasket(product_id: Int) {
+        delegate?.addToBasket(product_id: product_id)
     }
     
     func addToFavorite(product_id: Int) {
         delegate?.addToFavorite(product_id: product_id)
     }
+    
+    func didOpenDescriptionVC(product: Product) {
+        
+    }
+    
+    func openTwoDirectionVC(products: [Product], category_id: Int) {
+        
+    }
 }
+

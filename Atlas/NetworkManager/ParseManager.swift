@@ -64,4 +64,20 @@ class ParseManager {
             }
         }
     }
+    
+    func deleteRequest<T: Decodable>(url: String, parameters: Parameters? = nil, url_parameters: Parameters? = nil,
+                                   success: @escaping (T) -> (), error: @escaping (String) -> ()) {
+        let endpoint = Endpoints.delete(url: url, parameters: nil, url_parameters: url_parameters, token: token)
+        self.networkManager.request(endpoint) { (result: Result<GeneralResult<T>>) in
+            DispatchQueue.main.async {
+                switch result {
+                case .failure(let errorMessage):
+                    error(errorMessage)
+                case .success(let value):
+                    success(value.result)
+                }
+            }
+        }
+    }
+   
 }

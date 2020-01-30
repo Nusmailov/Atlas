@@ -10,24 +10,19 @@ import Foundation
 
 class Product: Codable {
     var id: Int
-    var cat_id: Int
-    var name: String
-    var description: String
-    var show_count: Int
-    var price: Int
+    var product_name: String
+    var section_id: Int
+    var product_description: String
+    var product_price: Int
+    var product_width: Int
+    var product_length: Int
     var in_favorite: Bool
     var in_basket: Bool
-    var images: [String]?
-    
+    var images: [ImageModel]
     
     static func getImageUrl(url: String) -> URL {
         let url = "http://37.46.133.192:781/\(url)"
         return URL.init(string: url)!
-    }
-    
-    
-    static func == (first: Product, second: Product) -> Bool {
-        return first.id == second.id && first.name == second.name && first.description == second.description
     }
 }
 
@@ -38,4 +33,19 @@ class ProductModel: Codable {
     let count_date: Int
     let offset: Int
     let limit: Int
+}
+
+class ImageModel: Codable {
+    var image_path: String
+}
+
+class TotalProduct: Codable {
+    var popular: [Product]
+    var sections: [SectionProduct]
+}
+
+class SectionProduct: Codable {
+    var id: Int
+    var section_name: String
+    var products: [Product]
 }

@@ -11,5 +11,11 @@ import Foundation
 class NewsApi {
     static let getBanner = "banners"
     static let sections = "sections"
-    static let getMainPopular = "products/main"
+    static let products = "products/main"
+}
+
+
+class ProductApi {
+    static let favorite = "favorite"
+    static let basket = "basket"
 }

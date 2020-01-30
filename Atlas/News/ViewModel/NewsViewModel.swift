@@ -23,6 +23,8 @@ class NewsViewModel {
     var delegate: ProcessViewDelegate?
     var bannerDelegate: BannerProcessDelegate?
     var categorySectionDelegate: CategorySectionProcessDelegate?
+    var productList = [String: [Product]]()
+    var productKeys = [String]()
     
     func getBannerList() {
         self.categorySectionDelegate?.showLoader()
@@ -48,4 +50,21 @@ class NewsViewModel {
         }
     }
     
+    func getProductList() {
+        self.delegate?.showLoader()
+        productList.removeAll()
+        productKeys.removeAll()
+        ParseManager.shared.getRequest(url: NewsApi.products,
+            success: { (result: TotalProduct) in
+                self.productList["Самые продоваемые"] = result.popular
+                self.productKeys.append("Самые продоваемые")
+                for i in result.sections {
+                    self.productList[i.section_name] = i.products
+                    self.productKeys.append(i.section_name)
+                }
+                self.delegate?.updateUI()
+        }) { (error) in
+            self.delegate?.showErrorMessage(error)
+        }
+    }
 }

@@ -63,7 +63,7 @@ class ProductCollectionViewCell: UICollectionViewCell {
     lazy var busketButton: UIButton = {
         let button = UIButton()
         button.setImage(#imageLiteral(resourceName: "box"), for: .normal)
-        button.addTarget(self, action: #selector(addToBusket), for: .touchUpInside)
+        button.addTarget(self, action: #selector(addToBasket), for: .touchUpInside)
         return button
     }()
     
@@ -76,25 +76,7 @@ class ProductCollectionViewCell: UICollectionViewCell {
     }()
     var product: Product! {
         didSet {
-            nameProductLabel.text = product.name
-            priceProductLabel.text = "\(String(describing: product.price)) \("tenge")"
-            descriptionProductLabel.text = product.description
-            if product.in_favorite {
-                favoriteButton.setImage(#imageLiteral(resourceName: "Path 8890.1"), for: .normal)
-            } else {
-                favoriteButton.setImage(#imageLiteral(resourceName: "Half-heart"), for: .normal)
-            }
-            if product.in_basket {
-                busketButton.setImage(#imageLiteral(resourceName: "Cart#2-2"), for: .normal)
-            } else {
-                busketButton.setImage(#imageLiteral(resourceName: "box"), for: .normal)
-            }
-            if product?.images?.count != 0  &&  product.images?[0] != "" {
-                productImageView.sd_imageIndicator = SDWebImageActivityIndicator.gray
-                productImageView.sd_setImage(with: Product.getImageUrl(url: (product.images?[0])!))
-            } else {
-//                productImageView.image = UIImage(named: MediaType.gift)
-            }
+            
         }
     }
     var isInBusket = false
@@ -192,7 +174,7 @@ class ProductCollectionViewCell: UICollectionViewCell {
         }
     }
     
-    @objc func addToBusket() {
+    @objc func addToBasket() {
         if !product.in_basket {
             busketButton.setImage(#imageLiteral(resourceName: "Path 8890.1"), for: .normal)
             delegate?.addToBusket(product_id: product.id)

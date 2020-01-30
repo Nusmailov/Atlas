@@ -56,7 +56,7 @@ class ProductCollectionCell: UICollectionViewCell {
     func configure(item: Int) -> Void {
         if item % 2 == 0 {
             setupLeftView()
-        }else{
+        } else {
             setupRightView()
         }
     }
