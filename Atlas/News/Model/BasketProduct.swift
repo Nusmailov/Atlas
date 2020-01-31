@@ -10,13 +10,13 @@ import Foundation
 
 
 class BasketProduct: Codable {
+    var id: Int
     var user_id: Int
-    var order_id: Int
+    var order_id: Int?
     var product_id: Int
     var area: Double
     var product_quantity: Int
-    var cost: Int
-    var id: Int
+    var cost: Double
 }
 
 class FavouriteProduct: Codable {

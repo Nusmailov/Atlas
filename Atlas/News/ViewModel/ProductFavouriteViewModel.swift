@@ -9,8 +9,8 @@
 import Foundation
 
 protocol ProductFavouriteDelegate: ProcessViewDelegate {
-    func addedFavourite()
-    func removedFavourite()
+    func addedFavourite(product_id: Int)
+    func removedFavourite(product_id: Int)
 }
 
 class ProductFavouriteViewModel {
@@ -21,18 +21,19 @@ class ProductFavouriteViewModel {
         parameters["product_id"] = product_id
         ParseManager.shared.postRequest(url: ProductApi.favorite, parameters: parameters,
             success: { (result: FavouriteProduct) in
-            self.delegate?.addedFavourite()
+                self.delegate?.addedFavourite(product_id: product_id)
         }) { (error) in
+            
             self.delegate?.showErrorMessage(error)
         }
     }
     
     func removeFavourite(product_id: Int) {
         var parameters = Parameters()
-        parameters["id"] = product_id
+        parameters["product_id"] = product_id
         ParseManager.shared.deleteRequest(url: ProductApi.favorite, url_parameters: parameters,
-            success: { (result: String) in
-                self.delegate?.removedFavourite()
+            success: { (result: Int) in
+                self.delegate?.removedFavourite(product_id: product_id)
         }) { (error) in
             self.delegate?.showErrorMessage(error)
         }

@@ -42,8 +42,7 @@ class SearcherView: UIView {
         addSubview(searchTextField)
         
         busketButton.snp.makeConstraints { (make) in
-            make.top.equalTo(8)
-            make.bottom.equalTo(-8)
+            make.centerY.equalToSuperview()
             make.right.equalTo(-16)
             make.width.equalTo(30)
         }

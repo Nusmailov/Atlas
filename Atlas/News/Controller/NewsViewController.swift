@@ -160,8 +160,8 @@ extension NewsViewController: UITableViewDelegate, UITableViewDataSource {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cellProduct", for: indexPath) as! ProductTableViewCell
         cell.productView.delegate = self
         let key = newsViewModel.productKeys[indexPath.row]
-        let products = newsViewModel.productList[key]!
-        cell.productView.setProducts(products: products)
+//        let products = newsViewModel.productList[newsViewModel.productKeys[indexPath.row]]!
+        cell.productView.setProducts(products: newsViewModel.productList[newsViewModel.productKeys[indexPath.row]]!)
         cell.productView.label.text = key
         cell.productView.delegate = self
         return cell
@@ -199,7 +199,7 @@ extension NewsViewController: ProductDelegate {
 extension NewsViewController: CategoryDelegate {
     func openCategoryProducts(products: [Product], category_id: Int) {}
     
-    func getSub(id: Int) { }    
+    func getSub(id: Int) {}
 }
 
 // MARK: - SearchTextFieldDelegate
@@ -225,8 +225,7 @@ extension NewsViewController: UICollectionViewDelegate, UICollectionViewDataSour
         collectionView.deselectItem(at: indexPath, animated: true)
     }
     
-    func collectionView(_ collectionView: UICollectionView,
-                        layout collectionViewLayout: UICollectionViewLayout,
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout,
                         sizeForItemAt indexPath: IndexPath) -> CGSize {
         let text = newsViewModel.sectionList[indexPath.row].section_name
         let cellWidth = text.size(withAttributes:[.font: UIFont.getMontserraSemiBoldFont(on: 12)]).width + 24.0
@@ -254,22 +253,24 @@ extension NewsViewController: CategorySectionProcessDelegate {
     }
 }
 
+//MARK: - ProductFavouriteDelegate
 extension NewsViewController: ProductFavouriteDelegate {
-    func addedFavourite() {
-        
+    func addedFavourite(product_id: Int) {
+        newsViewModel.addRemoveFavourite(product_id: product_id, state: true)
     }
     
-    func removedFavourite() {
-        
+    func removedFavourite(product_id: Int) {
+        newsViewModel.addRemoveFavourite(product_id: product_id, state: false)
     }
 }
 
+//MARK: - ProductBasketDelegate
 extension NewsViewController: ProductBasketDelegate {
-    func addedBasket() {
-        
+    func addedBasket(product_id: Int) {
+        newsViewModel.addRemoveBasket(product_id: product_id, state: true)
     }
     
-    func removedBasket() {
-        
+    func removedBasket(product_id: Int) {
+        newsViewModel.addRemoveBasket(product_id: product_id, state: false)
     }
 }

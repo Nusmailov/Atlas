@@ -11,7 +11,7 @@ import UIKit
 class BasketViewController: UIViewController {
     
     //MARK: - Properties
-    lazy var tableView: UIView = {
+    lazy var tableView: UITableView = {
         let tableview = UITableView()
         tableview.delegate = self
         tableview.dataSource = self
@@ -20,6 +20,11 @@ class BasketViewController: UIViewController {
         return tableview
     }()
     lazy var totalView = TotalBasketView()
+    lazy var viewModel: ProductBasketViewModel = {
+        let viewModel = ProductBasketViewModel()
+        viewModel.delegate = self
+        return viewModel
+    }()
     
     //MARK: - Lifecycle
     override func viewDidLoad() {
@@ -30,6 +35,7 @@ class BasketViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.navigationItem.title = "Корзина"
+        getBasketList()
     }
     
     //MARK: - SetupViews
@@ -46,12 +52,16 @@ class BasketViewController: UIViewController {
             make.left.right.equalToSuperview()
         }
     }
+    
+    @objc func getBasketList() {
+        viewModel.getBasketList()
+    }
 }
 
 //MARK: - UITableViewDelegate
 extension BasketViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 5
+        return viewModel.productList.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -59,4 +69,18 @@ extension BasketViewController: UITableViewDelegate, UITableViewDataSource {
         cell.selectionStyle = .none
         return cell
     }
+}
+
+extension BasketViewController: ProductBasketDelegate {
+    func addedBasket(product_id: Int) { }
+    
+    func removedBasket(product_id: Int) {
+        viewModel.removeBasket(product_id: product_id)
+    }
+    
+    func updateUI() {
+        tableView.reloadData()
+    }
+    
+    
 }

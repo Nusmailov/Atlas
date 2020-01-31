@@ -18,4 +18,6 @@ class NewsApi {
 class ProductApi {
     static let favorite = "favorite"
     static let basket = "basket"
+    static let busket = "busket"
+    static let basketList = "baskets"
 }

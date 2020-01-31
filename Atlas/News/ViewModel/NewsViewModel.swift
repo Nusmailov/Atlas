@@ -67,4 +67,24 @@ class NewsViewModel {
             self.delegate?.showErrorMessage(error)
         }
     }
+    
+    func addRemoveFavourite(product_id: Int, state: Bool) {
+        for i in productKeys {
+            for j in 0 ..< productList[i]!.count {
+                if productList[i]![j].id == product_id {
+                    productList[i]![j].in_favorite = state
+                }
+            }
+        }
+    }
+    
+    func addRemoveBasket(product_id: Int, state: Bool) {
+        for i in productKeys {
+            for j in 0 ..< productList[i]!.count {
+                if productList[i]![j].id == product_id {
+                    productList[i]![j].in_basket = state
+                }
+            }
+        }
+    }
 }

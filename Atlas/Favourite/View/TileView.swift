@@ -82,8 +82,12 @@ class TileView: UIView {
             priceLabel.text = "\(product.product_price) ₸ м2"
             tilenameLabel.text = product.product_name
             tilesizeLabel.text = "\(product.product_length)x\(product.product_width) см"
+            
             let heart = product.in_favorite ? UIImage(named: "Path 8890.1") : UIImage(named: "emptyHeart")
             favouriteButton.setImage(heart, for: .normal)
+            
+            let basket = product.in_basket ? UIImage(named: "Cart#2-2") : UIImage(named: "box")
+            basketButton.setImage(basket, for: .normal)
             if !product.images.isEmpty {
                 image.sd_imageIndicator = SDWebImageActivityIndicator.gray
                 image.sd_setImage(with: Product.getImageUrl(url: product.images[0].image_path))
@@ -165,18 +169,22 @@ class TileView: UIView {
     
     @objc func addToBasket() {
         if product.in_basket {
+            basketButton.setImage(UIImage(named: "box"), for: .normal)
             delegate?.removeBasket(product_id: product.id)
         }
         else {
+            basketButton.setImage(UIImage(named: "Cart#2-2"), for: .normal)
             delegate?.addToBasket(product_id: product.id)
         }
     }
     
     @objc func addToFavorite() {
         if product.in_favorite {
+            favouriteButton.setImage(UIImage(named: "emptyHeart"), for: .normal)
             delegate?.removeFavorite(product_id: product.id)
         }
         else {
+            favouriteButton.setImage(UIImage(named: "Path 8890.1"), for: .normal)
             delegate?.addToFavorite(product_id: product.id)
         }
     }
