@@ -44,15 +44,16 @@ class NewsViewController: LoaderBaseViewController {
         viewModel.bannerDelegate = self
         viewModel.categorySectionDelegate = self
         viewModel.delegate = self
+        viewModel.basketCountDelegate = self
         return viewModel
     }()
-    lazy var favouriteViewModel: ProductFavouriteViewModel = {
-        let viewModel = ProductFavouriteViewModel()
+    lazy var favouriteViewModel: FavouriteViewModel = {
+        let viewModel = FavouriteViewModel()
         viewModel.delegate = self
         return viewModel
     }()
-    lazy var basketViewModel: ProductBasketViewModel = {
-        let viewModel = ProductBasketViewModel()
+    lazy var basketViewModel: BasketViewModel = {
+        let viewModel = BasketViewModel()
         viewModel.delegate = self
         return viewModel
     }()
@@ -62,6 +63,7 @@ class NewsViewController: LoaderBaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupViews()
+        showLoader()
         loadData()
     }
     
@@ -70,6 +72,7 @@ class NewsViewController: LoaderBaseViewController {
         navigationController?.setNavigationBarHidden(true, animated: animated)
         navigationItem.title = "Главная"
         tabBarController?.tabBar.isHidden = false
+        newsViewModel.getBasketCount()
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -147,6 +150,7 @@ class NewsViewController: LoaderBaseViewController {
         newsViewModel.getBannerList()
         newsViewModel.getCategoryList()
         newsViewModel.getProductList()
+        newsViewModel.getBasketCount()
     }
 }
 
@@ -164,14 +168,15 @@ extension NewsViewController: UITableViewDelegate, UITableViewDataSource {
         cell.productView.setProducts(products: newsViewModel.productList[newsViewModel.productKeys[indexPath.row]]!)
         cell.productView.label.text = key
         cell.productView.delegate = self
+        
         return cell
     }
 }
 
 // MARK: - ProductOpenDelegate
 extension NewsViewController: ProductDelegate {
-    func openTwoDirectionVC(products: [Product], category_id: Int) {
-        
+    func openTwoDirectionVC(category_id: Int, row: Int) {
+         
     }
     
     func addToBasket(product_id: Int) {
@@ -197,7 +202,9 @@ extension NewsViewController: ProductDelegate {
 
 // MARK: - CategoryDelegate
 extension NewsViewController: CategoryDelegate {
-    func openCategoryProducts(products: [Product], category_id: Int) {}
+    func openCategoryProducts(products: [Product], category_id: Int) {
+        
+    }
     
     func getSub(id: Int) {}
 }
@@ -205,6 +212,7 @@ extension NewsViewController: CategoryDelegate {
 // MARK: - SearchTextFieldDelegate
 extension NewsViewController: UITextFieldDelegate {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        
         return true
     }
 }
@@ -223,6 +231,9 @@ extension NewsViewController: UICollectionViewDelegate, UICollectionViewDataSour
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         collectionView.deselectItem(at: indexPath, animated: true)
+        
+        coordinator.routeTotalCategoryProduct(sections: newsViewModel.sectionList, row: indexPath.item,
+                                              category_id: newsViewModel.categoryIdList[indexPath.item], on: self)
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout,
@@ -238,11 +249,6 @@ extension NewsViewController: BannerProcessDelegate {
     func updateBannerCollectionView() {
         self.discountCollectionView.setNews(newsList: newsViewModel.newsList)
     }
-    
-    func updateUI() {
-        updateTableView()
-        tableView.reloadData()
-    }
 }
 
 //MARK: - CategorySectionProcessDelegate
@@ -254,23 +260,16 @@ extension NewsViewController: CategorySectionProcessDelegate {
 }
 
 //MARK: - ProductFavouriteDelegate
-extension NewsViewController: ProductFavouriteDelegate {
-    func addedFavourite(product_id: Int) {
-        newsViewModel.addRemoveFavourite(product_id: product_id, state: true)
-    }
-    
-    func removedFavourite(product_id: Int) {
-        newsViewModel.addRemoveFavourite(product_id: product_id, state: false)
+extension NewsViewController: ProcessViewDelegate {
+    func updateUI() {
+        updateTableView()
+        tableView.reloadData()
     }
 }
 
-//MARK: - ProductBasketDelegate
-extension NewsViewController: ProductBasketDelegate {
-    func addedBasket(product_id: Int) {
-        newsViewModel.addRemoveBasket(product_id: product_id, state: true)
-    }
-    
-    func removedBasket(product_id: Int) {
-        newsViewModel.addRemoveBasket(product_id: product_id, state: false)
+//MARK: - BasketCountDelegate
+extension NewsViewController: BasketCountDelegate {
+    func updateCount(count: Int) {
+        searchBarView.busketButton.countLabel.text = "\(count)"
     }
 }

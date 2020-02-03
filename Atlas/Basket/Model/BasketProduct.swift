@@ -17,6 +17,7 @@ class BasketProduct: Codable {
     var area: Double
     var product_quantity: Int
     var cost: Double
+    var product: Product?
 }
 
 class FavouriteProduct: Codable {

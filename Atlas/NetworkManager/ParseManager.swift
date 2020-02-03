@@ -53,6 +53,7 @@ class ParseManager {
     func getRequest<T: Decodable>(url: String, parameters: Parameters? = nil,
                                   success: @escaping (T) -> (), error: @escaping (String) -> ()) {
         let endpoint = Endpoints.get(url: url, parameters: parameters, token: token)
+        
         self.networkManager.request(endpoint) { (result: Result<GeneralResult<T>>) in
             DispatchQueue.main.async {
                 switch result {

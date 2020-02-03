@@ -7,6 +7,7 @@
 //
 
 import UIKit
+
 class ProductCollectionCell: UICollectionViewCell {
     
     //MARK:- Properties

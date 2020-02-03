@@ -10,7 +10,7 @@ import UIKit
 
 protocol ProductDelegate: class {
     func didOpenDescriptionVC(product: Product)
-    func openTwoDirectionVC(products: [Product], category_id: Int)
+    func openTwoDirectionVC(category_id: Int, row: Int)
     
     func addToBasket(product_id: Int)
     func removeBasket(product_id: Int)
@@ -56,7 +56,8 @@ class ProductCollectionView: UIView {
     public var delegate: ProductDelegate?
     var products = [Product]()
     var requestText = ""
-    var category_id = 0
+    var category_id: Int!
+    var index: Int!
     
     // MARK: - Lifecycle
     override init(frame: CGRect) {
@@ -100,7 +101,8 @@ class ProductCollectionView: UIView {
     
     // MARK: - Actions
     @objc func openTwoDirectionViewController () {
-        delegate?.openTwoDirectionVC(products: products, category_id: category_id)
+
+//        delegate?.openTwoDirectionVC(category_id: category_id, row: index)
     }
 }
 
@@ -133,6 +135,10 @@ extension ProductCollectionView: UICollectionViewDelegate, UICollectionViewDataS
 
 
 extension ProductCollectionView: ProductDelegate {
+    func openTwoDirectionVC(category_id: Int, row: Int) {
+        delegate?.openTwoDirectionVC(category_id: category_id, row: row)
+    }
+    
     func removeBasket(product_id: Int) {
         delegate?.removeBasket(product_id: product_id)
     }
@@ -150,10 +156,6 @@ extension ProductCollectionView: ProductDelegate {
     }
     
     func didOpenDescriptionVC(product: Product) {
-        
-    }
-    
-    func openTwoDirectionVC(products: [Product], category_id: Int) {
         
     }
 }

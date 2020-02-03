@@ -20,4 +20,6 @@ class ProductApi {
     static let basket = "basket"
     static let busket = "busket"
     static let basketList = "baskets"
+    static let basketCount = "baskets/count"
+    static let sectionProducts = "section/products"
 }

@@ -20,10 +20,15 @@ class BasketViewController: UIViewController {
         return tableview
     }()
     lazy var totalView = TotalBasketView()
-    lazy var viewModel: ProductBasketViewModel = {
-        let viewModel = ProductBasketViewModel()
+    lazy var viewModel: BasketViewModel = {
+        let viewModel = BasketViewModel()
         viewModel.delegate = self
         return viewModel
+    }()
+    lazy var refreshControl: UIRefreshControl = {
+        let refresh = UIRefreshControl()
+        refresh.addTarget(self, action: #selector(getBasketList), for: .valueChanged)
+        return refresh
     }()
     
     //MARK: - Lifecycle
@@ -40,6 +45,7 @@ class BasketViewController: UIViewController {
     
     //MARK: - SetupViews
     private func setupViews() -> Void {
+        tableView.refreshControl = refreshControl
         view.backgroundColor = .white
         view.addSubview(tableView)
         tableView.snp.makeConstraints { (make) in
@@ -53,6 +59,7 @@ class BasketViewController: UIViewController {
         }
     }
     
+    //MARK: - Actions
     @objc func getBasketList() {
         viewModel.getBasketList()
     }
@@ -71,16 +78,9 @@ extension BasketViewController: UITableViewDelegate, UITableViewDataSource {
     }
 }
 
-extension BasketViewController: ProductBasketDelegate {
-    func addedBasket(product_id: Int) { }
-    
-    func removedBasket(product_id: Int) {
-        viewModel.removeBasket(product_id: product_id)
-    }
-    
+//MARK: - ProductBasketDelegate
+extension BasketViewController: ProcessViewDelegate {
     func updateUI() {
         tableView.reloadData()
     }
-    
-    
 }

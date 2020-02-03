@@ -80,7 +80,7 @@ class CategoryCollectionView: UIView {
 
 // MARK: - CollectionViewDelegate
 extension CategoryCollectionView: UICollectionViewDelegate, UICollectionViewDataSource,
-UICollectionViewDelegateFlowLayout {
+                                UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return 10//catsList.count
     }

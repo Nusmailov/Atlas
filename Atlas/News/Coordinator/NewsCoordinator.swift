@@ -18,4 +18,18 @@ class NewsCoordinator {
         baseViewController?.navigationController?.pushViewController(vc, animated: true)
     }
     
+    func routeTotalCategoryProduct(sections: [Section], row: Int, category_id: Int, on baseVC: UIViewController) {
+        baseViewController = baseVC
+        let vc = FilterViewController()
+        vc.sectionList = sections
+        vc.row = row
+        vc.category_id = category_id
+        baseViewController?.navigationController?.pushViewController(vc, animated: true)
+    }
+    
+    func routeToBasket(on baseVC: UIViewController) {
+        baseViewController = baseVC
+        let vc = BasketViewController()
+        baseViewController?.navigationController?.pushViewController(vc, animated: true)
+    }
 }

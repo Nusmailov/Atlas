@@ -22,7 +22,6 @@ class TotalBasketView: UIView {
         label.textColor = .mainColor
         label.font = .getMullerRegularFont(on: 13)
         label.text = "Итого: +10% скидка"
-        
         return label
     }()
     

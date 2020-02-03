@@ -21,3 +21,10 @@ class DefaultResponse: Decodable {
 
 class EmptyResponse: Codable {
 }
+
+
+class PaginationResult<T: Decodable>: Decodable {
+    let current_page: Int
+    let last_page: Int
+    let data: T
+}

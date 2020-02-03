@@ -28,6 +28,4 @@ class ProductViewController: ScrollViewController {
             make.top.left.right.equalToSuperview()
         }
     }
-    
-    
 }

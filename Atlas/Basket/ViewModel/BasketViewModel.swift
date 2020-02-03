@@ -1,0 +1,58 @@
+//
+//  ProductBasketViewModel.swift
+//  Atlas
+//
+//  Created by Nurzhigit Smailov on 1/30/20.
+//  Copyright © 2020 Eldor Makkambayev. All rights reserved.
+//
+
+import Foundation
+
+
+class BasketViewModel {
+    
+    var delegate: ProcessViewDelegate?
+    var productList = [Product]()
+    
+    func getBasketList() {
+        ParseManager.shared.getRequest(url: ProductApi.basketList, success: { (result: [Product]) in
+            self.productList = result
+            for i in self.productList {
+                BasketModel.shared.basketList[i.id] = i.in_basket
+            }
+            self.delegate?.updateUI()
+        }) { (error) in
+            self.delegate?.showErrorMessage(error)
+        }
+    }
+    
+    func addToBasket(product_id: Int) {
+        var parameters = Parameters()
+        parameters["product_id"] = product_id
+        ParseManager.shared.postRequest(url: ProductApi.basket, parameters: parameters,
+            success: { (result: BasketProduct) in
+                BasketModel.shared.basketList[product_id] = true
+                self.delegate?.updateUI()
+        }) { (error) in
+            self.delegate?.showErrorMessage(error)
+        }
+    }
+    
+    func removeBasket(product_id: Int) {
+        var parameters = Parameters()
+        parameters["product_id"] = product_id
+        ParseManager.shared.deleteRequest(url: ProductApi.busket, url_parameters: parameters,
+            success: { (result: Int) in
+                BasketModel.shared.basketList[product_id] = false
+                for i in 0 ..< self.productList.count {
+                    if self.productList[i].id == product_id {
+                        self.productList.remove(at: i)
+                        break
+                    }
+                }
+                self.delegate?.updateUI()
+        }) { (error) in
+            self.delegate?.showErrorMessage(error)
+        }
+    }
+}
