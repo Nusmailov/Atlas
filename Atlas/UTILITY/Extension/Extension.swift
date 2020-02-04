@@ -146,6 +146,7 @@ extension UIColor {
     static let inputViewColor = #colorLiteral(red: 0.4784313725, green: 0.6941176471, blue: 0.862745098, alpha: 1)
     static let anotherBlue = #colorLiteral(red: 0.631372549, green: 0.7215686275, blue: 0.8117647059, alpha: 1)
     static let whiteBlue = UIColor(red: 0.973, green: 0.98, blue: 0.988, alpha: 1)
+    static let whiteGray = #colorLiteral(red: 0.9725490196, green: 0.9803921569, blue: 0.9882352941, alpha: 1)
 }
 
 //MARK: - Image
