@@ -141,6 +141,7 @@
 		F562B05523E2F31B00E31AAD /* NewsCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = F562B05423E2F31B00E31AAD /* NewsCoordinator.swift */; };
 		F562B05723E4410C00E31AAD /* BasketModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F562B05623E4410C00E31AAD /* BasketModel.swift */; };
 		F562B05A23E4418E00E31AAD /* FavoriteModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F562B05923E4418E00E31AAD /* FavoriteModel.swift */; };
+		F58ECDD923E9246800B7BB2F /* SearchFilterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F58ECDD823E9246800B7BB2F /* SearchFilterView.swift */; };
 		F596E2C123E00EB700B15CA3 /* PoliticalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F596E2C023E00EB700B15CA3 /* PoliticalViewController.swift */; };
 		F5C219D723D9C3BD00AD5416 /* OrderViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5C219D623D9C3BD00AD5416 /* OrderViewModel.swift */; };
 		F5C219D923DAAEAB00AD5416 /* OrderQuantityView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5C219D823DAAEAB00AD5416 /* OrderQuantityView.swift */; };
@@ -310,6 +311,7 @@
 		F562B05423E2F31B00E31AAD /* NewsCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsCoordinator.swift; sourceTree = "<group>"; };
 		F562B05623E4410C00E31AAD /* BasketModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = BasketModel.swift; path = Atlas/News/Coordinator/BasketModel.swift; sourceTree = SOURCE_ROOT; };
 		F562B05923E4418E00E31AAD /* FavoriteModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteModel.swift; sourceTree = "<group>"; };
+		F58ECDD823E9246800B7BB2F /* SearchFilterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchFilterView.swift; sourceTree = "<group>"; };
 		F596E2C023E00EB700B15CA3 /* PoliticalViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PoliticalViewController.swift; sourceTree = "<group>"; };
 		F5C219D623D9C3BD00AD5416 /* OrderViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderViewModel.swift; sourceTree = "<group>"; };
 		F5C219D823DAAEAB00AD5416 /* OrderQuantityView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderQuantityView.swift; sourceTree = "<group>"; };
@@ -864,6 +866,7 @@
 				14C3559123C8397100782282 /* SearcherView.swift */,
 				14C3559323C8398A00782282 /* SpecialOrderView.swift */,
 				F55407B523DEE05B002875F5 /* BasketCountButton.swift */,
+				F58ECDD823E9246800B7BB2F /* SearchFilterView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -1299,6 +1302,7 @@
 				1417D8C123CC37A800429C23 /* SpecialAgreeView.swift in Sources */,
 				1417D8D623CC4C4C00429C23 /* NetworkResponse.swift in Sources */,
 				1417D8BD23CC37A800429C23 /* Office.swift in Sources */,
+				F58ECDD923E9246800B7BB2F /* SearchFilterView.swift in Sources */,
 				145A30E823C45111008962FF /* ProfileTabBarView.swift in Sources */,
 				14182787238533F700857FA9 /* ProfileImageView.swift in Sources */,
 				1417D8C823CC37A800429C23 /* ContactInfoViewController.swift in Sources */,

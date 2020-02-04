@@ -18,12 +18,11 @@ class NewsCoordinator {
         baseViewController?.navigationController?.pushViewController(vc, animated: true)
     }
     
-    func routeTotalCategoryProduct(sections: [Section], row: Int, category_id: Int, on baseVC: UIViewController) {
+    func routeTotalCategoryProduct(text: String? = "", sections: [Section], row: Int, category_id: Int, on baseVC: UIViewController) {
         baseViewController = baseVC
-        let vc = FilterViewController()
+        let vc = FilterViewController(category_id: category_id, text: text ?? "")
         vc.sectionList = sections
         vc.row = row
-        vc.category_id = category_id
         baseViewController?.navigationController?.pushViewController(vc, animated: true)
     }
     

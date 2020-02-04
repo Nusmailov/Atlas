@@ -31,6 +31,7 @@ class NewsViewModel {
     var productList = [String: [Product]]()
     var productKeys = [String]()
     var categoryIdList = [Int]()
+    var sectionIdList = [Int]()
     
     func getBannerList() {
 //        self.categorySectionDelegate?.showLoader()
@@ -63,13 +64,18 @@ class NewsViewModel {
 //        self.delegate?.showLoader()
         productList.removeAll()
         productKeys.removeAll()
+        sectionIdList.removeAll()
         ParseManager.shared.getRequest(url: NewsApi.products,
             success: { (result: TotalProduct) in
                 self.productList["Самые продоваемые"] = result.popular
                 self.productKeys.append("Самые продоваемые")
+                self.sectionIdList.append(-2)
                 for i in result.sections {
                     self.productList[i.section_name] = i.products
                     self.productKeys.append(i.section_name)
+                }
+                for i in result.sections {
+                    self.sectionIdList.append(i.id)
                 }
                 self.delegate?.updateUI()
         }) { (error) in

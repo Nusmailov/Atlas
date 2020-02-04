@@ -132,7 +132,7 @@ extension FavoriteViewController: ProcessViewDelegate {
 
 //MARK: - ProductDelegate
 extension FavoriteViewController: ProductDelegate {
-    func openTwoDirectionVC(category_id: Int, row: Int) { }
+    func openTwoDirectionVC(category_id: Int) { }
     
     func didOpenDescriptionVC(product: Product) { }
     

@@ -57,6 +57,7 @@ class NewsViewController: LoaderBaseViewController {
         viewModel.delegate = self
         return viewModel
     }()
+    
     let coordinator = NewsCoordinator()
     
     // MARK: - Lifecycle
@@ -164,19 +165,21 @@ extension NewsViewController: UITableViewDelegate, UITableViewDataSource {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cellProduct", for: indexPath) as! ProductTableViewCell
         cell.productView.delegate = self
         let key = newsViewModel.productKeys[indexPath.row]
-//        let products = newsViewModel.productList[newsViewModel.productKeys[indexPath.row]]!
         cell.productView.setProducts(products: newsViewModel.productList[newsViewModel.productKeys[indexPath.row]]!)
         cell.productView.label.text = key
         cell.productView.delegate = self
         
+        cell.productView.category_id = newsViewModel.sectionIdList[indexPath.item]
         return cell
     }
 }
 
 // MARK: - ProductOpenDelegate
 extension NewsViewController: ProductDelegate {
-    func openTwoDirectionVC(category_id: Int, row: Int) {
-         
+    func openTwoDirectionVC(category_id: Int) {
+        
+        coordinator.routeTotalCategoryProduct(sections: newsViewModel.sectionList,
+                                              row: -1, category_id: category_id, on: self)
     }
     
     func addToBasket(product_id: Int) {
@@ -200,19 +203,11 @@ extension NewsViewController: ProductDelegate {
     }
 }
 
-// MARK: - CategoryDelegate
-extension NewsViewController: CategoryDelegate {
-    func openCategoryProducts(products: [Product], category_id: Int) {
-        
-    }
-    
-    func getSub(id: Int) {}
-}
-
 // MARK: - SearchTextFieldDelegate
 extension NewsViewController: UITextFieldDelegate {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        
+        coordinator.routeTotalCategoryProduct(text: textField.text!, sections: newsViewModel.sectionList, row: 0, category_id: -1, on: self)
+        searchBarView.searchTextField.text = ""
         return true
     }
 }
@@ -231,7 +226,7 @@ extension NewsViewController: UICollectionViewDelegate, UICollectionViewDataSour
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         collectionView.deselectItem(at: indexPath, animated: true)
-        
+        searchBarView.searchTextField.text = ""
         coordinator.routeTotalCategoryProduct(sections: newsViewModel.sectionList, row: indexPath.item,
                                               category_id: newsViewModel.categoryIdList[indexPath.item], on: self)
     }

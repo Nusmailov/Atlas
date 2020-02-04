@@ -24,6 +24,12 @@ class FilterViewController: ViewController {
         collection.alwaysBounceVertical = true
         return collection
     }()
+    lazy var searchFilterView: SearchFilterView = {
+        let view = SearchFilterView()
+        view.textField.delegate = self
+        
+        return view
+    }()
     lazy var rightButton: BasketCountButton = {
         let button = BasketCountButton()
         button.addTarget(self, action: #selector(goToBasketView), for: .touchUpInside)
@@ -38,7 +44,7 @@ class FilterViewController: ViewController {
     }()
     lazy var refreshControl: UIRefreshControl = {
         let refresh = UIRefreshControl()
-        refresh.addTarget(self, action: #selector(updateData), for: .valueChanged)
+        refresh.addTarget(self, action: #selector(updateByCategory), for: .valueChanged)
         return refresh
     }()
     lazy var viewModel: FilterViewModel = {
@@ -65,12 +71,27 @@ class FilterViewController: ViewController {
     var category_id: Int!
     var row: Int!
     var coordinator = NewsCoordinator()
+    var indexBool = false
+    var selectedIndex = -1
+    var text = ""
     
+    init(category_id: Int, text: String? = "") {
+        super.init(nibName: nil, bundle: nil)
+        self.category_id = category_id
+        self.text = text ?? ""
+        self.searchFilterView.textField.text = text ?? ""
+    }
+
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
     //MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
         setupViews()
-        loadData(category_id: category_id)
+        view.backgroundColor = .white
+        showLoader()
+        updateByCategory()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -82,30 +103,53 @@ class FilterViewController: ViewController {
     
     //MARK: - setupViews
     func setupViews() {
-        view.addSubviews(views: [collectionView, sortingCollectionView])
+        view.addSubviews(views: [collectionView, searchFilterView, sortingCollectionView])
+        searchFilterView.snp.makeConstraints { (make) in
+            make.top.equalTo(view.safeAreaLayoutGuide.snp.top)
+            make.left.right.equalToSuperview()
+        }
         sortingCollectionView.snp.makeConstraints { (make) in
             make.left.right.equalToSuperview()
-            make.top.equalTo(view.safeAreaLayoutGuide.snp.top)
+            make.top.equalTo(searchFilterView.snp.bottom)
             make.height.equalTo(60)
         }
         collectionView.snp.makeConstraints { (make) in
             make.top.equalTo(sortingCollectionView.snp.bottom).offset(16)
             make.left.right.bottom.equalToSuperview()
         }
+        collectionView.keyboardDismissMode = .onDrag
+        sortingCollectionView.collectionView.keyboardDismissMode = .onDrag
+        collectionView.refreshControl = refreshControl
     }
     
+    //MARK: - Actions
     @objc func loadData(category_id: Int) {
         viewModel.getProduct(category_id: category_id, page: viewModel.page)
     }
     
     @objc func updateData() {
         viewModel.page = 1
-        loadData(category_id: category_id)
+        updateByCategory()
     }
     
     @objc func goToBasketView() {
         coordinator.routeToBasket(on: self)
     }
+    
+    @objc func updateByCategory() {
+        
+        if category_id == -2 {
+            viewModel.getPopularProducts()
+        }
+        else if category_id != -1 {
+            loadData(category_id: category_id)
+//            category_id = -1
+        }
+        else {
+            viewModel.getSearch(parameters: ["text" : text])
+        }
+    }
+    
     
 }
 
@@ -128,6 +172,7 @@ extension FilterViewController: UICollectionViewDelegate, UICollectionViewDataSo
                                                       for: indexPath) as! ProductCollectionCell
         cell.tileView.setProduct(product: viewModel.productList[indexPath.item])
         cell.tileView.delegate = self
+        
         return cell
     }
     
@@ -153,6 +198,7 @@ extension FilterViewController: UICollectionViewDelegate, UICollectionViewDataSo
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         if collectionView == self.sortingCollectionView.collectionView {
             category_id = sectionList[indexPath.item].id
+            searchFilterView.textField.text = ""
             loadData(category_id: category_id)
         } else {
             coordinator.routeDescriptionOrder(product: viewModel.productList[indexPath.item], on: self)
@@ -170,11 +216,11 @@ extension FilterViewController: ProcessViewDelegate {
 
 //MARK: - ProductDelegate
 extension FilterViewController: ProductDelegate {
+    func openTwoDirectionVC(category_id: Int) { }
+    
     func didOpenDescriptionVC(product: Product) {
         coordinator.routeDescriptionOrder(product: product, on: self)
     }
-    
-    func openTwoDirectionVC(category_id: Int, row: Int) { }
     
     func addToBasket(product_id: Int) {
         basketViewModel.addToBasket(product_id: product_id)
@@ -197,5 +243,19 @@ extension FilterViewController: ProductDelegate {
 extension FilterViewController: BasketCountDelegate {
     func updateCount(count: Int) {
         rightButton.countLabel.text = "\(count)"
+    }
+}
+
+//MARK: - UITextViewDelegate
+extension FilterViewController: UITextFieldDelegate {
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        let text = searchFilterView.textField.text!
+        dismissKeyboard()
+        var parameters = ["text" : text, "section_id" : category_id!] as [String : Any]
+        if category_id == -1 {
+            parameters.removeValue(forKey: "section_id")
+        }
+        viewModel.getSearch(parameters: parameters)
+        return true
     }
 }
