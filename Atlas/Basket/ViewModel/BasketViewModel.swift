@@ -11,15 +11,23 @@ import Foundation
 
 class BasketViewModel {
     
+    //MARK: - Properties
     var delegate: ProcessViewDelegate?
-    var productList = [Product]()
+    var productList = [BasketProduct]()
+    var page = 1
+    var max_page = 1
     
+    //MARK: - Requests
     func getBasketList() {
-        ParseManager.shared.getRequest(url: ProductApi.basketList, success: { (result: [Product]) in
-            self.productList = result
+        ParseManager.shared.getRequest(url: ProductApi.basketList,
+            success: { (result: PaginationResult<[BasketProduct]>) in
+            self.productList = result.data
             for i in self.productList {
-                BasketModel.shared.basketList[i.id] = i.in_basket
+                BasketModel.shared.basketList[i.id] = i.product.in_basket
             }
+            self.max_page = result.last_page
+            self.page = result.current_page
+            self.delegate?.hideLoader()
             self.delegate?.updateUI()
         }) { (error) in
             self.delegate?.showErrorMessage(error)

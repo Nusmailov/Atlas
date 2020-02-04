@@ -81,7 +81,7 @@ class FilterViewController: ViewController {
         self.text = text ?? ""
         self.searchFilterView.textField.text = text ?? ""
     }
-
+    
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
@@ -141,10 +141,14 @@ class FilterViewController: ViewController {
         if category_id == -2 {
             viewModel.getPopularProducts()
         }
+        else if category_id == -3 {
+            hideLoader()
+            searchFilterView.textField.becomeFirstResponder()
+        }
         else if category_id != -1 {
             loadData(category_id: category_id)
-//            category_id = -1
         }
+            
         else {
             viewModel.getSearch(parameters: ["text" : text])
         }
@@ -209,6 +213,7 @@ extension FilterViewController: UICollectionViewDelegate, UICollectionViewDataSo
 //MARK: - ProcessViewDelegate
 extension FilterViewController: ProcessViewDelegate {
     func updateUI() {
+        newsViewModel.getBasketCount()
         self.refreshControl.endRefreshing()
         self.collectionView.reloadData()
     }
@@ -223,6 +228,11 @@ extension FilterViewController: ProductDelegate {
     }
     
     func addToBasket(product_id: Int) {
+        UIView.animate(withDuration: 1.0, animations: {
+            self.rightButton.animationZoom(scaleX: 1.4, y: 1.4)
+        }, completion: { _ in
+            self.rightButton.animationZoom(scaleX: 1.0, y: 1.0)
+        })
         basketViewModel.addToBasket(product_id: product_id)
     }
     
@@ -252,9 +262,10 @@ extension FilterViewController: UITextFieldDelegate {
         let text = searchFilterView.textField.text!
         dismissKeyboard()
         var parameters = ["text" : text, "section_id" : category_id!] as [String : Any]
-        if category_id == -1 {
+        if category_id == -1 || category_id == -3 {
             parameters.removeValue(forKey: "section_id")
         }
+        
         viewModel.getSearch(parameters: parameters)
         return true
     }

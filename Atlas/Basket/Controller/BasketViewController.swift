@@ -34,12 +34,14 @@ class BasketViewController: UIViewController {
     //MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         setupViews()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.navigationItem.title = "Корзина"
+        showLoader()
         getBasketList()
     }
     
@@ -57,6 +59,7 @@ class BasketViewController: UIViewController {
             make.bottom.equalTo(-(tabBarController?.tabBar.bounds.height)!)
             make.left.right.equalToSuperview()
         }
+        tableView.keyboardDismissMode = .onDrag
     }
     
     //MARK: - Actions
@@ -72,8 +75,12 @@ extension BasketViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: BasketTableViewCell.cellIdentifier(), for: indexPath) as! BasketTableViewCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: BasketTableViewCell.cellIdentifier(),
+                                                 for: indexPath) as! BasketTableViewCell
+        cell.setBasketProduct(basketProduct: viewModel.productList[indexPath.row])
         cell.selectionStyle = .none
+        cell.delegate = self
+        cell.index = indexPath.item
         return cell
     }
 }
@@ -81,6 +88,16 @@ extension BasketViewController: UITableViewDelegate, UITableViewDataSource {
 //MARK: - ProductBasketDelegate
 extension BasketViewController: ProcessViewDelegate {
     func updateUI() {
+        refreshControl.endRefreshing()
         tableView.reloadData()
+    }
+}
+
+//MARK: - ProductBasketDelegate
+extension BasketViewController: DeleteBasketDelegate {
+    func deleteProductBasket(product_id: Int, index: Int) {
+        viewModel.removeBasket(product_id: product_id)
+        viewModel.productList.remove(at: index)
+        tableView.deleteRows(at: [IndexPath(item: index, section: 0)], with: .automatic)
     }
 }

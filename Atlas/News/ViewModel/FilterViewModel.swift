@@ -48,7 +48,7 @@ class FilterViewModel {
         }
     }
     
-    func getPopularProducts(){
+    func getPopularProducts() {
         ParseManager.shared.getRequest(url: ProductApi.popularProducts,
             success: { (result: PaginationResult<[Product]>) in
             self.productList = result.data

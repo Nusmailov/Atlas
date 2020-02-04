@@ -19,20 +19,15 @@ class ProductCharacteristicView: UIView {
         return label
     }()
     
-    lazy var backView: UIView = {
-        let view = UIView()
-        view.backgroundColor = #colorLiteral(red: 0.0, green: 0.0, blue: 0.0, alpha: 0.03)
-        view.layer.cornerRadius = 4
-        
-        return view
-    }()
-    
-    lazy var valueLabel: UILabel = {
-        let label = UILabel()
-        label.textColor = #colorLiteral(red: 0.267, green: 0.267, blue: 0.267, alpha: 1)
-        label.font = .getMullerMediumFont(on: 12)
-        
-        return label
+    lazy var valueTextField: UITextField = {
+        let text = UITextField()
+        text.textColor = #colorLiteral(red: 0.267, green: 0.267, blue: 0.267, alpha: 1)
+        text.font = .getMullerMediumFont(on: 12)
+        text.backgroundColor = #colorLiteral(red: 0.0, green: 0.0, blue: 0.0, alpha: 0.03)
+        text.layer.cornerRadius = 4
+        text.textAlignment = .center
+        text.keyboardType = .decimalPad
+        return text
     }()
 
     override init(frame: CGRect) {
@@ -50,23 +45,11 @@ class ProductCharacteristicView: UIView {
             make.top.equalToSuperview()
             make.left.equalTo(4)
         }
-        addSubview(backView)
-        backView.snp.makeConstraints { (make) in
+        addSubview(valueTextField)
+        valueTextField.snp.makeConstraints { (make) in
             make.top.equalTo(titleLabel.snp.bottom).offset(4)
             make.height.equalTo(33)
             make.bottom.right.left.equalToSuperview()
         }
-        backView.addSubview(valueLabel)
-        valueLabel.snp.makeConstraints { (make) in
-            make.center.equalToSuperview()
-        }
     }
-    /*
-    // Only override draw() if you perform custom drawing.
-    // An empty implementation adversely affects performance during animation.
-    override func draw(_ rect: CGRect) {
-        // Drawing code
-    }
-    */
-
 }

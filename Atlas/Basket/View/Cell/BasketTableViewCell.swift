@@ -7,6 +7,11 @@
 //
 
 import UIKit
+import SDWebImage
+
+protocol DeleteBasketDelegate {
+    func deleteProductBasket(product_id: Int, index: Int)
+}
 
 class BasketTableViewCell: UITableViewCell {
     
@@ -22,7 +27,7 @@ class BasketTableViewCell: UITableViewCell {
     
     lazy var productImage: UIImageView = {
         let image = UIImageView()
-        image.contentMode = .scaleAspectFill
+        image.contentMode = .scaleAspectFit
         image.image = #imageLiteral(resourceName: "plitka 1")
         
         return image
@@ -60,24 +65,24 @@ class BasketTableViewCell: UITableViewCell {
     lazy var priceView: ProductCharacteristicView = {
         let view = ProductCharacteristicView()
         view.titleLabel.text = "Цена: "
-        view.valueLabel.text = "20 000 ₸ м2"
-        
+        view.valueTextField.text = "20 000 ₸ м2"
+        view.valueTextField.isEnabled = false
         return view
     }()
     
     lazy var countView: ProductCharacteristicView = {
         let view = ProductCharacteristicView()
         view.titleLabel.text = "Шт: "
-        view.valueLabel.text = "2"
-        
+        view.valueTextField.text = "2"
+        view.valueTextField.keyboardType = .numberPad
         return view
     }()
 
     lazy var volumeView: ProductCharacteristicView = {
         let view = ProductCharacteristicView()
         view.titleLabel.text = "м2: "
-        view.valueLabel.text = "2,66"
-        
+        view.valueTextField.text = "2,66"
+        view.valueTextField.keyboardType = .decimalPad
         return view
     }()
     
@@ -85,16 +90,34 @@ class BasketTableViewCell: UITableViewCell {
         let view = UIView()
         view.backgroundColor = #colorLiteral(red: 0.0, green: 0.0, blue: 0.0, alpha: 0.03)
         view.layer.cornerRadius = 4
-
+        
         return view
     }()
     
     lazy var deleteButton: UIButton = {
         let button = UIButton()
         button.setImage(#imageLiteral(resourceName: "Trash"), for: .normal)
-        
+        button.addTarget(self, action: #selector(deleteBasket), for: .touchUpInside)
         return button
     }()
+    
+    var basketProduct: BasketProduct! {
+        didSet {
+            priceView.valueTextField.text = "\(basketProduct.product.product_price) ₸ м2"
+            countView.valueTextField.text = "\(basketProduct.product_quantity)"
+            volumeView.valueTextField.text = "\(basketProduct.area)"
+            descriptionLabel.text = basketProduct.product.product_description
+            titleLabel.text = basketProduct.product.product_name
+            volumeLabel.text = "\(basketProduct.product.product_length)x\(basketProduct.product.product_width) м2"
+            
+            if !basketProduct.product.images.isEmpty {
+                productImage.sd_imageIndicator = SDWebImageActivityIndicator.gray
+                productImage.sd_setImage(with: Product.getImageUrl(url: basketProduct.product.images[0].image_path))
+            }
+        }
+    }
+    var delegate: DeleteBasketDelegate?
+    var index: Int!
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -103,6 +126,10 @@ class BasketTableViewCell: UITableViewCell {
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+    
+    func setBasketProduct(basketProduct: BasketProduct) {
+        self.basketProduct = basketProduct
     }
     
     private func setupView() -> Void {
@@ -185,6 +212,10 @@ class BasketTableViewCell: UITableViewCell {
         super.setSelected(selected, animated: animated)
 
         // Configure the view for the selected state
+    }
+    
+    @objc func deleteBasket() {
+        delegate?.deleteProductBasket(product_id: basketProduct.product.id, index: index)
     }
 
 }

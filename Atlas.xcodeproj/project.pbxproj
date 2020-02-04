@@ -792,9 +792,9 @@
 		145A30FB23C4B092008962FF /* Basket */ = {
 			isa = PBXGroup;
 			children = (
-				F54CBB0F23E7C2A40012CA36 /* ViewModel */,
 				145A30FE23C4B0B1008962FF /* Model */,
 				145A30FD23C4B0A0008962FF /* View */,
+				F54CBB0F23E7C2A40012CA36 /* ViewModel */,
 				145A30FC23C4B099008962FF /* Controller */,
 			);
 			path = Basket;

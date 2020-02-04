@@ -74,6 +74,7 @@ class NewsViewController: LoaderBaseViewController {
         navigationItem.title = "Главная"
         tabBarController?.tabBar.isHidden = false
         newsViewModel.getBasketCount()
+        tableView.reloadData()
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -177,12 +178,16 @@ extension NewsViewController: UITableViewDelegate, UITableViewDataSource {
 // MARK: - ProductOpenDelegate
 extension NewsViewController: ProductDelegate {
     func openTwoDirectionVC(category_id: Int) {
-        
         coordinator.routeTotalCategoryProduct(sections: newsViewModel.sectionList,
                                               row: -1, category_id: category_id, on: self)
     }
     
     func addToBasket(product_id: Int) {
+        UIView.animate(withDuration: 1.0, animations: {
+            self.searchBarView.busketButton.animationZoom(scaleX: 1.4, y: 1.4)
+        }, completion: { _ in
+            self.searchBarView.busketButton.animationZoom(scaleX: 1.0, y: 1.0)
+        })
         basketViewModel.addToBasket(product_id: product_id)
     }
     
@@ -206,9 +211,14 @@ extension NewsViewController: ProductDelegate {
 // MARK: - SearchTextFieldDelegate
 extension NewsViewController: UITextFieldDelegate {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        coordinator.routeTotalCategoryProduct(text: textField.text!, sections: newsViewModel.sectionList, row: 0, category_id: -1, on: self)
-        searchBarView.searchTextField.text = ""
+//        coordinator.routeTotalCategoryProduct(text: textField.text!, sections: newsViewModel.sectionList,
+//                                              row: 0, category_id: -1, on: self)
+//        searchBarView.searchTextField.text = ""
+        
         return true
+    }
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+        coordinator.routeTotalCategoryProduct(sections: newsViewModel.sectionList, row: 0, category_id: -3, on: self)
     }
 }
 
@@ -257,6 +267,7 @@ extension NewsViewController: CategorySectionProcessDelegate {
 //MARK: - ProductFavouriteDelegate
 extension NewsViewController: ProcessViewDelegate {
     func updateUI() {
+        newsViewModel.getBasketCount()
         updateTableView()
         tableView.reloadData()
     }
@@ -266,5 +277,11 @@ extension NewsViewController: ProcessViewDelegate {
 extension NewsViewController: BasketCountDelegate {
     func updateCount(count: Int) {
         searchBarView.busketButton.countLabel.text = "\(count)"
+    }
+}
+
+extension UIView {
+    func animationZoom(scaleX: CGFloat, y: CGFloat) {
+        self.transform = CGAffineTransform(scaleX: scaleX, y: y)
     }
 }
