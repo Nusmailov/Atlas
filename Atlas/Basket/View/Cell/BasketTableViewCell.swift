@@ -9,7 +9,7 @@
 import UIKit
 import SDWebImage
 
-protocol DeleteBasketDelegate {
+protocol DeleteBasketDelegate: class {
     func deleteProductBasket(product_id: Int, index: Int)
 }
 
@@ -116,7 +116,7 @@ class BasketTableViewCell: UITableViewCell {
             }
         }
     }
-    var delegate: DeleteBasketDelegate?
+    weak var delegate: DeleteBasketDelegate?
     var index: Int!
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {

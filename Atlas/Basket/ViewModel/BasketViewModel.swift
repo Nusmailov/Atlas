@@ -12,10 +12,14 @@ import Foundation
 class BasketViewModel {
     
     //MARK: - Properties
-    var delegate: ProcessViewDelegate?
+    weak var delegate: ProcessViewDelegate?
     var productList = [BasketProduct]()
     var page = 1
     var max_page = 1
+    
+    deinit {
+        print("BasketViewModel deallocated")
+    }
     
     //MARK: - Requests
     func getBasketList() {
@@ -25,6 +29,7 @@ class BasketViewModel {
             for i in self.productList {
                 BasketModel.shared.basketList[i.id] = i.product.in_basket
             }
+                
             self.max_page = result.last_page
             self.page = result.current_page
             self.delegate?.hideLoader()

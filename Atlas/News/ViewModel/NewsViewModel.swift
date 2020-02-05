@@ -16,25 +16,27 @@ protocol CategorySectionProcessDelegate: ProcessViewDelegate {
     func updateSectionCollectionView()
 }
 
-protocol BasketCountDelegate {
+protocol BasketCountDelegate: class {
     func updateCount(count: Int)
 }
 
 class NewsViewModel {
+    
+    //MARK: - Properties
     let token = UserManager.getCurrentToken()
     var newsList = [News]()
     var sectionList = [Section]()
-    var delegate: ProcessViewDelegate?
-    var bannerDelegate: BannerProcessDelegate?
-    var categorySectionDelegate: CategorySectionProcessDelegate?
-    var basketCountDelegate: BasketCountDelegate?
+    weak var delegate: ProcessViewDelegate?
+    weak var bannerDelegate: BannerProcessDelegate?
+    weak var categorySectionDelegate: CategorySectionProcessDelegate?
+    weak var basketCountDelegate: BasketCountDelegate?
     var productList = [String: [Product]]()
     var productKeys = [String]()
     var categoryIdList = [Int]()
     var sectionIdList = [Int]()
     
+    //MARK: - Functions
     func getBannerList() {
-//        self.categorySectionDelegate?.showLoader()
         ParseManager.shared.getRequest(url: NewsApi.getBanner,
             success: { (result: [News]) in
             self.categorySectionDelegate?.hideLoader()
@@ -46,7 +48,6 @@ class NewsViewModel {
     }
     
     func getCategoryList() {
-//        self.categorySectionDelegate?.showLoader()
         ParseManager.shared.getRequest(url: NewsApi.sections,
             success: { (result: SectionData) in
             self.categorySectionDelegate?.hideLoader()
@@ -61,7 +62,6 @@ class NewsViewModel {
     }
     
     func getProductList() {
-//        self.delegate?.showLoader()
         productList.removeAll()
         productKeys.removeAll()
         sectionIdList.removeAll()

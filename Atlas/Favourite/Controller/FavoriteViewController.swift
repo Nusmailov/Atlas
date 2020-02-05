@@ -46,6 +46,7 @@ class FavoriteViewController: ViewController {
     //MARK:- Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
+        basketViewModel.getBasketList()
         setupViews()
         setupBackground()
     }
@@ -82,7 +83,9 @@ class FavoriteViewController: ViewController {
     @objc func getList(page: Int) {
         viewModel.getFavouriteList(page: page)
     }
+    
     @objc func updateList() {
+        basketViewModel.getBasketList()
         viewModel.page = 1
         viewModel.getFavouriteList(page: viewModel.page)
     }
@@ -125,7 +128,7 @@ extension FavoriteViewController: ProcessViewDelegate {
     func updateUI() {
         self.refreshControl.endRefreshing()
         UIView.performWithoutAnimation {
-            self.collectionView.reloadSections(IndexSet(integersIn: 0...0))
+            self.collectionView.reloadData()
         }
     }
 }

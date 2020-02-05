@@ -9,7 +9,7 @@
 import Foundation
 
 class FavouriteViewModel {
-    var delegate: ProcessViewDelegate?
+    weak var delegate: ProcessViewDelegate?
     var favouriteList = [Product]()
     var max_page = 1
     var page = 1

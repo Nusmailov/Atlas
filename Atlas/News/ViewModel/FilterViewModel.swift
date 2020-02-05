@@ -12,7 +12,7 @@ import Foundation
 class FilterViewModel {
     
     //MARK: - Properties
-    var delegate: ProcessViewDelegate?
+    weak var delegate: ProcessViewDelegate?
     var productList = [Product]()
     var max_page = 1
     var page = 1
