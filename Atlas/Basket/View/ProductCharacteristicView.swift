@@ -48,7 +48,7 @@ class ProductCharacteristicView: UIView {
         addSubview(valueTextField)
         valueTextField.snp.makeConstraints { (make) in
             make.top.equalTo(titleLabel.snp.bottom).offset(4)
-            make.height.equalTo(33)
+            make.height.equalTo(35)
             make.bottom.right.left.equalToSuperview()
         }
     }

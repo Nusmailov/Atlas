@@ -42,6 +42,7 @@ class FavoriteViewController: ViewController {
         refresh.addTarget(self, action: #selector(updateList), for: .valueChanged)
         return refresh
     }()
+    let coordinator = NewsCoordinator()
     
     //MARK:- Lifecycle
     override func viewDidLoad() {
@@ -106,11 +107,10 @@ extension FavoriteViewController: UICollectionViewDelegate, UICollectionViewData
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let vc = ProductViewController()
-        self.navigationController?.pushViewController(vc, animated: true)
+        
+        coordinator.routeDescriptionOrder(product: viewModel.favouriteList[indexPath.item], on: self)
     }
     
-    //Heith/Width
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         return CGSize.init(width: view.frame.width / 2 - 5, height: 275)
     }

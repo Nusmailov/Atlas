@@ -146,8 +146,10 @@
 		F586FB3623EAB7160041F68D /* CheckoutViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F586FB3523EAB7160041F68D /* CheckoutViewController.swift */; };
 		F586FB3823EABF860041F68D /* ChechkoutText.swift in Sources */ = {isa = PBXBuildFile; fileRef = F586FB3723EABF860041F68D /* ChechkoutText.swift */; };
 		F586FB3A23EAD7370041F68D /* CheckoutAddressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F586FB3923EAD7370041F68D /* CheckoutAddressView.swift */; };
+		F586FB3C23EC11690041F68D /* ImageCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F586FB3B23EC11690041F68D /* ImageCollectionViewCell.swift */; };
 		F58ECDD923E9246800B7BB2F /* SearchFilterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F58ECDD823E9246800B7BB2F /* SearchFilterView.swift */; };
 		F596E2C123E00EB700B15CA3 /* PoliticalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F596E2C023E00EB700B15CA3 /* PoliticalViewController.swift */; };
+		F5B4722023EC269600E48389 /* ProductViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5B4721F23EC269600E48389 /* ProductViewModel.swift */; };
 		F5C219D723D9C3BD00AD5416 /* OrderViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5C219D623D9C3BD00AD5416 /* OrderViewModel.swift */; };
 		F5C219D923DAAEAB00AD5416 /* OrderQuantityView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5C219D823DAAEAB00AD5416 /* OrderQuantityView.swift */; };
 		F5C219F223DABAC800AD5416 /* Montserrat-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = F5C219EE23DABAC700AD5416 /* Montserrat-Medium.ttf */; };
@@ -321,8 +323,10 @@
 		F586FB3523EAB7160041F68D /* CheckoutViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckoutViewController.swift; sourceTree = "<group>"; };
 		F586FB3723EABF860041F68D /* ChechkoutText.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChechkoutText.swift; sourceTree = "<group>"; };
 		F586FB3923EAD7370041F68D /* CheckoutAddressView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckoutAddressView.swift; sourceTree = "<group>"; };
+		F586FB3B23EC11690041F68D /* ImageCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageCollectionViewCell.swift; sourceTree = "<group>"; };
 		F58ECDD823E9246800B7BB2F /* SearchFilterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchFilterView.swift; sourceTree = "<group>"; };
 		F596E2C023E00EB700B15CA3 /* PoliticalViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PoliticalViewController.swift; sourceTree = "<group>"; };
+		F5B4721F23EC269600E48389 /* ProductViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductViewModel.swift; sourceTree = "<group>"; };
 		F5C219D623D9C3BD00AD5416 /* OrderViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderViewModel.swift; sourceTree = "<group>"; };
 		F5C219D823DAAEAB00AD5416 /* OrderQuantityView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderQuantityView.swift; sourceTree = "<group>"; };
 		F5C219EE23DABAC700AD5416 /* Montserrat-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Montserrat-Medium.ttf"; sourceTree = "<group>"; };
@@ -621,8 +625,8 @@
 			isa = PBXGroup;
 			children = (
 				F562B05823E4417F00E31AAD /* Model */,
-				1418272D2384FEBB00857FA9 /* View */,
 				F596327B23E7B722004D5626 /* ViewModel */,
+				1418272D2384FEBB00857FA9 /* View */,
 				1418272E2384FEC100857FA9 /* Controller */,
 			);
 			path = Favourite;
@@ -891,7 +895,6 @@
 			children = (
 				14C3559723C839C500782282 /* Cats.swift */,
 				14C3559823C839C500782282 /* News.swift */,
-				14C3559923C839C600782282 /* Product.swift */,
 				F562B04D23E1990B00E31AAD /* Section.swift */,
 				F534DA1523E81E3D00D0E61B /* FilterModel.swift */,
 			);
@@ -903,6 +906,7 @@
 			children = (
 				14266BEA23C83D2000413F66 /* TypeProductCollectionViewCell.swift */,
 				14C3558D23C8392000782282 /* CategoryCell.swift */,
+				F586FB3B23EC11690041F68D /* ImageCollectionViewCell.swift */,
 			);
 			path = CollectionViewCell;
 			sourceTree = "<group>";
@@ -995,6 +999,7 @@
 		F550644823DEA03F00DE95EB /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
+				F5B4721F23EC269600E48389 /* ProductViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -1002,6 +1007,7 @@
 		F550644923DEA04600DE95EB /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				14C3559923C839C600782282 /* Product.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -1259,6 +1265,7 @@
 				1417D8D923CC4C4C00429C23 /* Response.swift in Sources */,
 				1418275F2384FFA400857FA9 /* BaseMainViewController.swift in Sources */,
 				1418277D2385134100857FA9 /* DismissableTextView.swift in Sources */,
+				F5B4722023EC269600E48389 /* ProductViewModel.swift in Sources */,
 				141827692385059900857FA9 /* ScrollViewController.swift in Sources */,
 				145A30EF23C45117008962FF /* CardTableViewCell.swift in Sources */,
 				F550644423DE9F6000DE95EB /* ProductViewController.swift in Sources */,
@@ -1293,6 +1300,7 @@
 				14C3559A23C839C600782282 /* Cats.swift in Sources */,
 				F5C219D723D9C3BD00AD5416 /* OrderViewModel.swift in Sources */,
 				1417D8F323CC8A5A00429C23 /* LoaderBaseViewController.swift in Sources */,
+				F586FB3C23EC11690041F68D /* ImageCollectionViewCell.swift in Sources */,
 				1417D8C623CC37A800429C23 /* OrderViewController.swift in Sources */,
 				1417D8DE23CC4C5700429C23 /* ParseManager.swift in Sources */,
 				145A30EA23C45111008962FF /* SelectSettingsView.swift in Sources */,

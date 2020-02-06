@@ -14,7 +14,7 @@ class NewsCoordinator {
     
     func routeDescriptionOrder(product: Product, on baseVC: UIViewController) {
         baseViewController = baseVC
-        let vc = ProductViewController()
+        let vc = ProductViewController(product: product)
         baseViewController?.navigationController?.pushViewController(vc, animated: true)
     }
     

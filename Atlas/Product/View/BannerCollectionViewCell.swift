@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import SDWebImage
 
 class BannerCollectionViewCell: UICollectionViewCell {
     
@@ -16,21 +17,26 @@ class BannerCollectionViewCell: UICollectionViewCell {
         view.contentMode = .scaleAspectFill
         view.layer.masksToBounds = true
         view.image = #imageLiteral(resourceName: "main")
-        return view
-    }()
-    
-    lazy var mainView: UIView = {
-        let view = UIView()
         view.backgroundColor = .white
         view.layer.cornerRadius = 5
         view.layer.masksToBounds = true
         return view
     }()
+    var image: ImageModel! {
+        didSet {
+            imageView.sd_imageIndicator = SDWebImageActivityIndicator.gray
+            imageView.sd_setImage(with: Product.getImageUrl(url: image.image_path))
+        }
+    }
     
     // MARK: - Lifecycle
     override init(frame: CGRect) {
         super.init(frame: frame)
         setupViews()
+    }
+    
+    func setImage(image: ImageModel) {
+        self.image = image
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -39,13 +45,7 @@ class BannerCollectionViewCell: UICollectionViewCell {
     
     // MARK: - SetupViews
     func setupViews() {
-        addSubview(mainView)
-        mainView.snp.makeConstraints { (make) in
-            make.top.equalToSuperview().offset(8)
-            make.left.equalToSuperview().offset(16)
-            make.bottom.right.equalToSuperview().offset(-8)
-        }
-        mainView.addSubview(imageView)
+        addSubview(imageView)
         imageView.snp.makeConstraints { (make) in
             make.edges.equalToSuperview()
         }
