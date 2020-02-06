@@ -23,7 +23,7 @@ class ProductCollectionViewCell: UICollectionViewCell {
         view.layer.cornerRadius = 10
         return view
     }()
-    public var delegate: ProductAddingDelegate?
+    public weak var delegate: ProductAddingDelegate?
     lazy var productImageView:UIImageView = {
         let view = UIImageView()
         view.image = #imageLiteral(resourceName: "plitka 1")

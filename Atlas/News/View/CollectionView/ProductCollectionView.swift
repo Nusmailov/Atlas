@@ -53,7 +53,7 @@ class ProductCollectionView: UIView {
         button.titleLabel?.font = .getMontserraRegularFont(on: 15)
         return button
     }()
-    public var delegate: ProductDelegate?
+    weak var delegate: ProductDelegate?
     var products = [Product]()
     var requestText = ""
     var category_id: Int!

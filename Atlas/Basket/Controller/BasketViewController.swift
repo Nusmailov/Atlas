@@ -19,7 +19,11 @@ class BasketViewController: UIViewController {
         tableview.separatorStyle = .none
         return tableview
     }()
-    lazy var totalView = TotalBasketView()
+    lazy var totalView: TotalBasketView = {
+        let view = TotalBasketView()
+        view.getButton.addTarget(self, action: #selector(checkoutBasket), for: .touchUpInside)
+        return view
+    }()
     lazy var viewModel: BasketViewModel = {
         let viewModel = BasketViewModel()
         viewModel.delegate = self
@@ -34,12 +38,7 @@ class BasketViewController: UIViewController {
     //MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         setupViews()
-    }
-    
-    deinit {
-        print("BasketViewController deallocated")
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -69,6 +68,11 @@ class BasketViewController: UIViewController {
     //MARK: - Actions
     @objc func getBasketList() {
         viewModel.getBasketList()
+    }
+    
+    @objc func checkoutBasket() {
+        let vc = CheckoutViewController()
+        self.navigationController?.pushViewController(vc, animated: true)
     }
 }
 

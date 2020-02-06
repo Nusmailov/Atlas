@@ -96,7 +96,7 @@ class TileView: UIView {
             }
         }
     }
-    var delegate: ProductDelegate?
+    weak var delegate: ProductDelegate?
     
     //MARK: - Lifecycle
     override init(frame: CGRect) {

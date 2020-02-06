@@ -70,7 +70,7 @@ class SpecialOrderView: UIView {
         return label
     }()
     
-    public var openDelegate: SpecialOrderDelegate?
+    public weak var openDelegate: SpecialOrderDelegate?
     
     // MARK: - Lifecycle
     override init(frame: CGRect) {

@@ -37,7 +37,7 @@ class CategoryCollectionView: UIView {
         return collectionView
     }()
     var catsList = [Cats]()
-    public var delegate: CategoryDelegate?
+    weak var delegate: CategoryDelegate?
     var category_id = 0
     
     // MARK: - Lifecycle

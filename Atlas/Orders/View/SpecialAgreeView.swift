@@ -42,7 +42,7 @@ class SpecialAgreeView: UIView {
         view.backgroundColor = .white
         return view
     }()
-    var delegate: SpecialAgreeDelegate?
+    weak var delegate: SpecialAgreeDelegate?
     
     // MARK: - Lifecycle
     override init(frame: CGRect) {

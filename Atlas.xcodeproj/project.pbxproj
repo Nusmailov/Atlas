@@ -141,6 +141,11 @@
 		F562B05523E2F31B00E31AAD /* NewsCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = F562B05423E2F31B00E31AAD /* NewsCoordinator.swift */; };
 		F562B05723E4410C00E31AAD /* BasketModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F562B05623E4410C00E31AAD /* BasketModel.swift */; };
 		F562B05A23E4418E00E31AAD /* FavoriteModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F562B05923E4418E00E31AAD /* FavoriteModel.swift */; };
+		F586FB3223EAB2630041F68D /* CheckoutInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F586FB3123EAB2630041F68D /* CheckoutInfoView.swift */; };
+		F586FB3423EAB62D0041F68D /* CheckoutView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F586FB3323EAB62D0041F68D /* CheckoutView.swift */; };
+		F586FB3623EAB7160041F68D /* CheckoutViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F586FB3523EAB7160041F68D /* CheckoutViewController.swift */; };
+		F586FB3823EABF860041F68D /* ChechkoutText.swift in Sources */ = {isa = PBXBuildFile; fileRef = F586FB3723EABF860041F68D /* ChechkoutText.swift */; };
+		F586FB3A23EAD7370041F68D /* CheckoutAddressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F586FB3923EAD7370041F68D /* CheckoutAddressView.swift */; };
 		F58ECDD923E9246800B7BB2F /* SearchFilterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F58ECDD823E9246800B7BB2F /* SearchFilterView.swift */; };
 		F596E2C123E00EB700B15CA3 /* PoliticalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F596E2C023E00EB700B15CA3 /* PoliticalViewController.swift */; };
 		F5C219D723D9C3BD00AD5416 /* OrderViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5C219D623D9C3BD00AD5416 /* OrderViewModel.swift */; };
@@ -311,6 +316,11 @@
 		F562B05423E2F31B00E31AAD /* NewsCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsCoordinator.swift; sourceTree = "<group>"; };
 		F562B05623E4410C00E31AAD /* BasketModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = BasketModel.swift; path = Atlas/News/Coordinator/BasketModel.swift; sourceTree = SOURCE_ROOT; };
 		F562B05923E4418E00E31AAD /* FavoriteModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteModel.swift; sourceTree = "<group>"; };
+		F586FB3123EAB2630041F68D /* CheckoutInfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckoutInfoView.swift; sourceTree = "<group>"; };
+		F586FB3323EAB62D0041F68D /* CheckoutView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckoutView.swift; sourceTree = "<group>"; };
+		F586FB3523EAB7160041F68D /* CheckoutViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckoutViewController.swift; sourceTree = "<group>"; };
+		F586FB3723EABF860041F68D /* ChechkoutText.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChechkoutText.swift; sourceTree = "<group>"; };
+		F586FB3923EAD7370041F68D /* CheckoutAddressView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckoutAddressView.swift; sourceTree = "<group>"; };
 		F58ECDD823E9246800B7BB2F /* SearchFilterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchFilterView.swift; sourceTree = "<group>"; };
 		F596E2C023E00EB700B15CA3 /* PoliticalViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PoliticalViewController.swift; sourceTree = "<group>"; };
 		F5C219D623D9C3BD00AD5416 /* OrderViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderViewModel.swift; sourceTree = "<group>"; };
@@ -804,6 +814,7 @@
 			isa = PBXGroup;
 			children = (
 				145A30FF23C4B0D9008962FF /* BasketViewController.swift */,
+				F586FB3523EAB7160041F68D /* CheckoutViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -814,6 +825,9 @@
 				145A310323C4BB0C008962FF /* Cell */,
 				145A310123C4B118008962FF /* TotalBasketView.swift */,
 				145A310623C58D30008962FF /* ProductCharacteristicView.swift */,
+				F586FB3123EAB2630041F68D /* CheckoutInfoView.swift */,
+				F586FB3323EAB62D0041F68D /* CheckoutView.swift */,
+				F586FB3923EAD7370041F68D /* CheckoutAddressView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -823,6 +837,7 @@
 			children = (
 				F562B04F23E2E97F00E31AAD /* BasketProduct.swift */,
 				F562B05623E4410C00E31AAD /* BasketModel.swift */,
+				F586FB3723EABF860041F68D /* ChechkoutText.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -1235,9 +1250,11 @@
 				141827312384FECC00857FA9 /* ProductCollectionCell.swift in Sources */,
 				1417D8E623CC50DA00429C23 /* UserManager.swift in Sources */,
 				F509D1E623E16344004AF7E5 /* FavouriteViewModel.swift in Sources */,
+				F586FB3A23EAD7370041F68D /* CheckoutAddressView.swift in Sources */,
 				1417D8BE23CC37A800429C23 /* Order.swift in Sources */,
 				1418277923850D9800857FA9 /* LoginControllerConstraintConfiguration.swift in Sources */,
 				141827962385651800857FA9 /* ForEntityInputView.swift in Sources */,
+				F586FB3223EAB2630041F68D /* CheckoutInfoView.swift in Sources */,
 				145A30F723C4525C008962FF /* CloudCard.swift in Sources */,
 				1417D8D923CC4C4C00429C23 /* Response.swift in Sources */,
 				1418275F2384FFA400857FA9 /* BaseMainViewController.swift in Sources */,
@@ -1258,6 +1275,7 @@
 				1417D8DB23CC4C4C00429C23 /* Parser.swift in Sources */,
 				145A30D823C450F6008962FF /* SecureViewController.swift in Sources */,
 				14266BE923C83D1100413F66 /* ProductCollectionViewCell.swift in Sources */,
+				F586FB3823EABF860041F68D /* ChechkoutText.swift in Sources */,
 				F534DA1423E81BC500D0E61B /* FilterViewModel.swift in Sources */,
 				1418275A2384FF7800857FA9 /* ConfirmationViewController.swift in Sources */,
 				145A30E723C45111008962FF /* BonusView.swift in Sources */,
@@ -1286,6 +1304,7 @@
 				1417D8EC23CC839500429C23 /* AuthorizationViewModel.swift in Sources */,
 				1417D8E023CC4CE600429C23 /* Endpoints.swift in Sources */,
 				1417D8DC23CC4C4C00429C23 /* EndpointType.swift in Sources */,
+				F586FB3623EAB7160041F68D /* CheckoutViewController.swift in Sources */,
 				14266BE723C83CEC00413F66 /* DiscountCollectionViewCell.swift in Sources */,
 				F562B05223E2F18E00E31AAD /* BasketViewModel.swift in Sources */,
 				14182782238533D900857FA9 /* ImagePicker.swift in Sources */,
@@ -1301,6 +1320,7 @@
 				141827562384FF6300857FA9 /* RegistrationViewController.swift in Sources */,
 				1417D8C123CC37A800429C23 /* SpecialAgreeView.swift in Sources */,
 				1417D8D623CC4C4C00429C23 /* NetworkResponse.swift in Sources */,
+				F586FB3423EAB62D0041F68D /* CheckoutView.swift in Sources */,
 				1417D8BD23CC37A800429C23 /* Office.swift in Sources */,
 				F58ECDD923E9246800B7BB2F /* SearchFilterView.swift in Sources */,
 				145A30E823C45111008962FF /* ProfileTabBarView.swift in Sources */,

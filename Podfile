@@ -10,5 +10,6 @@ target 'Atlas' do
   pod 'BEMCheckBox'
   pod 'SDWebImage'
   pod 'SVProgressHUD'
+  pod 'DropDown'
   
 end

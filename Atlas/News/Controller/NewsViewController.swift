@@ -41,10 +41,10 @@ class NewsViewController: LoaderBaseViewController {
     }()
     lazy var newsViewModel: NewsViewModel = {
         let viewModel = NewsViewModel()
-        viewModel.bannerDelegate = self
-        viewModel.categorySectionDelegate = self
         viewModel.delegate = self
+        viewModel.bannerDelegate = self
         viewModel.basketCountDelegate = self
+        viewModel.categorySectionDelegate = self
         return viewModel
     }()
     lazy var favouriteViewModel: FavouriteViewModel = {

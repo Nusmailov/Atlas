@@ -1,5 +1,6 @@
 PODS:
   - BEMCheckBox (1.4.1)
+  - DropDown (2.3.13)
   - IQKeyboardManager (6.5.0)
   - SDWebImage (5.4.0):
     - SDWebImage/Core (= 5.4.0)
@@ -9,6 +10,7 @@ PODS:
 
 DEPENDENCIES:
   - BEMCheckBox
+  - DropDown
   - IQKeyboardManager
   - SDWebImage
   - SnapKit
@@ -20,16 +22,18 @@ SPEC REPOS:
     - IQKeyboardManager
     - SDWebImage
     - SnapKit
-  trunk:
     - SVProgressHUD
+  trunk:
+    - DropDown
 
 SPEC CHECKSUMS:
   BEMCheckBox: 5ba6e37ade3d3657b36caecc35c8b75c6c2b1a4e
+  DropDown: 8a2116376c1981888557f72ec2ffc9a5e0e456ec
   IQKeyboardManager: 700e5155d6a292383b54e8678aec769e14fc78fc
   SDWebImage: 5bf6aec6481ae2a062bdc59f9d6c1d1e552090e0
   SnapKit: 97b92857e3df3a0c71833cce143274bf6ef8e5eb
   SVProgressHUD: 1428aafac632c1f86f62aa4243ec12008d7a51d6
 
-PODFILE CHECKSUM: 52af89b79d383fb88a96f42f0b988ee474c1ca37
+PODFILE CHECKSUM: 992375f796262a48b28ec35d1bd06480168adc13
 
 COCOAPODS: 1.8.0.beta.1

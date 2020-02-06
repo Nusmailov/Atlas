@@ -20,6 +20,7 @@ class FavouriteViewModel {
         ParseManager.shared.postRequest(url: ProductApi.favorite, parameters: parameters,
             success: { (result: FavouriteProduct) in
                 FavoriteModel.shared.favoriteList[product_id] = true
+                BasketModel.shared.basketList[product_id] = true
                 self.delegate?.updateUI()
         }) { (error) in
             self.delegate?.showErrorMessage(error)
