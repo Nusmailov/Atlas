@@ -24,6 +24,7 @@ class ProductViewController: ScrollViewController {
     lazy var productView: ProductCollectionView = {
         let view = ProductCollectionView()
         view.delegate = self
+        view.label.text = "C этим покупают"
         return view
     }()
     lazy var favouriteViewModel: FavouriteViewModel = {
@@ -36,17 +37,37 @@ class ProductViewController: ScrollViewController {
         viewModel.delegate = self
         return viewModel
     }()
+    lazy var productViewModel: ProductViewModel = {
+        let viewModel = ProductViewModel()
+        viewModel.delegate = self
+        return viewModel
+    }()
+    lazy var refreshControl: UIRefreshControl = {
+        let refresh = UIRefreshControl()
+        refresh.addTarget(self, action: #selector(updateData), for: .valueChanged)
+        return refresh
+    }()
     var product: Product! {
         didSet {
+            imageCollectionView.descriptionLabel.text = product.product_description
+            imageCollectionView.nameLabel.text = product.product_name
+            imageCollectionView.priceLabel.text = "\(product.product_price)"
+            imageCollectionView.sizeLabel.text = "\(product.product_length)x\(product.product_width) м2"
             
+            let favorite = FavoriteModel.shared.favoriteList[product.id]
+            let heart = favorite == true ? UIImage(named: "Path 8890.1") : UIImage(named: "emptyHeart")
+            imageCollectionView.heartButton.setImage(heart, for: .normal)
+            imageCollectionView.collectionView.reloadData()
         }
     }
+    var coordinator = NewsCoordinator()
     
     //MARK: - Lifecycle
     init(product: Product) {
         super.init(nibName: nil, bundle: nil)
         self.product = product
         imageCollectionView.setProduct(product: product)
+        productView.category_id = self.product.id
     }
     
     required init?(coder: NSCoder) {
@@ -56,6 +77,7 @@ class ProductViewController: ScrollViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupViews()
+        productViewModel.getByList(product_id: product.id)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -70,40 +92,63 @@ class ProductViewController: ScrollViewController {
         imageCollectionView.snp.makeConstraints { (make) in
             make.top.left.right.equalToSuperview()
         }
+        
         productView.snp.makeConstraints { (make) in
-            make.top.equalTo(imageCollectionView.snp.bottom).offset(8)
+            make.top.equalTo(imageCollectionView.snp.bottom).offset(16)
             make.bottom.left.right.equalToSuperview()
         }
     }
     
+    //MARK: - Actions
     @objc func goToBasketView() {
         let vc = BasketViewController()
         self.navigationController?.pushViewController(vc, animated: true)
+    }
+    
+    func basketAnimate() {
+        UIView.animate(withDuration: 1.0, animations: {
+            self.rightButton.animationZoom(scaleX: 1.4, y: 1.4)
+        }, completion: { _ in
+            self.rightButton.animationZoom(scaleX: 1.0, y: 1.0)
+        })
+    }
+    
+    @objc func updateData() {
+        productViewModel.getByList(product_id: product.id)
+    }
+    
+    @objc func addToFavourite() {
+        favouriteViewModel.addToFavorite(product_id: product.id)
     }
 }
 
 //MARK: - ProcessViewDelegate
 extension ProductViewController: ProcessViewDelegate {
     func updateUI() {
+        productView.setProducts(products: productViewModel.productList)
         imageCollectionView.collectionView.reloadData()
+        productView.collectionView.reloadData()
     }
 }
 
 //MARK: - ProductDelegate
 extension ProductViewController: ProductDelegate {
     func didOpenDescriptionVC(product: Product) {
-        
+        coordinator.routeDescriptionOrder(product: product, on: self)
     }
     
     func openTwoDirectionVC(category_id: Int) {
-        
+//        coordinator.routeTotalCategoryProduct(sections: [],
+//                                              row: -1, category_id: category_id, on: self)
     }
     
     func addToBasket(product_id: Int) {
+        basketAnimate()
         basketViewModel.addToBasket(product_id: product_id)
     }
     
     func removeBasket(product_id: Int) {
+        basketAnimate()
         basketViewModel.removeBasket(product_id: product_id)
     }
     

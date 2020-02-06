@@ -200,7 +200,7 @@ class BannerCollectionView: UIView {
         }
         
         checkButton.snp.makeConstraints { (make) in
-            make.top.equalTo(descriptionLabel.snp.bottom).offset(4)
+            make.top.equalTo(descriptionLabel.snp.bottom).offset(16)
             make.left.equalTo(16)
             make.right.equalTo(-16)
             make.height.equalTo(40)

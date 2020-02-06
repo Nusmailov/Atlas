@@ -24,4 +24,5 @@ class ProductApi {
     static let sectionProducts = "section/products"
     static let search = "search"
     static let popularProducts = "products"
+    static let bywithit = "bywithit"
 }
