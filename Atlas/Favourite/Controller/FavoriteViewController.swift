@@ -107,7 +107,6 @@ extension FavoriteViewController: UICollectionViewDelegate, UICollectionViewData
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        
         coordinator.routeDescriptionOrder(product: viewModel.favouriteList[indexPath.item], on: self)
     }
     

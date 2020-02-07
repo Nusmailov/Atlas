@@ -11,5 +11,6 @@ target 'Atlas' do
   pod 'SDWebImage'
   pod 'SVProgressHUD'
   pod 'DropDown'
+  pod 'FSCalendar'
   
 end

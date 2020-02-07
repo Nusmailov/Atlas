@@ -14,6 +14,7 @@ class ProductViewController: ScrollViewController {
     //MARK: - Properties
     lazy var imageCollectionView: BannerCollectionView = {
         let view = BannerCollectionView()
+        view.imageDelegate = self
         return view
     }()
     lazy var rightButton: BasketCountButton = {
@@ -21,7 +22,7 @@ class ProductViewController: ScrollViewController {
         button.addTarget(self, action: #selector(goToBasketView), for: .touchUpInside)
         return button
     }()
-    lazy var productView: ProductCollectionView = {
+    lazy var productListView: ProductCollectionView = {
         let view = ProductCollectionView()
         view.delegate = self
         view.label.text = "C этим покупают"
@@ -30,6 +31,11 @@ class ProductViewController: ScrollViewController {
     lazy var favouriteViewModel: FavouriteViewModel = {
         let viewModel = FavouriteViewModel()
         viewModel.delegate = self
+        return viewModel
+    }()
+    lazy var newsViewModel: NewsViewModel = {
+        let viewModel = NewsViewModel()
+        viewModel.basketCountDelegate = self
         return viewModel
     }()
     lazy var basketViewModel: BasketViewModel = {
@@ -51,9 +57,8 @@ class ProductViewController: ScrollViewController {
         didSet {
             imageCollectionView.descriptionLabel.text = product.product_description
             imageCollectionView.nameLabel.text = product.product_name
-            imageCollectionView.priceLabel.text = "\(product.product_price)"
+            imageCollectionView.priceLabel.text = "\(product.product_price) ₸"
             imageCollectionView.sizeLabel.text = "\(product.product_length)x\(product.product_width) м2"
-            
             let favorite = FavoriteModel.shared.favoriteList[product.id]
             let heart = favorite == true ? UIImage(named: "Path 8890.1") : UIImage(named: "emptyHeart")
             imageCollectionView.heartButton.setImage(heart, for: .normal)
@@ -61,13 +66,14 @@ class ProductViewController: ScrollViewController {
         }
     }
     var coordinator = NewsCoordinator()
+    var imageCoordinator = ImageCoordinator()
     
     //MARK: - Lifecycle
     init(product: Product) {
         super.init(nibName: nil, bundle: nil)
         self.product = product
         imageCollectionView.setProduct(product: product)
-        productView.category_id = self.product.id
+        productListView.category_id = self.product.id
     }
     
     required init?(coder: NSCoder) {
@@ -77,23 +83,28 @@ class ProductViewController: ScrollViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupViews()
-        productViewModel.getByList(product_id: product.id)
+        updateData()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        tabBarController?.tabBar.isHidden = false
         navigationItem.rightBarButtonItem = UIBarButtonItem(customView: rightButton)
     }
-
+    
     //MARK: - SetupViews
+    func setProduct(product: Product) {
+        self.product = product
+    }
+    
     func setupViews() {
-        contentView.addSubviews(views: [imageCollectionView, productView])
+        contentView.addSubviews(views: [imageCollectionView, productListView])
 
         imageCollectionView.snp.makeConstraints { (make) in
             make.top.left.right.equalToSuperview()
         }
         
-        productView.snp.makeConstraints { (make) in
+        productListView.snp.makeConstraints { (make) in
             make.top.equalTo(imageCollectionView.snp.bottom).offset(16)
             make.bottom.left.right.equalToSuperview()
         }
@@ -115,6 +126,7 @@ class ProductViewController: ScrollViewController {
     
     @objc func updateData() {
         productViewModel.getByList(product_id: product.id)
+        newsViewModel.getBasketCount()
     }
     
     @objc func addToFavourite() {
@@ -125,9 +137,9 @@ class ProductViewController: ScrollViewController {
 //MARK: - ProcessViewDelegate
 extension ProductViewController: ProcessViewDelegate {
     func updateUI() {
-        productView.setProducts(products: productViewModel.productList)
+        productListView.setProducts(products: productViewModel.productList)
         imageCollectionView.collectionView.reloadData()
-        productView.collectionView.reloadData()
+        productListView.collectionView.reloadData()
     }
 }
 
@@ -138,8 +150,7 @@ extension ProductViewController: ProductDelegate {
     }
     
     func openTwoDirectionVC(category_id: Int) {
-//        coordinator.routeTotalCategoryProduct(sections: [],
-//                                              row: -1, category_id: category_id, on: self)
+        coordinator.routeTotalCategoryProduct(sections: [], row: -1, category_id: product.section_id, on: self)
     }
     
     func addToBasket(product_id: Int) {
@@ -160,3 +171,18 @@ extension ProductViewController: ProductDelegate {
         favouriteViewModel.removeFavourite(product_id: product_id)
     }
 }
+
+//MARK: - BasketCountDelegate
+extension ProductViewController: BasketCountDelegate {
+    func updateCount(count: Int) {
+        rightButton.countLabel.text = "\(count)"
+    }
+}
+
+//MARK: - OpenImageDelegate
+extension ProductViewController: OpenImageDelegate {
+    func openImage(image_url: String) {
+        imageCoordinator.routeImageViewContoller(image_path: image_url, on: self)
+    }
+}
+

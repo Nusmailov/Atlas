@@ -65,6 +65,7 @@ class FilterViewController: ViewController {
     lazy var newsViewModel: NewsViewModel = {
         let viewModel = NewsViewModel()
         viewModel.basketCountDelegate = self
+        viewModel.categorySectionDelegate = self
         return viewModel
     }()
     var sectionList = [Section]()
@@ -90,6 +91,7 @@ class FilterViewController: ViewController {
         super.viewDidLoad()
         setupViews()
         view.backgroundColor = .white
+        if sectionList.isEmpty { newsViewModel.getCategoryList() }
         showLoader()
         updateByCategory()
     }
@@ -148,7 +150,6 @@ class FilterViewController: ViewController {
         else if category_id != -1 {
             loadData(category_id: category_id)
         }
-            
         else {
             viewModel.getSearch(parameters: ["text" : text])
         }
@@ -268,5 +269,13 @@ extension FilterViewController: UITextFieldDelegate {
         
         viewModel.getSearch(parameters: parameters)
         return true
+    }
+}
+
+//MARK: - CategorySectionProcessDelegate
+extension FilterViewController: CategorySectionProcessDelegate {
+    func updateSectionCollectionView() {
+        self.sectionList = newsViewModel.sectionList
+        self.sortingCollectionView.collectionView.reloadData()
     }
 }

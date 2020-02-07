@@ -14,9 +14,9 @@ class BannerCollectionViewCell: UICollectionViewCell {
     // MARK: - Properties
     lazy var imageView: UIImageView = {
         let view = UIImageView()
-        view.contentMode = .scaleAspectFill
+        view.image = #imageLiteral(resourceName: "no-image")
+        view.contentMode = .scaleAspectFit
         view.layer.masksToBounds = true
-        view.image = #imageLiteral(resourceName: "main")
         view.backgroundColor = .white
         view.layer.cornerRadius = 5
         view.layer.masksToBounds = true
@@ -25,6 +25,7 @@ class BannerCollectionViewCell: UICollectionViewCell {
     var image: ImageModel! {
         didSet {
             imageView.sd_imageIndicator = SDWebImageActivityIndicator.gray
+            imageView.contentMode = .scaleAspectFill
             imageView.sd_setImage(with: Product.getImageUrl(url: image.image_path))
         }
     }

@@ -8,6 +8,10 @@
 
 import UIKit
 
+protocol OpenImageDelegate {
+    func openImage(image_url: String)
+}
+
 class BannerCollectionView: UIView {
     
     // MARK: - Properties
@@ -87,6 +91,7 @@ class BannerCollectionView: UIView {
         let view = ProductCharacteristicView()
         view.titleLabel.text = "шт:"
         view.valueTextField.text = "2"
+        view.valueTextField.keyboardType = .numberPad
         return view
     }()
     lazy var areaView: ProductCharacteristicView = {
@@ -111,12 +116,8 @@ class BannerCollectionView: UIView {
         button.titleLabel?.font = .getMontserraSemiBoldFont(on: 12)
         return button
     }()
-    
-    var product: Product! {
-        didSet {
-            
-        }
-    }
+    var imageDelegate: OpenImageDelegate?
+    var product: Product!
     
     // MARK: - Lifecycle
     override init(frame: CGRect) {
@@ -228,7 +229,7 @@ extension BannerCollectionView: UICollectionViewDelegate, UICollectionViewDataSo
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        
+        imageDelegate?.openImage(image_url: product.images[indexPath.item].image_path)
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {

@@ -149,6 +149,14 @@
 		F586FB3C23EC11690041F68D /* ImageCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F586FB3B23EC11690041F68D /* ImageCollectionViewCell.swift */; };
 		F58ECDD923E9246800B7BB2F /* SearchFilterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F58ECDD823E9246800B7BB2F /* SearchFilterView.swift */; };
 		F596E2C123E00EB700B15CA3 /* PoliticalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F596E2C023E00EB700B15CA3 /* PoliticalViewController.swift */; };
+		F59A151423ED20F100D0B672 /* ImageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F59A151323ED20F100D0B672 /* ImageViewController.swift */; };
+		F59A151723ED213A00D0B672 /* ImageCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = F59A151623ED213A00D0B672 /* ImageCoordinator.swift */; };
+		F59A151923ED354100D0B672 /* CalendarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F59A151823ED354100D0B672 /* CalendarViewController.swift */; };
+		F59A151B23ED35CA00D0B672 /* ChooseDateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F59A151A23ED35CA00D0B672 /* ChooseDateView.swift */; };
+		F59A151D23ED35FC00D0B672 /* ChooseButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = F59A151C23ED35FC00D0B672 /* ChooseButton.swift */; };
+		F59A151F23ED67B100D0B672 /* AddressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F59A151E23ED67B100D0B672 /* AddressView.swift */; };
+		F59A152123ED6A1600D0B672 /* ContactView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F59A152023ED6A1600D0B672 /* ContactView.swift */; };
+		F59A152323ED6B2900D0B672 /* ContactButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = F59A152223ED6B2900D0B672 /* ContactButton.swift */; };
 		F5B4722023EC269600E48389 /* ProductViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5B4721F23EC269600E48389 /* ProductViewModel.swift */; };
 		F5C219D723D9C3BD00AD5416 /* OrderViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5C219D623D9C3BD00AD5416 /* OrderViewModel.swift */; };
 		F5C219D923DAAEAB00AD5416 /* OrderQuantityView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5C219D823DAAEAB00AD5416 /* OrderQuantityView.swift */; };
@@ -326,6 +334,14 @@
 		F586FB3B23EC11690041F68D /* ImageCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageCollectionViewCell.swift; sourceTree = "<group>"; };
 		F58ECDD823E9246800B7BB2F /* SearchFilterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchFilterView.swift; sourceTree = "<group>"; };
 		F596E2C023E00EB700B15CA3 /* PoliticalViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PoliticalViewController.swift; sourceTree = "<group>"; };
+		F59A151323ED20F100D0B672 /* ImageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageViewController.swift; sourceTree = "<group>"; };
+		F59A151623ED213A00D0B672 /* ImageCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageCoordinator.swift; sourceTree = "<group>"; };
+		F59A151823ED354100D0B672 /* CalendarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarViewController.swift; sourceTree = "<group>"; };
+		F59A151A23ED35CA00D0B672 /* ChooseDateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChooseDateView.swift; sourceTree = "<group>"; };
+		F59A151C23ED35FC00D0B672 /* ChooseButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChooseButton.swift; sourceTree = "<group>"; };
+		F59A151E23ED67B100D0B672 /* AddressView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddressView.swift; sourceTree = "<group>"; };
+		F59A152023ED6A1600D0B672 /* ContactView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactView.swift; sourceTree = "<group>"; };
+		F59A152223ED6B2900D0B672 /* ContactButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactButton.swift; sourceTree = "<group>"; };
 		F5B4721F23EC269600E48389 /* ProductViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductViewModel.swift; sourceTree = "<group>"; };
 		F5C219D623D9C3BD00AD5416 /* OrderViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderViewModel.swift; sourceTree = "<group>"; };
 		F5C219D823DAAEAB00AD5416 /* OrderQuantityView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderQuantityView.swift; sourceTree = "<group>"; };
@@ -819,6 +835,7 @@
 			children = (
 				145A30FF23C4B0D9008962FF /* BasketViewController.swift */,
 				F586FB3523EAB7160041F68D /* CheckoutViewController.swift */,
+				F59A151823ED354100D0B672 /* CalendarViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -832,6 +849,11 @@
 				F586FB3123EAB2630041F68D /* CheckoutInfoView.swift */,
 				F586FB3323EAB62D0041F68D /* CheckoutView.swift */,
 				F586FB3923EAD7370041F68D /* CheckoutAddressView.swift */,
+				F59A151A23ED35CA00D0B672 /* ChooseDateView.swift */,
+				F59A151C23ED35FC00D0B672 /* ChooseButton.swift */,
+				F59A151E23ED67B100D0B672 /* AddressView.swift */,
+				F59A152023ED6A1600D0B672 /* ContactView.swift */,
+				F59A152223ED6B2900D0B672 /* ContactButton.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -971,6 +993,7 @@
 		F550644523DEA02300DE95EB /* Product */ = {
 			isa = PBXGroup;
 			children = (
+				F59A151523ED212C00D0B672 /* Coordinator */,
 				F550644923DEA04600DE95EB /* Model */,
 				F550644823DEA03F00DE95EB /* ViewModel */,
 				F550644723DEA03B00DE95EB /* View */,
@@ -983,6 +1006,7 @@
 			isa = PBXGroup;
 			children = (
 				F550644323DE9F6000DE95EB /* ProductViewController.swift */,
+				F59A151323ED20F100D0B672 /* ImageViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -1058,6 +1082,14 @@
 				F509D1E523E16344004AF7E5 /* FavouriteViewModel.swift */,
 			);
 			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		F59A151523ED212C00D0B672 /* Coordinator */ = {
+			isa = PBXGroup;
+			children = (
+				F59A151623ED213A00D0B672 /* ImageCoordinator.swift */,
+			);
+			path = Coordinator;
 			sourceTree = "<group>";
 		};
 		F5C219D523D9C3B000AD5416 /* ViewModel */ = {
@@ -1272,6 +1304,8 @@
 				145A30E923C45111008962FF /* CardTextView.swift in Sources */,
 				145A30FA23C45CC5008962FF /* Address.swift in Sources */,
 				F562B04E23E1990B00E31AAD /* Section.swift in Sources */,
+				F59A151723ED213A00D0B672 /* ImageCoordinator.swift in Sources */,
+				F59A151D23ED35FC00D0B672 /* ChooseButton.swift in Sources */,
 				14C3559C23C839C600782282 /* Product.swift in Sources */,
 				14C3559423C8398A00782282 /* SpecialOrderView.swift in Sources */,
 				1418276F23850A4300857FA9 /* AutorizationInputView.swift in Sources */,
@@ -1300,11 +1334,13 @@
 				14C3559A23C839C600782282 /* Cats.swift in Sources */,
 				F5C219D723D9C3BD00AD5416 /* OrderViewModel.swift in Sources */,
 				1417D8F323CC8A5A00429C23 /* LoaderBaseViewController.swift in Sources */,
+				F59A151B23ED35CA00D0B672 /* ChooseDateView.swift in Sources */,
 				F586FB3C23EC11690041F68D /* ImageCollectionViewCell.swift in Sources */,
 				1417D8C623CC37A800429C23 /* OrderViewController.swift in Sources */,
 				1417D8DE23CC4C5700429C23 /* ParseManager.swift in Sources */,
 				145A30EA23C45111008962FF /* SelectSettingsView.swift in Sources */,
 				1417D8C323CC37A800429C23 /* HistoryView.swift in Sources */,
+				F59A151423ED20F100D0B672 /* ImageViewController.swift in Sources */,
 				145A30F823C4525C008962FF /* City.swift in Sources */,
 				141827402384FF0300857FA9 /* PhoneTextField.swift in Sources */,
 				14C3559023C8396500782282 /* DiscountCollectionView.swift in Sources */,
@@ -1334,17 +1370,20 @@
 				145A30E823C45111008962FF /* ProfileTabBarView.swift in Sources */,
 				14182787238533F700857FA9 /* ProfileImageView.swift in Sources */,
 				1417D8C823CC37A800429C23 /* ContactInfoViewController.swift in Sources */,
+				F59A152123ED6A1600D0B672 /* ContactView.swift in Sources */,
 				1417D8C723CC37A800429C23 /* OrderDescriptionViewController.swift in Sources */,
 				F562B05A23E4418E00E31AAD /* FavoriteModel.swift in Sources */,
 				1417D8EF23CC83C500429C23 /* ViewModelConfigurable.swift in Sources */,
 				1418277B2385131500857FA9 /* InputView.swift in Sources */,
 				145A30D923C450F6008962FF /* ProfileViewController.swift in Sources */,
 				1417D8C223CC37A800429C23 /* OrderDescriptionView.swift in Sources */,
+				F59A152323ED6B2900D0B672 /* ContactButton.swift in Sources */,
 				1417D8BF23CC37A800429C23 /* ProductOrder.swift in Sources */,
 				141827322384FECC00857FA9 /* TileView.swift in Sources */,
 				141827142384FD7300857FA9 /* AppCenter.swift in Sources */,
 				1418277323850A4300857FA9 /* ConfidantionLabelTopLineView.swift in Sources */,
 				141827892385345800857FA9 /* TitleInputView.swift in Sources */,
+				F59A151923ED354100D0B672 /* CalendarViewController.swift in Sources */,
 				145A30E623C45111008962FF /* AddNewAddressView.swift in Sources */,
 				14EB5C9F2386593900AE4910 /* ConfirmationView.swift in Sources */,
 				145A30E523C45111008962FF /* AddButtonView.swift in Sources */,
@@ -1380,6 +1419,7 @@
 				F562B05723E4410C00E31AAD /* BasketModel.swift in Sources */,
 				F555D49623DB03B300117029 /* InfoTitleView.swift in Sources */,
 				145A30EB23C45111008962FF /* AddressTextView.swift in Sources */,
+				F59A151F23ED67B100D0B672 /* AddressView.swift in Sources */,
 				F534DA1023E7DB9600D0E61B /* FilterViewController.swift in Sources */,
 				14C3558823C8389300782282 /* ProductCollectionView.swift in Sources */,
 				F55407B423DEB131002875F5 /* SettingSwitchView.swift in Sources */,

@@ -28,7 +28,6 @@ class CheckoutView: UIView {
     lazy var dateSelectView: CheckoutInfoView = {
         let view = CheckoutInfoView()
         view.titleLabel.text = "Дата подготовки заказа"
-        
         return view
     }()
     lazy var descriptionLabel: UILabel = {
@@ -39,9 +38,32 @@ class CheckoutView: UIView {
         label.numberOfLines = 0
         return label
     }()
-    lazy var addressView: UIView = {
-        let view = UIView()
+    lazy var addressView: AddressView = {
+        let view = AddressView()
         return view
+    }()
+    lazy var contactView: ContactView = {
+        let view = ContactView()
+        return view
+    }()
+    lazy var totalTextLabel: UILabel = {
+        let label = UILabel()
+        label.text = "Итого:"
+        label.textColor = UIColor(red: 0.318, green: 0.361, blue: 0.435, alpha: 1)
+        label.font = .getMontserraBoldFont(on: 15)
+        return label
+    }()
+    lazy var totalPriceLabel: UILabel = {
+        let label = UILabel()
+        label.text = "20 000 тенге"
+        label.textColor = UIColor(red: 0.318, green: 0.361, blue: 0.435, alpha: 1)
+        label.font = .getMontserraBoldFont(on: 18)
+        return label
+    }()
+    lazy var realizeButton: ContinueButton = {
+        let button = ContinueButton()
+        button.layer.cornerRadius = 10
+        return button
     }()
     
     //MARK: - Init
@@ -56,7 +78,9 @@ class CheckoutView: UIView {
     
     //MARK: - SetupViews
     func setupViews() {
-        addSubviews(views: [paymentType, typeOrderView, addressView, descriptionLabel, dateSelectView])
+        addSubviews(views: [paymentType, typeOrderView, addressView, descriptionLabel,
+                            dateSelectView, contactView, totalTextLabel, totalPriceLabel,
+                            realizeButton])
         paymentType.snp.makeConstraints { (make) in
             make.top.left.equalTo(16)
             make.right.equalTo(-16)
@@ -70,22 +94,38 @@ class CheckoutView: UIView {
             make.top.equalTo(typeOrderView.snp.bottom).offset(16)
             make.left.equalTo(16)
             make.right.equalTo(-16)
-            make.bottom.equalToSuperview()
         }
-        self.dateSelectView.snp.makeConstraints { (make) in
-            make.top.equalTo(self.descriptionLabel.snp.bottom).offset(16)
+        dateSelectView.snp.makeConstraints { (make) in
+            make.top.equalTo(descriptionLabel.snp.bottom).offset(16)
             make.left.equalTo(16)
             make.right.equalTo(-16)
         }
-        self.addressView.snp.makeConstraints { (make) in
-            make.top.equalTo(self.dateSelectView.snp.bottom).offset(16)
+        addressView.snp.makeConstraints { (make) in
+            make.top.equalTo(dateSelectView.snp.bottom).offset(16)
             make.left.equalTo(16)
             make.right.equalTo(-16)
         }
-    }
-    
-    //MARK: - Actions
-    func showHideDate() {
+        contactView.snp.makeConstraints { (make) in
+            make.top.equalTo(addressView.snp.bottom).offset(16)
+            make.left.equalTo(16)
+            make.right.equalTo(-16)
+        }
+        totalTextLabel.snp.makeConstraints { (make) in
+            make.top.equalTo(contactView.snp.bottom).offset(16)
+            make.left.equalTo(16)
+            make.right.equalTo(-16)
+        }
+        totalPriceLabel.snp.makeConstraints { (make) in
+            make.top.equalTo(totalTextLabel.snp.bottom).offset(4)
+            make.left.equalTo(16)
+            make.right.equalTo(-16)
+        }
+        realizeButton.snp.makeConstraints { (make) in
+            make.top.equalTo(totalPriceLabel.snp.bottom).offset(16)
+            make.left.equalTo(16)
+            make.height.equalTo(60)
+            make.right.bottom.equalTo(-16)
+        }
         
     }
 }
@@ -111,7 +151,7 @@ extension CheckoutView: SelectTypeOrderDelegate {
             UIView.animate(withDuration: .init(floatLiteral: 0.5)) {
                 self.dateSelectView.alpha = 0
                 self.addressView.snp.remakeConstraints { (make) in
-                    make.top.equalTo(self.dateSelectView.snp.bottom).offset(16)
+                    make.top.equalTo(self.descriptionLabel.snp.bottom).offset(16)
                     make.left.equalTo(16)
                     make.right.equalTo(-16)
                 }

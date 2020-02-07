@@ -217,6 +217,7 @@ extension NewsViewController: UITextFieldDelegate {
         
         return true
     }
+    
     func textFieldDidBeginEditing(_ textField: UITextField) {
         coordinator.routeTotalCategoryProduct(sections: newsViewModel.sectionList, row: 0, category_id: -3, on: self)
     }
