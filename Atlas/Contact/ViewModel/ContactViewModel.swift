@@ -16,8 +16,10 @@ class ContactViewModel {
     weak var baseViewController: UIViewController?
     
     func getContactDetail() {
+        delegate?.showLoader()
         ParseManager.shared.getRequest(url: ContactApi.info, success: { (result: Contact) in
             self.contact = result
+            self.delegate?.hideLoader()
             self.delegate?.updateUI()
         }) { (error) in
             self.delegate?.showErrorMessage(error)

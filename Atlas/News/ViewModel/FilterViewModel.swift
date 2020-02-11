@@ -25,9 +25,9 @@ class FilterViewModel {
             self.productList.removeAll()
         }
         ParseManager.shared.getRequest(url: ProductApi.sectionProducts, parameters: parameters,
-               success: { (result: FilterModel) in
+               success: { (result: PaginationResult<[Product]>) in
                 self.delegate?.hideLoader()
-                self.productList = result.products
+                self.productList = result.data
                 self.max_page = result.last_page
                 self.page = result.current_page
                 self.delegate?.updateUI()

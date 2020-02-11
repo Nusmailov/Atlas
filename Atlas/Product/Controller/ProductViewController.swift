@@ -151,7 +151,7 @@ extension ProductViewController: ProductDelegate {
     }
     
     func openTwoDirectionVC(category_id: Int) {
-        coordinator.routeTotalCategoryProduct(sections: [], row: -1, category_id: product.section_id, on: self)
+        coordinator.routeTotalCategoryProduct(sections: [], row: -1, category_id: product.id, on: self)
     }
     
     func addToBasket(product_id: Int) {

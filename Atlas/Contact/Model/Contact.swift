@@ -22,4 +22,5 @@ class Contact: Codable {
 
 class ContactApi {
     static let info = "settings"
+    static let views = "views"
 }

@@ -14,14 +14,13 @@ class TotalBasketView: UIView {
     lazy var topLine: UIView = {
         let view = UIView()
         view.layer.backgroundColor = UIColor(red: 0.937, green: 0.933, blue: 0.933, alpha: 1).cgColor
-
         return view
     }()
     lazy var totalTitle: UILabel = {
         let label = UILabel()
         label.textColor = .mainColor
         label.font = .getMullerRegularFont(on: 13)
-        label.text = "Итого: +10% скидка"
+        label.text = "Итого:"
         return label
     }()
     

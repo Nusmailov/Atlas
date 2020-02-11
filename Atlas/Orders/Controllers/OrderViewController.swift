@@ -119,5 +119,6 @@ extension OrderViewController: UITableViewDelegate, UITableViewDataSource {
 extension OrderViewController: ProcessViewDelegate {
     func updateUI() {
         tableView.reloadData()
+        refreshControl.endRefreshing()
     }
 }

@@ -14,7 +14,7 @@ class MapView: MKMapView {
     
     //MARK: - Properties
     var initialLocation = CLLocation(latitude: 37.385365, longitude: -122.084074)
-    let regionRadius: CLLocationDistance = 800
+    let regionRadius: CLLocationDistance = 900
     let userName = ""
     lazy var addressView: UIView = {
         let view = UIView()

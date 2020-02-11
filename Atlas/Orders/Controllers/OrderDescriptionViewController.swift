@@ -24,6 +24,11 @@ class OrderDescriptionViewController: UIViewController {
         return tableView
     }()
     fileprivate let cellID = "cellID"
+    lazy var refreshControl: UIRefreshControl = {
+        let refresh = UIRefreshControl()
+        refresh.addTarget(self, action: #selector(updateData), for: .valueChanged)
+        return refresh
+    }()
     lazy var orderDescriptionView = OrderDescriptionView()
     var order_id: Int!
     fileprivate var order: Order! {
@@ -67,6 +72,11 @@ class OrderDescriptionViewController: UIViewController {
             make.top.left.right.equalToSuperview()
             make.bottom.equalToSuperview().offset(-50)
         }
+        tableView.refreshControl = refreshControl
+    }
+    
+    @objc func updateData() {
+        viewModel.getById(order_id: order_id)
     }
 }
 
@@ -92,9 +102,10 @@ extension OrderDescriptionViewController: UITableViewDelegate, UITableViewDataSo
     }
 }
 
-// MARK: - TableViewDelegate
+// MARK: - ProcessViewDelegate
 extension OrderDescriptionViewController: ProcessViewDelegate {
     func updateUI() {
         tableView.reloadData()
+        refreshControl.endRefreshing()
     }
 }

@@ -26,6 +26,8 @@ class ContactViewController: ScrollViewController {
     }()
     lazy var estimateView: EstimateView = {
         let view = EstimateView()
+        view.appleLogoButton.addTarget(self, action: #selector(appstoreLink), for: .touchUpInside)
+        view.documentsButton.addTarget(self, action: #selector(privacy), for: .touchUpInside)
         return view
     }()
     lazy var viewModel: ContactViewModel = {
@@ -78,6 +80,7 @@ class ContactViewController: ScrollViewController {
         }
     }
     
+    //MARK: -  Actions
     @objc func call() {
         viewModel.call()
     }
@@ -90,11 +93,24 @@ class ContactViewController: ScrollViewController {
         viewModel.writeEmail(on: self)
     }
     
+    @objc func appstoreLink() {
+        guard let site = contact?.app_store else { return }
+        if let url = URL(string: site) {
+            UIApplication.shared.open(url)
+        }
+    }
+    
     func mailComposeController(_ controller: MFMailComposeViewController, didFinishWith result: MFMailComposeResult, error: Error?) {
         controller.dismiss(animated: true)
     }
+    
+    @objc func privacy() {
+        let vc = ContactInfoViewController(state: ContactInfoText.privacy)
+        self.navigationController?.pushViewController(vc, animated: true)
+    }
 }
 
+//MARK: - ProcessViewDelegate
 extension ContactViewController: ProcessViewDelegate {
     func updateUI() {
         self.contact = viewModel.contact!

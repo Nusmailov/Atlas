@@ -65,4 +65,12 @@ class BasketViewModel {
             self.delegate?.showErrorMessage(error)
         }
     }
+    
+    func totalPrice() -> Int {
+        var sum = 0
+        for i in productList {
+            sum += i.product.product_price * i.product_quantity
+        }
+        return sum
+    }
 }

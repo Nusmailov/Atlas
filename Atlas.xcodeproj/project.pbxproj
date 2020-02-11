@@ -123,6 +123,7 @@
 		AD93390C44BFB52B511808DA /* Pods_Atlas.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0636DCD93F3F426A799B9625 /* Pods_Atlas.framework */; };
 		F509D1E423E16187004AF7E5 /* ProductTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F509D1E323E16187004AF7E5 /* ProductTableViewCell.swift */; };
 		F509D1E623E16344004AF7E5 /* FavouriteViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F509D1E523E16344004AF7E5 /* FavouriteViewModel.swift */; };
+		F520CFD423F2A78D009FB7C8 /* ContactInfoText.swift in Sources */ = {isa = PBXBuildFile; fileRef = F520CFD323F2A78D009FB7C8 /* ContactInfoText.swift */; };
 		F534DA1023E7DB9600D0E61B /* FilterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F534DA0F23E7DB9600D0E61B /* FilterViewController.swift */; };
 		F534DA1423E81BC500D0E61B /* FilterViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F534DA1323E81BC500D0E61B /* FilterViewModel.swift */; };
 		F534DA1623E81E3D00D0E61B /* FilterModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F534DA1523E81E3D00D0E61B /* FilterModel.swift */; };
@@ -135,6 +136,7 @@
 		F555D49623DB03B300117029 /* InfoTitleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F555D49523DB03B300117029 /* InfoTitleView.swift */; };
 		F5608C4523F2558500DEDFE5 /* Contact.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5608C4423F2558500DEDFE5 /* Contact.swift */; };
 		F5608C4C23F2588B00DEDFE5 /* ContactViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5608C4B23F2588B00DEDFE5 /* ContactViewController.swift */; };
+		F562854923F2A94F00C7DD0F /* PrivacyPolicyViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F562854823F2A94F00C7DD0F /* PrivacyPolicyViewModel.swift */; };
 		F562B04A23E17BF000E31AAD /* NewsApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = F562B04923E17BF000E31AAD /* NewsApi.swift */; };
 		F562B04C23E17E2000E31AAD /* ProcessViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F562B04B23E17E2000E31AAD /* ProcessViewDelegate.swift */; };
 		F562B04E23E1990B00E31AAD /* Section.swift in Sources */ = {isa = PBXBuildFile; fileRef = F562B04D23E1990B00E31AAD /* Section.swift */; };
@@ -315,6 +317,7 @@
 		B54F1572D35155CB362341AC /* Pods-Atlas.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Atlas.debug.xcconfig"; path = "Target Support Files/Pods-Atlas/Pods-Atlas.debug.xcconfig"; sourceTree = "<group>"; };
 		F509D1E323E16187004AF7E5 /* ProductTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductTableViewCell.swift; sourceTree = "<group>"; };
 		F509D1E523E16344004AF7E5 /* FavouriteViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavouriteViewModel.swift; sourceTree = "<group>"; };
+		F520CFD323F2A78D009FB7C8 /* ContactInfoText.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactInfoText.swift; sourceTree = "<group>"; };
 		F534DA0F23E7DB9600D0E61B /* FilterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterViewController.swift; sourceTree = "<group>"; };
 		F534DA1323E81BC500D0E61B /* FilterViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterViewModel.swift; sourceTree = "<group>"; };
 		F534DA1523E81E3D00D0E61B /* FilterModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterModel.swift; sourceTree = "<group>"; };
@@ -327,6 +330,7 @@
 		F555D49523DB03B300117029 /* InfoTitleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoTitleView.swift; sourceTree = "<group>"; };
 		F5608C4423F2558500DEDFE5 /* Contact.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Contact.swift; sourceTree = "<group>"; };
 		F5608C4B23F2588B00DEDFE5 /* ContactViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactViewController.swift; sourceTree = "<group>"; };
+		F562854823F2A94F00C7DD0F /* PrivacyPolicyViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrivacyPolicyViewModel.swift; sourceTree = "<group>"; };
 		F562B04923E17BF000E31AAD /* NewsApi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsApi.swift; sourceTree = "<group>"; };
 		F562B04B23E17E2000E31AAD /* ProcessViewDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProcessViewDelegate.swift; sourceTree = "<group>"; };
 		F562B04D23E1990B00E31AAD /* Section.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Section.swift; sourceTree = "<group>"; };
@@ -394,9 +398,9 @@
 		1417D8AB23CC37A800429C23 /* Orders */ = {
 			isa = PBXGroup;
 			children = (
-				F5C219D523D9C3B000AD5416 /* ViewModel */,
 				1417D8AD23CC37A800429C23 /* Model */,
 				1417D8B123CC37A800429C23 /* View */,
+				F5C219D523D9C3B000AD5416 /* ViewModel */,
 				1417D8B723CC37A800429C23 /* Controllers */,
 			);
 			path = Orders;
@@ -433,7 +437,6 @@
 				1417D8B923CC37A800429C23 /* OrderViewController.swift */,
 				1417D8BA23CC37A800429C23 /* OrderDescriptionViewController.swift */,
 				1417D8B823CC37A800429C23 /* InfoOrderViewController.swift */,
-				1417D8BB23CC37A800429C23 /* ContactInfoViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -1082,6 +1085,7 @@
 			isa = PBXGroup;
 			children = (
 				F5608C4423F2558500DEDFE5 /* Contact.swift */,
+				F520CFD323F2A78D009FB7C8 /* ContactInfoText.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -1101,6 +1105,7 @@
 			isa = PBXGroup;
 			children = (
 				F5DD1A2623F25DA0004DB812 /* ContactViewModel.swift */,
+				F562854823F2A94F00C7DD0F /* PrivacyPolicyViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -1108,6 +1113,7 @@
 		F5608C4A23F2586100DEDFE5 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				1417D8BB23CC37A800429C23 /* ContactInfoViewController.swift */,
 				F5608C4B23F2588B00DEDFE5 /* ContactViewController.swift */,
 			);
 			path = Controller;
@@ -1438,8 +1444,10 @@
 				F562B05A23E4418E00E31AAD /* FavoriteModel.swift in Sources */,
 				1417D8EF23CC83C500429C23 /* ViewModelConfigurable.swift in Sources */,
 				1418277B2385131500857FA9 /* InputView.swift in Sources */,
+				F520CFD423F2A78D009FB7C8 /* ContactInfoText.swift in Sources */,
 				145A30D923C450F6008962FF /* ProfileViewController.swift in Sources */,
 				1417D8C223CC37A800429C23 /* OrderDescriptionView.swift in Sources */,
+				F562854923F2A94F00C7DD0F /* PrivacyPolicyViewModel.swift in Sources */,
 				F59A152323ED6B2900D0B672 /* ContactButton.swift in Sources */,
 				1417D8BF23CC37A800429C23 /* ProductOrder.swift in Sources */,
 				141827322384FECC00857FA9 /* TileView.swift in Sources */,

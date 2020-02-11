@@ -44,9 +44,9 @@ class BasketViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.navigationItem.title = "Корзина"
+        tabBarController?.tabBar.isHidden = false
         showLoader()
         getBasketList()
-        tabBarController?.tabBar.isHidden = false
     }
     
     //MARK: - SetupViews
@@ -54,11 +54,12 @@ class BasketViewController: UIViewController {
         tableView.refreshControl = refreshControl
         view.backgroundColor = .white
         view.addSubview(tableView)
+        view.addSubview(totalView)
         tableView.snp.makeConstraints { (make) in
             make.bottom.equalTo(-(tabBarController?.tabBar.bounds.height)!-48)
             make.left.top.right.equalToSuperview()
         }
-        view.addSubview(totalView)
+        
         totalView.snp.makeConstraints { (make) in
             make.bottom.equalTo(-(tabBarController?.tabBar.bounds.height)!)
             make.left.right.equalToSuperview()
@@ -97,6 +98,7 @@ extension BasketViewController: UITableViewDelegate, UITableViewDataSource {
 //MARK: - ProductBasketDelegate
 extension BasketViewController: ProcessViewDelegate {
     func updateUI() {
+        totalView.totalCountLabel.text = "\(viewModel.totalPrice())₸"
         refreshControl.endRefreshing()
         tableView.reloadData()
     }

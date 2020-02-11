@@ -18,11 +18,11 @@ class EstimateView: UIView {
         return label
     }()
     
-    lazy var appleLogo: UIImageView = {
-        let image = UIImageView()
-        image.contentMode = .scaleAspectFit
-        image.image = UIImage(named: "apple")
-        return image
+    lazy var appleLogoButton: UIButton = {
+        let button = UIButton()
+        button.setImage(UIImage(named: "apple"), for: .normal)
+        button.imageView?.contentMode = .scaleAspectFit
+        return button
     }()
     lazy var documentsButton: ContinueButton = {
         let button = ContinueButton()
@@ -42,13 +42,13 @@ class EstimateView: UIView {
     
     //MARK: - SetupViews
     func setupViews() {
-        addSubviews(views: [estimateLabel, appleLogo, documentsButton])
+        addSubviews(views: [estimateLabel, appleLogoButton, documentsButton])
         estimateLabel.snp.makeConstraints { (make) in
             make.top.left.equalTo(16)
             make.right.equalTo(-16)
         }
         
-        appleLogo.snp.makeConstraints { (make) in
+        appleLogoButton.snp.makeConstraints { (make) in
             make.top.equalTo(estimateLabel.snp.bottom).offset(16)
             make.left.equalTo(16)
             make.right.equalTo(-16)
@@ -57,7 +57,7 @@ class EstimateView: UIView {
         }
         
         documentsButton.snp.makeConstraints { (make) in
-            make.top.equalTo(appleLogo.snp.bottom).offset(16)
+            make.top.equalTo(appleLogoButton.snp.bottom).offset(16)
             make.left.equalTo(16)
             make.bottom.right.equalTo(-16)
             make.height.equalTo(50)

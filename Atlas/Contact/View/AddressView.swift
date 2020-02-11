@@ -9,6 +9,7 @@
 import UIKit
 
 class AddressView: UIView {
+    
     //MARK: - Properties
     lazy var addressLabel: UILabel = {
         let label = UILabel()
