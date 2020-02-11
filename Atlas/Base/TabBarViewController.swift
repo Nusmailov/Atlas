@@ -33,7 +33,7 @@ class TabBarViewController: UITabBarController {
         orders.tabBarItem.image = #imageLiteral(resourceName: "Clipboard")
         orders.tabBarItem.imageInsets = UIEdgeInsets(top: 35, left: 35, bottom: 35, right: 35)
         
-        let contacts = UIViewController()
+        let contacts = ContactViewController()
         let contactsNavController = UINavigationController(rootViewController: contacts)
         contactsNavController.tabBarItem.title = "Контакты"
         contactsNavController.tabBarItem.image = #imageLiteral(resourceName: "Mail opened")

@@ -19,7 +19,7 @@ class OrderProductTableViewCell: UITableViewCell {
         view.backgroundColor = .whiteBlue
         return view
     }()
-    lazy var productImageView:UIImageView = {
+    lazy var productImageView: UIImageView = {
         let view = UIImageView()
         view.image = #imageLiteral(resourceName: "plitka 1")
         view.contentMode = .scaleAspectFit
@@ -33,20 +33,22 @@ class OrderProductTableViewCell: UITableViewCell {
         label.text = "Клинкер «Амстердам» универсальный"
         return label
     }()
-    lazy var priceView: OrderQuantityView = {
-        let view = OrderQuantityView()
+    lazy var priceView: ProductCharacteristicView = {
+        let view = ProductCharacteristicView()
+        view.titleLabel.text = "Цена:"
+        view.valueTextField.isEnabled = false
         return view
     }()
-    lazy var quantityView: OrderQuantityView = {
-        let view = OrderQuantityView()
+    lazy var quantityView: ProductCharacteristicView = {
+        let view = ProductCharacteristicView()
         view.titleLabel.text = "Шт:"
-        view.textLabel.text = "2"
+        view.valueTextField.isEnabled = false
         return view
     }()
-    lazy var sizeView: OrderQuantityView = {
-        let view = OrderQuantityView()
+    lazy var sizeView: ProductCharacteristicView = {
+        let view = ProductCharacteristicView()
         view.titleLabel.text = "м2:"
-        view.textLabel.text = "2,66"
+        view.valueTextField.isEnabled = false
         return view
     }()
     lazy var descriptionLabel: UILabel = {
@@ -65,17 +67,18 @@ class OrderProductTableViewCell: UITableViewCell {
         return label
     }()
     
-    var productOrder: ProductOrder! {
+    var basketProduct: BasketProduct! {
         didSet {
-            //            quantityProductLabel.text = "\(String(describing: productOrder.count)) pieces"
-            //            priceProductLabel.text = "\(String(describing: productOrder.all_price)) tenge"
-            //            nameProductLabel.text = "\(String(describing: productOrder.name))"
-            //            if productOrder?.images.count != 0 {
-            //                productImageView.sd_imageIndicator = SDWebImageActivityIndicator.gray
-            //                productImageView.sd_setImage(with: Product.getImageUrl(url: (productOrder?.images[0])!))
-            //            } else {
-            //                productImageView.image = #imageLiteral(resourceName: "plitka 1")
-            //            }
+            quantityView.valueTextField.text = "\(basketProduct.product_quantity)"
+            sizeView.valueTextField.text = "\(basketProduct.area)"
+            priceView.valueTextField.text = "\(basketProduct.cost)₸ м2"
+            nameProductLabel.text = basketProduct.product.product_name
+            descriptionLabel.text = basketProduct.product.product_description
+            allSizeLabel.text = "\(basketProduct.product.product_width)x\(basketProduct.product.product_length) см "
+            if !basketProduct.product.images.isEmpty {
+                productImageView.sd_imageIndicator = SDWebImageActivityIndicator.gray
+                productImageView.sd_setImage(with: Product.getImageUrl(url: basketProduct.product.images[0].image_path))
+            }
         }
     }
     
@@ -91,8 +94,8 @@ class OrderProductTableViewCell: UITableViewCell {
     }
     
     
-    func setProductOrder(productOrder: ProductOrder) {
-        self.productOrder = productOrder
+    func setBasketOrder(basketProduct: BasketProduct) {
+        self.basketProduct = basketProduct
     }
     
     // MARK: - Setupviews
@@ -110,22 +113,24 @@ class OrderProductTableViewCell: UITableViewCell {
         
         productImageView.snp.makeConstraints { (make) in
             make.top.leading.equalToSuperview().offset(16)
-            make.width.height.equalTo(75)
+            make.width.height.equalTo(80)
         }
+        
         nameProductLabel.snp.makeConstraints { (make) in
             make.top.equalToSuperview().offset(16)
-            make.left.equalTo(productImageView.snp.right).offset(4)
+            make.left.equalTo(productImageView.snp.right).offset(8)
             make.right.equalToSuperview().offset(-16)
         }
+        
         allSizeLabel.snp.makeConstraints { (make) in
             make.top.equalTo(nameProductLabel.snp.bottom).offset(4)
-            make.left.equalTo(productImageView.snp.right).offset(2)
+            make.left.equalTo(productImageView.snp.right).offset(8)
             make.right.equalTo(-8)
         }
         
         descriptionLabel.snp.makeConstraints { (make) in
-            make.top.equalTo(allSizeLabel.snp.bottom).offset(1)
-            make.left.equalTo(productImageView.snp.right).offset(2)
+            make.top.equalTo(allSizeLabel.snp.bottom).offset(12)
+            make.left.equalTo(productImageView.snp.right).offset(8)
             make.right.equalTo(-8)
         }
         
@@ -133,16 +138,21 @@ class OrderProductTableViewCell: UITableViewCell {
             make.top.equalTo(descriptionLabel.snp.bottom).offset(8)
             make.left.equalTo(8)
             make.bottom.equalTo(-12)
+            make.width.equalTo(100)
         }
+        
         quantityView.snp.makeConstraints { (make) in
             make.left.equalTo(priceView.snp.right).offset(10)
             make.width.greaterThanOrEqualTo(75)
             make.centerY.equalTo(priceView)
+            make.width.equalTo(100)
         }
+        
         sizeView.snp.makeConstraints { (make) in
             make.left.equalTo(quantityView.snp.right).offset(10)
             make.width.greaterThanOrEqualTo(75)
             make.centerY.equalTo(priceView)
+            make.width.equalTo(100)
         }
     }
     

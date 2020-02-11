@@ -27,12 +27,14 @@ public class DefaultParserImpl: Parser {
             
 //            let string = String(data: data, encoding: .utf8)
 //            print("String Json: ", string)
+            
             do {
                 let json = try JSONSerialization.jsonObject(with: data, options: .allowFragments)
                 print("JSON:", json)
                 
 //                print("MESSAGE: ", (json as! [String: Any])["message"] as! String)
             } catch {
+                
                 print("Error with json:", error.localizedDescription)
             }
             

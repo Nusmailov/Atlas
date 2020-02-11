@@ -24,14 +24,11 @@ class BasketViewModel {
     //MARK: - Requests
     func getBasketList() {
         ParseManager.shared.getRequest(url: ProductApi.basketList,
-            success: { (result: PaginationResult<[BasketProduct]>) in
-            self.productList = result.data
+            success: { (result: [BasketProduct]) in
+            self.productList = result
             for i in self.productList {
                 BasketModel.shared.basketList[i.id] = i.product.in_basket
             }
-                
-            self.max_page = result.last_page
-            self.page = result.current_page
             self.delegate?.hideLoader()
             self.delegate?.updateUI()
         }) { (error) in

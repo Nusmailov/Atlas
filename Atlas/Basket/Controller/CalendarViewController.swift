@@ -46,7 +46,7 @@ class CalendarViewController: ViewController {
         viewForDissmiss.snp.makeConstraints { (make) in
             make.edges.equalToSuperview()
         }
-        let locale = NSLocale(localeIdentifier: "ru_RU")
+        let locale = NSLocale(localeIdentifier: "Ru_RU")
         dateView.calendarView.locale = locale as Locale
         dateView.snp.makeConstraints { (make) in
             make.center.equalToSuperview()
@@ -63,7 +63,6 @@ class CalendarViewController: ViewController {
     @objc func checkAction(sender : UITapGestureRecognizer) {
         dismiss(animated: true, completion: nil)
     }
-    
     
     @objc func getDate(date: Date) {
         selected_Date = date

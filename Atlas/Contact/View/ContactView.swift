@@ -25,11 +25,13 @@ class ContactView: UIView {
     lazy var emailView: ContactButton = {
         let button = ContactButton()
         button.image.image = #imageLiteral(resourceName: "mail")
+        button.titleTextLabel.text = "Наша почта"
         return button
     }()
     lazy var webView: ContactButton = {
         let button = ContactButton()
         button.image.image = #imageLiteral(resourceName: "web")
+        button.titleTextLabel.text = "Наш сайт"
         return button
     }()
     //MARK: - Init
@@ -61,5 +63,4 @@ class ContactView: UIView {
             make.bottom.left.right.equalToSuperview()
         }
     }
-
 }

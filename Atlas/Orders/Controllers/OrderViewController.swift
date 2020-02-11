@@ -13,7 +13,7 @@ class OrderViewController: ViewController {
     // MARK: - Properties
     lazy var tableView: UITableView = {
         let tableView = UITableView(frame: .zero)
-        tableView.register(OrderTableViewCell.self, forCellReuseIdentifier: cellID)
+        tableView.register(OrderTableViewCell.self, forCellReuseIdentifier: "cellID")
         tableView.frame = CGRect(x: 0, y: 0, width: view.frame.width, height: view.frame.height)
         tableView.delegate = self
         tableView.dataSource = self
@@ -24,10 +24,7 @@ class OrderViewController: ViewController {
         tableView.layer.cornerRadius = 10
         return tableView
     }()
-    fileprivate let cellID = "cellID"
     lazy var historyView = HistoryView()
-//    private var networkManager: NetworkManager
-    private var orderList = [Order]()
     var refreshControl = UIRefreshControl()
     lazy var mainView: UIView = {
         let view = UIView(frame: CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height))
@@ -35,11 +32,15 @@ class OrderViewController: ViewController {
         view.layer.cornerRadius = 10
         return view
     }()
-    var page = 1
     lazy var emptyView: EmptyView = {
         let view = EmptyView()
-        view.text.text = "noOrder"
+        view.text.text = "Ваши заказы будут отображаться тут"
         return view
+    }()
+    lazy var viewModel: OrderViewModel = {
+        let viewModel = OrderViewModel()
+        viewModel.delegate = self
+        return viewModel
     }()
     
     // MARK: - Lifecycle
@@ -53,6 +54,7 @@ class OrderViewController: ViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupTableView()
+        viewModel.getOrderList()
     }
     
     //MARK: - SetupViews
@@ -65,7 +67,7 @@ class OrderViewController: ViewController {
         }
         mainView.addSubview(tableView)
         mainView.addSubview(emptyView)
-//        self.refreshControl.addTarget(self, action: #selector(getOrders), for: .valueChanged)
+        self.refreshControl.addTarget(self, action: #selector(getOrders), for: .valueChanged)
         tableView.snp.makeConstraints { (make) in
             make.edges.equalToSuperview()
         }
@@ -74,53 +76,31 @@ class OrderViewController: ViewController {
             make.center.equalToSuperview()
         }
         emptyView.isHidden = true
-//        tableView.refreshControl = self.refreshControl
+        tableView.refreshControl = self.refreshControl
     }
     
-    
     //MARK: - Request
-//    @objc func getOrders() {
-//        let token = UserManager.getCurrentToken()!
-//        let endpoints = Endpoints.getOrders(token: token, page: page)
-//        networkManager.request(endpoints) { [weak self] (result: Result<GeneralResult<OrderData?>>) in
-//            self?.hideLoader()
-//            switch result {
-//            case .success(let order):
-//                DispatchQueue.main.async {
-//                    
-//                    self?.orderList = order.result?.data ?? []
-//                    self?.refreshControl.endRefreshing()
-//                    self?.tableView.reloadData()
-//                }
-//            case .failure(let error):
-//                DispatchQueue.main.async {
-//                    self?.showErrorMessage(error)
-//                }
-//            }
-//        }
-//    }
+    @objc func getOrders() {
+        viewModel.getOrderList()
+    }
 }
 
 //MARK: - TableViewDelegate
 extension OrderViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if section != 0 {
-            emptyView.isHidden = 10 == 0 ? false : true
+            emptyView.isHidden = viewModel.orderList.count == 0 ? false : true
         }
-        return section == 0 ? 0 : 10
+        return section == 0 ? 0 : viewModel.orderList.count
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {
         return 2
     }
     
-//    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-//        return historyView
-//    }
-    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: cellID, for: indexPath) as! OrderTableViewCell
-//        cell.setOrder(order: orderList[indexPath.item])
+        let cell = tableView.dequeueReusableCell(withIdentifier: "cellID", for: indexPath) as! OrderTableViewCell
+        cell.setOrder(order: viewModel.orderList[indexPath.row])
         return cell
     }
     
@@ -129,32 +109,15 @@ extension OrderViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let vc = OrderDescriptionViewController()
-//        vc.setOrder(order: orderList[indexPath.item])
+        let vc = OrderDescriptionViewController(order_id: viewModel.orderList[indexPath.row].id)
+        vc.setOrder(order: viewModel.orderList[indexPath.row])
         self.navigationController?.pushViewController(vc, animated: true)
-        
-//        if orderList[indexPath.item].status == -1 {
-//
-//        }
-//        else if orderList[indexPath.item].status == 1 {
-//            let vc = OrderDescriptionViewController()
-//            vc.isHeaderFooter = true
-//            vc.specialAgreeView.cancelButton.isEnabled = false
-//            vc.specialAgreeView.cancelButton.backgroundColor = .lightGray
-//            vc.setOrder(order: orderList[indexPath.item])
-//            vc.specialAgreeView.agreeButton.setTitle("pay", for:  .normal)
-//            self.navigationController?.pushViewController(vc, animated: true)
-//        }
-//        else if orderList[indexPath.item].status == 0 {
-//            let vc = OrderDescriptionViewController()
-//            vc.isHeaderFooter = true
-//            vc.setOrder(order: orderList[indexPath.item])
-//            self.navigationController?.pushViewController(vc, animated: true)
-//        }
-//        else {
-//            let vc = OrderDescriptionViewController()
-//            vc.setOrder(order: orderList[indexPath.item])
-//            self.navigationController?.pushViewController(vc, animated: true)
-//        }
+    }
+}
+
+//MARK: - ProcessViewDelegate
+extension OrderViewController: ProcessViewDelegate {
+    func updateUI() {
+        tableView.reloadData()
     }
 }

@@ -14,7 +14,7 @@ class ChooseDateView: UIView {
     
     lazy var chooseDateLabel: UILabel = {
         let label = UILabel()
-        label.text = "Date"
+        label.text = "Выберите дату"
         label.textColor = .black
         label.font = .getMullerBoldFont(on: 20)
         return label

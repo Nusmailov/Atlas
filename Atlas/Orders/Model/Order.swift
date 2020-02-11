@@ -9,58 +9,38 @@
 import Foundation
 import UIKit
 
-class Order: Decodable {
+class Order: Codable {
     var id: Int
-    var type: String
-    var user_id: Int?
-    var courier_id: Int?
-    var status: Int?
-    var status_info: String?
-    var delivery_date: String?
-    var delivery_hour: String?
-    var pay_type: Int?
-    var pay_type_info: String?
-    var pay_bool: Int?
-    var bonus: Int?
-    var total_price: Double?
-    var products: [ProductOrder]?
-    var address: Address?
-    var card: CloudCard?
+    var user_id: Int
+    var area_sum: Double
+    var cost_sum: Double
+    var order_date: String?
+    var order_type: String
+    var order_status: String
+    var order_type_name: String
+    var order_status_name: String
     
     private enum CodingKeys: String, CodingKey  {
         case id
-        case type
         case user_id
-        case courier_id
-        case status
-        case status_info
-        case delivery_date
-        case delivery_hour
-        case pay_type
-        case pay_type_info
-        case pay_bool
-        case bonus
-        case total_price
-        case products
-        case address
-        case card
+        case area_sum
+        case cost_sum
+        case order_date
+        case order_type
+        case order_status
+        case order_type_name
+        case order_status_name
     }
 }
 
-class OrderData: Decodable {
+class OrderData: Codable {
     var current_page: Int
-    var count_pages: Int
-    var count_date: Int
-    var offset: Int
-    var limit: Int
-    var data: [Order]?
+    var last_page: Int
+    var data: [Order]
     
     private enum CodingKeys: String, CodingKey {
         case current_page
-        case count_pages
-        case count_date
-        case offset
-        case limit
+        case last_page
         case data
     }
 }
@@ -93,4 +73,9 @@ enum OrderStatus: String {
             return UIColor(red: 0.784, green: 0.204, blue: 0.278, alpha: 1)
         }
     }
+}
+
+class OrderApi {
+    static let orderList = "order/list"
+    static let order = "order"
 }

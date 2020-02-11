@@ -39,7 +39,7 @@ class OrderDescriptionView: UIView {
         
         return label
     }()
-    lazy var addressOrderLabel: UILabel = {
+    lazy var typeOrderLabel: UILabel = {
         let label = UILabel()
         label.text = "Алматы, пр-т Абая 2, кв 39"
         label.font = .getMontserraRegularFont(on: 13)
@@ -48,7 +48,7 @@ class OrderDescriptionView: UIView {
     }()
     lazy var paymentTypeOrderLabel: UILabel = {
         let label = UILabel()
-        label.text = "Наличными курьеру"
+        label.text = "Наличными"
         label.font = .getMontserraRegularFont(on: 13)
         label.textColor = UIColor(red: 0.275, green: 0.282, blue: 0.333, alpha: 1)
         return label
@@ -159,9 +159,9 @@ class OrderDescriptionView: UIView {
             make.right.equalToSuperview().offset(-16)
         }
         
-        typeView.addSubview(addressOrderLabel)
+        typeView.addSubview(typeOrderLabel)
         
-        addressOrderLabel.snp.makeConstraints { (make) in
+        typeOrderLabel.snp.makeConstraints { (make) in
             make.top.leading.equalToSuperview().offset(16)
             make.bottom.right.equalToSuperview().offset(-16)
         }

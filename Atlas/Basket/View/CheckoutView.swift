@@ -16,7 +16,6 @@ class CheckoutView: UIView {
         view.dropView.dataSource = ["Самовывоз"]
         return view
     }()
-    
     lazy var typeOrderView: CheckoutInfoView = {
         let view = CheckoutInfoView()
         view.dropView.dataSource = ["Предзаказ", "Бронирование", "Заказ с хранением", "Обычный заказ"]

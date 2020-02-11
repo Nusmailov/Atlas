@@ -30,7 +30,7 @@ class OrderTableViewCell: UITableViewCell {
         let label = UILabel()
         label.font = .getMontserraSemiBoldFont(on: 13)
         label.textColor = #colorLiteral(red: 1, green: 0.7529411765, blue: 0, alpha: 1)
-        label.text = "Ожидает расмотрения"
+//        label.text = "Ожидает расмотрения"
         return label
     }()
     lazy var circleView: UIView = {
@@ -42,20 +42,10 @@ class OrderTableViewCell: UITableViewCell {
     fileprivate var order: Order! {
         didSet {
             statusOrderLabel.textColor = #colorLiteral(red: 1, green: 0.7529411765, blue: 0, alpha: 1)
-            if order.status == 3 {
-                statusOrderLabel.textColor = #colorLiteral(red: 0.137254902, green: 0.8549019608, blue: 0.5960784314, alpha: 1)
-            } else if order.status == 4 {
-                statusOrderLabel.textColor = .red
-            }
-            if order.type == "special" {
-                circleView.backgroundColor = #colorLiteral(red: 0.1647058824, green: 0.5960784314, blue: 1, alpha: 1)
-                orderTextLabel.text = "special" + " №\(order.id)"
-            }
-            statusOrderLabel.text = order.status_info
-            let date = order.delivery_date?.prefix(10)
-            guard let hour = order.delivery_hour else { return }
-            orderTextLabel.text = "orderN №\(order.id) from \(date ?? "") \(hour)"
-            circleView.backgroundColor = .white
+            statusOrderLabel.text = order.order_status_name
+            orderTextLabel.text = "Заказ \(order.id)"
+            guard let date = order.order_date else { return }
+            orderTextLabel.text = orderTextLabel.text! + " от \(date)"
         }
     }
     

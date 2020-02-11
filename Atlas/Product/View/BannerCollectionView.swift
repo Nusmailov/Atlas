@@ -18,7 +18,7 @@ class BannerCollectionView: UIView {
     lazy var collectionView : UICollectionView = {
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .horizontal
-        layout.itemSize = CGSize(width: UIScreen.main.bounds.width, height: 200)
+        layout.itemSize = CGSize(width: UIScreen.main.bounds.width, height: 300)
         let cv = UICollectionView(frame: CGRect.zero, collectionViewLayout: layout)
         cv.translatesAutoresizingMaskIntoConstraints = false
         cv.delegate = self
@@ -142,7 +142,7 @@ class BannerCollectionView: UIView {
                             checkButton])
         collectionView.snp.makeConstraints { (make) in
             make.top.left.right.equalToSuperview()
-            make.height.equalTo(200)
+            make.height.equalTo(300)
         }
         
         heartButton.snp.makeConstraints { (make) in
@@ -220,12 +220,11 @@ extension BannerCollectionView: UICollectionViewDelegate, UICollectionViewDataSo
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cellId", for: indexPath) as! BannerCollectionViewCell
         cell.setImage(image: product.images[indexPath.item])
-        
         return cell
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: self.frame.width, height: 220)
+        return CGSize(width: self.frame.width, height: 320)
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {

@@ -63,6 +63,7 @@ class ProductViewController: ScrollViewController {
             let heart = favorite == true ? UIImage(named: "Path 8890.1") : UIImage(named: "emptyHeart")
             imageCollectionView.heartButton.setImage(heart, for: .normal)
             imageCollectionView.collectionView.reloadData()
+            title = product.product_name
         }
     }
     var coordinator = NewsCoordinator()
