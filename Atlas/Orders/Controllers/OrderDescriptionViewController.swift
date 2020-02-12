@@ -33,6 +33,8 @@ class OrderDescriptionViewController: UIViewController {
     var order_id: Int!
     fileprivate var order: Order! {
         didSet {
+            let orderStatus = OrderStatus.init(rawValue: order.order_status)
+            orderDescriptionView.dateOrderLabel.textColor = orderStatus?.textColor
             orderDescriptionView.dateOrderLabel.text = order.order_status_name
             orderDescriptionView.typeOrderLabel.text = order.order_type_name
             orderDescriptionView.overAllPriceOrderLabel.text = "\(order.cost_sum)₸"

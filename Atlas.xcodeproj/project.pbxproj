@@ -1113,8 +1113,8 @@
 		F5608C4A23F2586100DEDFE5 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
-				1417D8BB23CC37A800429C23 /* ContactInfoViewController.swift */,
 				F5608C4B23F2588B00DEDFE5 /* ContactViewController.swift */,
+				1417D8BB23CC37A800429C23 /* ContactInfoViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";

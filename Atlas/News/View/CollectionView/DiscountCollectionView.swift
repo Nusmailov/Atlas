@@ -8,6 +8,10 @@
 
 import UIKit
 
+protocol OpenWebDelegate: class {
+    func openWeb(url: URL)
+}
+
 class DiscountCollectionView: UIView {
     
     //MARK: - Properties
@@ -37,6 +41,7 @@ class DiscountCollectionView: UIView {
         pageControl.isUserInteractionEnabled = false
         return pageControl
     }()
+    weak var delegate: OpenWebDelegate?
     
     //MARK: - Init
     override init(frame: CGRect) {
@@ -81,7 +86,7 @@ extension  DiscountCollectionView: UICollectionViewDataSource, UICollectionViewD
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         if let url = URL(string: newsList[indexPath.item].transition_url) {
-            UIApplication.shared.open(url)
+            delegate?.openWeb(url: url)
         }
     }
     

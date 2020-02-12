@@ -11,11 +11,11 @@ import Foundation
 class UserManager {
     static let userDefaults = UserDefaults.standard
     
-    static func createSessionWithUser(_ user: User) throws {
+    static func createSessionWithUser(_ user: UserModel) throws {
         let jsonEncoder = JSONEncoder()
         do {
             let userData = try jsonEncoder.encode(user)
-            setCurrentToken(to: user.token)
+            setCurrentToken(to: user.result.token)
             userDefaults.set(userData, forKey: Key.currentUser)
         } catch {
             throw error
@@ -30,11 +30,11 @@ class UserManager {
         return userDefaults.string(forKey: Key.currentToken)
     }
     
-    static func getCurrentUser() -> User? {
+    static func getCurrentUser() -> UserModel? {
         let jsonDecoder = JSONDecoder()
         if let userData = userDefaults.value(forKey: Key.currentUser) as? Data {
             do {
-                let currentUser = try jsonDecoder.decode(User.self, from: userData)
+                let currentUser = try jsonDecoder.decode(UserModel.self, from: userData)
                 return currentUser
             } catch {
                 print(error.localizedDescription)

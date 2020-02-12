@@ -47,6 +47,7 @@ class FavoriteViewController: ViewController {
     //MARK:- Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
+        showLoader()
         basketViewModel.getBasketList()
         setupViews()
         setupBackground()
@@ -91,6 +92,7 @@ class FavoriteViewController: ViewController {
         viewModel.getFavouriteList(page: viewModel.page)
     }
 }
+
 //MARK:- CollectionView Delegate/Datasource
 extension FavoriteViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout{
     

@@ -8,7 +8,7 @@
 
 import UIKit
 
-protocol OpenImageDelegate {
+protocol OpenImageDelegate: class {
     func openImage(image_url: String)
 }
 
@@ -116,7 +116,7 @@ class BannerCollectionView: UIView {
         button.titleLabel?.font = .getMontserraSemiBoldFont(on: 12)
         return button
     }()
-    var imageDelegate: OpenImageDelegate?
+    weak var imageDelegate: OpenImageDelegate?
     var product: Product!
     
     // MARK: - Lifecycle

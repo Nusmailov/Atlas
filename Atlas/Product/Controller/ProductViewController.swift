@@ -15,6 +15,7 @@ class ProductViewController: ScrollViewController {
     lazy var imageCollectionView: BannerCollectionView = {
         let view = BannerCollectionView()
         view.imageDelegate = self
+        view.heartButton.addTarget(self, action: #selector(addToFavourite), for: .touchUpInside)
         return view
     }()
     lazy var rightButton: BasketCountButton = {
@@ -31,6 +32,7 @@ class ProductViewController: ScrollViewController {
     lazy var favouriteViewModel: FavouriteViewModel = {
         let viewModel = FavouriteViewModel()
         viewModel.delegate = self
+        viewModel.updateDelegate = self
         return viewModel
     }()
     lazy var newsViewModel: NewsViewModel = {
@@ -59,8 +61,7 @@ class ProductViewController: ScrollViewController {
             imageCollectionView.nameLabel.text = product.product_name
             imageCollectionView.priceLabel.text = "\(product.product_price) ₸"
             imageCollectionView.sizeLabel.text = "\(product.product_length)x\(product.product_width) м2"
-            let favorite = FavoriteModel.shared.favoriteList[product.id]
-            let heart = favorite == true ? UIImage(named: "Path 8890.1") : UIImage(named: "emptyHeart")
+            let heart = FavoriteModel.shared.favoriteList[product.id] == true ? UIImage(named: "Path 8890.1") : UIImage(named: "emptyHeart")
             imageCollectionView.heartButton.setImage(heart, for: .normal)
             imageCollectionView.collectionView.reloadData()
             title = product.product_name
@@ -131,7 +132,11 @@ class ProductViewController: ScrollViewController {
     }
     
     @objc func addToFavourite() {
-        favouriteViewModel.addToFavorite(product_id: product.id)
+        if self.product.in_favorite == true {
+            favouriteViewModel.removeFavourite(product_id: product.id)
+        } else {
+            favouriteViewModel.addToFavorite(product_id: product.id)
+        }
     }
 }
 
@@ -187,3 +192,17 @@ extension ProductViewController: OpenImageDelegate {
     }
 }
 
+//MARK: - UpdateProductDelegate
+extension ProductViewController: UpdateProductDelegate {
+    func addedFavorite() {
+        let product = self.product
+        product?.in_favorite = true
+        self.product = product
+    }
+    
+    func removedFavorite() {
+        let product = self.product
+        product?.in_favorite = false
+        self.product = product
+    }
+}

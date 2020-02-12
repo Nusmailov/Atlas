@@ -103,7 +103,7 @@ class LoginViewController: LoaderBaseViewController {
         ParseManager.shared.postRequest(url: AppConstants.API.authUrl, parameters: parameters, success: { (result: User?) in
             self.hideLoader()
             do {
-                try? UserManager.createSessionWithUser(result!)
+                try? UserManager.createSessionWithUser(UserModel.init(user: result!))
             }
             AppCenter.shared.makeRootController()
         }) { (error) in

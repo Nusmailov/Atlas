@@ -53,12 +53,12 @@ class OrderViewController: ViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        setupTableView()
+        setupViews()
         viewModel.getOrderList()
     }
     
     //MARK: - SetupViews
-    func setupTableView() {
+    func setupViews() {
         view.addSubview(mainView)
         mainView.snp.makeConstraints { (make) in
             make.top.equalToSuperview().offset(8)

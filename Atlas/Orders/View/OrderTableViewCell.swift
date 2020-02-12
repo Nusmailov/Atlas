@@ -41,7 +41,8 @@ class OrderTableViewCell: UITableViewCell {
     }()
     fileprivate var order: Order! {
         didSet {
-            statusOrderLabel.textColor = #colorLiteral(red: 1, green: 0.7529411765, blue: 0, alpha: 1)
+            let orderStatus = OrderStatus.init(rawValue: order.order_status)
+            statusOrderLabel.textColor = orderStatus?.textColor
             statusOrderLabel.text = order.order_status_name
             orderTextLabel.text = "Заказ \(order.id)"
             guard let date = order.order_date else { return }

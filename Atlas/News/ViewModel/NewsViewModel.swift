@@ -68,11 +68,13 @@ class NewsViewModel {
         ParseManager.shared.getRequest(url: NewsApi.products,
             success: { (result: TotalProduct) in
                 self.productList["Самые продоваемые"] = result.popular
+                self.basketFill(productList: result.popular)
                 self.productKeys.append("Самые продоваемые")
                 self.sectionIdList.append(-2)
                 for i in result.sections {
                     self.productList[i.section_name] = i.products
                     self.productKeys.append(i.section_name)
+                    self.basketFill(productList: i.products)
                 }
                 for i in result.sections {
                     self.sectionIdList.append(i.id)
@@ -88,6 +90,12 @@ class NewsViewModel {
             self.basketCountDelegate?.updateCount(count: result)
         }) { (error) in
             self.delegate?.showErrorMessage(error)
+        }
+    }
+    
+    func basketFill(productList: [Product]) {
+        for i in productList {
+            BasketModel.shared.basketList[i.id] = i.in_basket
         }
     }
 }

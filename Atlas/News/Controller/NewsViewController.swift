@@ -11,7 +11,11 @@ import UIKit
 class NewsViewController: LoaderBaseViewController {
     
     // MARK: - Properties
-    lazy var discountCollectionView = DiscountCollectionView()
+    lazy var discountCollectionView: DiscountCollectionView = {
+        let view = DiscountCollectionView()
+        view.delegate = self
+        return view
+    }()
     private let searchController = UISearchController(searchResultsController: nil)
     lazy var searchBarView: SearcherView = {
         let search = SearcherView()
@@ -284,5 +288,11 @@ extension NewsViewController: BasketCountDelegate {
 extension UIView {
     func animationZoom(scaleX: CGFloat, y: CGFloat) {
         self.transform = CGAffineTransform(scaleX: scaleX, y: y)
+    }
+}
+//MARK: - OpenWebDelegate
+extension NewsViewController: OpenWebDelegate {
+    func openWeb(url: URL) {
+        UIApplication.shared.open(url)
     }
 }
