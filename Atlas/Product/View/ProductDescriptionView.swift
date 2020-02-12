@@ -12,7 +12,7 @@ protocol OpenImageDelegate: class {
     func openImage(image_url: String)
 }
 
-class BannerCollectionView: UIView {
+class ProductDescriptionView: UIView {
     
     // MARK: - Properties
     lazy var collectionView : UICollectionView = {
@@ -98,6 +98,7 @@ class BannerCollectionView: UIView {
         let view = ProductCharacteristicView()
         view.titleLabel.text = "м2:"
         view.valueTextField.text = "2.66"
+        view.valueTextField.isEnabled = false
         return view
     }()
     lazy var buyButton: UIButton = {
@@ -211,7 +212,7 @@ class BannerCollectionView: UIView {
 }
 
 //MARK: - UICollectionViewDelegate
-extension BannerCollectionView: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
+extension ProductDescriptionView: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return product.images.count

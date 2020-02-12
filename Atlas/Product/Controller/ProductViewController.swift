@@ -12,8 +12,8 @@ import SDWebImage
 class ProductViewController: ScrollViewController {
     
     //MARK: - Properties
-    lazy var imageCollectionView: BannerCollectionView = {
-        let view = BannerCollectionView()
+    lazy var imageCollectionView: ProductDescriptionView = {
+        let view = ProductDescriptionView()
         view.imageDelegate = self
         view.heartButton.addTarget(self, action: #selector(addToFavourite), for: .touchUpInside)
         return view

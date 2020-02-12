@@ -168,7 +168,6 @@ extension NewsViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cellProduct", for: indexPath) as! ProductTableViewCell
-        cell.productView.delegate = self
         let key = newsViewModel.productKeys[indexPath.row]
         cell.productView.setProducts(products: newsViewModel.productList[newsViewModel.productKeys[indexPath.row]]!)
         cell.productView.label.text = key

@@ -128,7 +128,7 @@
 		F534DA1423E81BC500D0E61B /* FilterViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F534DA1323E81BC500D0E61B /* FilterViewModel.swift */; };
 		F534DA1623E81E3D00D0E61B /* FilterModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F534DA1523E81E3D00D0E61B /* FilterModel.swift */; };
 		F550644423DE9F6000DE95EB /* ProductViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F550644323DE9F6000DE95EB /* ProductViewController.swift */; };
-		F550644B23DEA05B00DE95EB /* BannerCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F550644A23DEA05B00DE95EB /* BannerCollectionView.swift */; };
+		F550644B23DEA05B00DE95EB /* ProductDescriptionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F550644A23DEA05B00DE95EB /* ProductDescriptionView.swift */; };
 		F550644D23DEA08F00DE95EB /* BannerCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F550644C23DEA08F00DE95EB /* BannerCollectionViewCell.swift */; };
 		F55407B423DEB131002875F5 /* SettingSwitchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F55407B323DEB131002875F5 /* SettingSwitchView.swift */; };
 		F55407B623DEE05B002875F5 /* BasketCountButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = F55407B523DEE05B002875F5 /* BasketCountButton.swift */; };
@@ -322,7 +322,7 @@
 		F534DA1323E81BC500D0E61B /* FilterViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterViewModel.swift; sourceTree = "<group>"; };
 		F534DA1523E81E3D00D0E61B /* FilterModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterModel.swift; sourceTree = "<group>"; };
 		F550644323DE9F6000DE95EB /* ProductViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductViewController.swift; sourceTree = "<group>"; };
-		F550644A23DEA05B00DE95EB /* BannerCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BannerCollectionView.swift; sourceTree = "<group>"; };
+		F550644A23DEA05B00DE95EB /* ProductDescriptionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductDescriptionView.swift; sourceTree = "<group>"; };
 		F550644C23DEA08F00DE95EB /* BannerCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BannerCollectionViewCell.swift; sourceTree = "<group>"; };
 		F55407B323DEB131002875F5 /* SettingSwitchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingSwitchView.swift; sourceTree = "<group>"; };
 		F55407B523DEE05B002875F5 /* BasketCountButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BasketCountButton.swift; sourceTree = "<group>"; };
@@ -1032,7 +1032,7 @@
 		F550644723DEA03B00DE95EB /* View */ = {
 			isa = PBXGroup;
 			children = (
-				F550644A23DEA05B00DE95EB /* BannerCollectionView.swift */,
+				F550644A23DEA05B00DE95EB /* ProductDescriptionView.swift */,
 				F550644C23DEA08F00DE95EB /* BannerCollectionViewCell.swift */,
 			);
 			path = View;
@@ -1472,7 +1472,7 @@
 				1417D8C423CC37A800429C23 /* OrderProductTableViewCell.swift in Sources */,
 				F596E2C123E00EB700B15CA3 /* PoliticalViewController.swift in Sources */,
 				1418277623850BD600857FA9 /* MainButton.swift in Sources */,
-				F550644B23DEA05B00DE95EB /* BannerCollectionView.swift in Sources */,
+				F550644B23DEA05B00DE95EB /* ProductDescriptionView.swift in Sources */,
 				141827942385590C00857FA9 /* SwitcherView.swift in Sources */,
 				141826DB2384FA8A00857FA9 /* ViewController.swift in Sources */,
 				1418275E2384FFA400857FA9 /* TabBarViewController.swift in Sources */,

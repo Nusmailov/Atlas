@@ -64,7 +64,6 @@ class FavouriteViewModel {
             self.max_page = result.last_page
             for i in self.favouriteList {
                 FavoriteModel.shared.favoriteList[i.id] = i.in_favorite
-                
             }
             self.basketFill(productList: self.favouriteList)
             self.delegate?.updateUI()

@@ -170,12 +170,7 @@ class TileView: UIView {
     }
     
     @objc func addToBasket() {
-        if BasketModel.shared.basketList[product.id] == true {
-            delegate?.removeBasket(product_id: product.id)
-        }
-        else {
-            delegate?.addToBasket(product_id: product.id)
-        }
+        
     }
     
     @objc func addToFavorite() {
@@ -188,6 +183,11 @@ class TileView: UIView {
     }
 
     @objc func toBuy() {
-        
+        if BasketModel.shared.basketList[product.id] == true {
+            delegate?.removeBasket(product_id: product.id)
+        }
+        else {
+            delegate?.addToBasket(product_id: product.id)
+        }
     }
 }

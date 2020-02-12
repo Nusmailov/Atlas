@@ -138,13 +138,11 @@ class MapAddressViewController: UIViewController {
     
     // MARK: - Actions
     @objc func sendAddress() {
-        let vc = self.navigationController!.viewControllers[0] as! ProfileViewController
-        vc.addNewAddressView.streetTextField.textField.text = addressLabel.text
-        let lastAddressCoordinate = getCenterLocation(for: mapView)
-        print(lastAddressCoordinate)
-        vc.lat = lastAddressCoordinate.coordinate.latitude
-        vc.lng = lastAddressCoordinate.coordinate.longitude
-        self.navigationController!.popToRootViewController(animated: true)
+//        let vc = self.navigationController!.viewControllers[0] as! ProfileViewController
+//        vc.addNewAddressView.streetTextField.textField.text = addressLabel.text
+//        let lastAddressCoordinate = getCenterLocation(for: mapView)
+//        print(lastAddressCoordinate)
+//        self.navigationController!.popToRootViewController(animated: true)
     }
     
 }
