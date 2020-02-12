@@ -21,7 +21,6 @@ class InfoTitleView: UIView {
         let label = UILabel()
         label.textColor = UIColor(red: 0.275, green: 0.282, blue: 0.333, alpha: 1)
         label.font = .getMontserraRegularFont(on: 13)
-        label.text = "654684-654654"
         return label
     }()
     lazy var mainView: UIView = {

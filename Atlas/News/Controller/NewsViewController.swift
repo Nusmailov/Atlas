@@ -213,14 +213,6 @@ extension NewsViewController: ProductDelegate {
 
 // MARK: - SearchTextFieldDelegate
 extension NewsViewController: UITextFieldDelegate {
-    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-//        coordinator.routeTotalCategoryProduct(text: textField.text!, sections: newsViewModel.sectionList,
-//                                              row: 0, category_id: -1, on: self)
-//        searchBarView.searchTextField.text = ""
-        
-        return true
-    }
-    
     func textFieldDidBeginEditing(_ textField: UITextField) {
         coordinator.routeTotalCategoryProduct(sections: newsViewModel.sectionList, row: 0, category_id: -3, on: self)
     }

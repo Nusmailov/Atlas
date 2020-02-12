@@ -11,7 +11,7 @@ import Foundation
 struct User: Codable {
     let id: Int
     let name: String
-    let token: String
+    let token: String?
     let contract_type: String?
     let contract_number: Int?
     let image_path: String?
@@ -19,12 +19,12 @@ struct User: Codable {
     let email: String?
     let contact: String?
     let email_verified_at: Int?
-    let contract_type_name: String?
-    let total_orders: Int?
-    let total_cost: String?
-    let created_at: String?
-    let updated_at: String?
-    let deleted_at: String?
+    let device_token: String?
+    let device_type: String?
+    let sound: Int
+    let push: Int
+    let city_id: Int
+    let language: String
 }
 
 class UserModel: Codable {

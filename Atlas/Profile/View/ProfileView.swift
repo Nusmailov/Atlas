@@ -25,7 +25,6 @@ class ProfileView: UIView {
         label.font = .getMullerBoldFont(on: 18)
         label.textColor = #colorLiteral(red: 0.3176470588, green: 0.3607843137, blue: 0.4352941176, alpha: 1)
         label.numberOfLines = 0
-        label.text = "Баратов Азиз"
         return label
     }()
     lazy var userPhoneLabel: UILabel = {
@@ -33,7 +32,7 @@ class ProfileView: UIView {
         label.font = .getMullerRegularFont(on: 14)
         label.numberOfLines = 0
         label.textColor = #colorLiteral(red: 0.3176470588, green: 0.3607843137, blue: 0.4352941176, alpha: 1)
-        label.text = "+7 (777) 777 77-77"
+//        label.text = "+7 (777) 777 77-77"
         return label
     }()
     lazy var contractView: InfoTitleView = {
@@ -43,13 +42,11 @@ class ProfileView: UIView {
     lazy var typeContractView: InfoTitleView = {
         let view = InfoTitleView()
         view.titleLabel.text = "Тип договора"
-        view.textLabel.text = "Диллерский"
         return view
     }()
     lazy var propsView: InfoTitleView = {
         let view = InfoTitleView()
         view.titleLabel.text = "Реквизиты"
-        view.textLabel.text = "6546847987154654"
         return view
     }()
     

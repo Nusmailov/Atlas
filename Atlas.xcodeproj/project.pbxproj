@@ -152,6 +152,8 @@
 		F586FB3A23EAD7370041F68D /* CheckoutAddressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F586FB3923EAD7370041F68D /* CheckoutAddressView.swift */; };
 		F586FB3C23EC11690041F68D /* ImageCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F586FB3B23EC11690041F68D /* ImageCollectionViewCell.swift */; };
 		F58ECDD923E9246800B7BB2F /* SearchFilterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F58ECDD823E9246800B7BB2F /* SearchFilterView.swift */; };
+		F5943D5323F409DD00DCE2A3 /* ProfileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5943D5223F409DD00DCE2A3 /* ProfileViewModel.swift */; };
+		F5943D5523F40A1500DCE2A3 /* ProfileApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5943D5423F40A1500DCE2A3 /* ProfileApi.swift */; };
 		F596E2C123E00EB700B15CA3 /* PoliticalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F596E2C023E00EB700B15CA3 /* PoliticalViewController.swift */; };
 		F59A151423ED20F100D0B672 /* ImageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F59A151323ED20F100D0B672 /* ImageViewController.swift */; };
 		F59A151723ED213A00D0B672 /* ImageCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = F59A151623ED213A00D0B672 /* ImageCoordinator.swift */; };
@@ -346,6 +348,8 @@
 		F586FB3923EAD7370041F68D /* CheckoutAddressView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckoutAddressView.swift; sourceTree = "<group>"; };
 		F586FB3B23EC11690041F68D /* ImageCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageCollectionViewCell.swift; sourceTree = "<group>"; };
 		F58ECDD823E9246800B7BB2F /* SearchFilterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchFilterView.swift; sourceTree = "<group>"; };
+		F5943D5223F409DD00DCE2A3 /* ProfileViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewModel.swift; sourceTree = "<group>"; };
+		F5943D5423F40A1500DCE2A3 /* ProfileApi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileApi.swift; sourceTree = "<group>"; };
 		F596E2C023E00EB700B15CA3 /* PoliticalViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PoliticalViewController.swift; sourceTree = "<group>"; };
 		F59A151323ED20F100D0B672 /* ImageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageViewController.swift; sourceTree = "<group>"; };
 		F59A151623ED213A00D0B672 /* ImageCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageCoordinator.swift; sourceTree = "<group>"; };
@@ -638,9 +642,9 @@
 		1418271A2384FE3900857FA9 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				145A30D423C450F6008962FF /* ProfileViewController.swift */,
 				145A30D023C450F6008962FF /* AddCardViewController.swift */,
 				145A30D123C450F6008962FF /* MapAddressViewController.swift */,
-				145A30D423C450F6008962FF /* ProfileViewController.swift */,
 				145A30D323C450F6008962FF /* SecureViewController.swift */,
 				145A30D223C450F6008962FF /* SettingsViewController.swift */,
 			);
@@ -1057,6 +1061,8 @@
 		F555D49723DB0A4300117029 /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
+				F5943D5223F409DD00DCE2A3 /* ProfileViewModel.swift */,
+				F5943D5423F40A1500DCE2A3 /* ProfileApi.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -1380,6 +1386,7 @@
 				1418278F238536CE00857FA9 /* SwitchView.swift in Sources */,
 				14C3559223C8397100782282 /* SearcherView.swift in Sources */,
 				1418277F238519D100857FA9 /* LoginLogoView.swift in Sources */,
+				F5943D5323F409DD00DCE2A3 /* ProfileViewModel.swift in Sources */,
 				1417D8D823CC4C4C00429C23 /* NetworkManager.swift in Sources */,
 				1417D8DB23CC4C4C00429C23 /* Parser.swift in Sources */,
 				145A30D823C450F6008962FF /* SecureViewController.swift in Sources */,
@@ -1433,6 +1440,7 @@
 				1417D8C123CC37A800429C23 /* SpecialAgreeView.swift in Sources */,
 				1417D8D623CC4C4C00429C23 /* NetworkResponse.swift in Sources */,
 				F586FB3423EAB62D0041F68D /* CheckoutView.swift in Sources */,
+				F5943D5523F40A1500DCE2A3 /* ProfileApi.swift in Sources */,
 				1417D8BD23CC37A800429C23 /* Office.swift in Sources */,
 				F58ECDD923E9246800B7BB2F /* SearchFilterView.swift in Sources */,
 				145A30E823C45111008962FF /* ProfileTabBarView.swift in Sources */,

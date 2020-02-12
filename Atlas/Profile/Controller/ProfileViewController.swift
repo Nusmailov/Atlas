@@ -38,6 +38,36 @@ class ProfileViewController: ScrollViewController {
         button.addTarget(self, action: #selector(settingsButtonAction), for: .touchUpInside)
         return button
     }()
+    lazy var viewModel: ProfileViewModel = {
+        let viewModel = ProfileViewModel()
+        viewModel.delegate = self
+        return viewModel
+    }()
+    lazy var newsViewModel: NewsViewModel = {
+        let viewModel = NewsViewModel()
+        viewModel.basketCountDelegate = self
+        return viewModel
+    }()
+    var user: User? {
+        didSet {
+            profileView.userNameLabel.text = user?.name
+            if let contact = user?.contact {
+                let first = String(contact).prefix(1)
+                let main = String(contact).prefix(4).suffix(3)
+                let last = String(contact).suffix(7)
+                profileView.userPhoneLabel.text = "\(first) (\(main)) \(last)"
+            }
+            if let contract_number = user?.contract_number {
+                profileView.contractView.textLabel.text = "\(contract_number)"
+            }
+            if let contract_type = user?.contract_type {
+                profileView.typeContractView.textLabel.text = contract_type
+            }
+            if let requisites = user?.requisites {
+                profileView.propsView.textLabel.text = requisites
+            }
+        }
+    }
     
     // MARK: - Lifecycle
     override func viewDidLoad() {
@@ -45,6 +75,7 @@ class ProfileViewController: ScrollViewController {
         scrollView.backgroundColor = .white
         actionSwipeGestures()
         setupViews()
+        viewModel.auth()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -54,7 +85,6 @@ class ProfileViewController: ScrollViewController {
         navigationItem.title = "Профиль"
         navigationItem.rightBarButtonItem = UIBarButtonItem(customView: rightButton)
         navigationItem.leftBarButtonItem = UIBarButtonItem(customView: leftButton)
-        getFullUser()
         getBasketCount()
     }
     
@@ -112,7 +142,7 @@ class ProfileViewController: ScrollViewController {
     }
     
     @objc func getFullUser() {
-        refreshControl.endRefreshing()
+        viewModel.auth()
     }
     
     @objc func goToBusketView() {
@@ -120,6 +150,21 @@ class ProfileViewController: ScrollViewController {
         self.navigationController?.pushViewController(vc, animated: true)
     }
     
-    func getBasketCount() { }
-    
+    func getBasketCount() {
+        newsViewModel.getBasketCount()
+    }
+}
+// MARK: - ProcessViewDelegate
+extension ProfileViewController: ProcessViewDelegate {
+    func updateUI() {
+        self.user = viewModel.user
+        refreshControl.endRefreshing()
+    }
+}
+
+// MARK: - BasketCountDelegate
+extension ProfileViewController: BasketCountDelegate {
+    func updateCount(count: Int) {
+        self.rightButton.countLabel.text = "\(count)"
+    }
 }

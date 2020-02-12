@@ -19,20 +19,12 @@ class Product: Codable {
     var in_favorite: Bool
     var in_basket: Bool
     var images: [ImageModel]
+    var area: Double
     
     static func getImageUrl(url: String) -> URL {
         let url = "http://37.46.133.192:781/\(url)"
         return URL.init(string: url)!
     }
-}
-
-class ProductModel: Codable {
-    let data: [Product]
-    let current_page: Int
-    let count_pages: Int
-    let count_date: Int
-    let offset: Int
-    let limit: Int
 }
 
 class ImageModel: Codable {

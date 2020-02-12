@@ -15,7 +15,7 @@ class UserManager {
         let jsonEncoder = JSONEncoder()
         do {
             let userData = try jsonEncoder.encode(user)
-            setCurrentToken(to: user.result.token)
+            setCurrentToken(to: user.result.token!)
             userDefaults.set(userData, forKey: Key.currentUser)
         } catch {
             throw error
