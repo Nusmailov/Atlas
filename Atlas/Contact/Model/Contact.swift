@@ -13,8 +13,8 @@ class Contact: Codable {
     var address: String
     var lat: Double
     var lng: Double
-    var call_phone: String
-    var email: String
+    var call_phone: [String]
+    var email: [String]
     var site: String
     var app_store: String?
     var google_play: String?

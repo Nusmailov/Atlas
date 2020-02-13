@@ -14,8 +14,8 @@ class TileView: UIView {
     //MARK: - Properties
     lazy var image: UIImageView = {
         let image = UIImageView()
-        image.image = #imageLiteral(resourceName: "plitka 1")
-        image.contentMode = .scaleAspectFill
+        image.image = #imageLiteral(resourceName: "no-image")
+        image.contentMode = .scaleAspectFit
         image.layer.masksToBounds = true
         image.layer.cornerRadius = 10
         return image
@@ -92,7 +92,11 @@ class TileView: UIView {
             basketButton.setImage(basket, for: .normal)
             if !product.images.isEmpty {
                 image.sd_imageIndicator = SDWebImageActivityIndicator.gray
+                image.contentMode = .scaleAspectFill
                 image.sd_setImage(with: Product.getImageUrl(url: product.images[0].image_path))
+            } else {
+                image.image = #imageLiteral(resourceName: "no-image")
+                image.contentMode = .scaleAspectFit
             }
         }
     }

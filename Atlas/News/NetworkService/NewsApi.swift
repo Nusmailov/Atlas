@@ -19,6 +19,7 @@ class ProductApi {
     static let favorite = "favorite"
     static let basket = "basket"
     static let busket = "busket"
+    static let updateBasket = "basket/edit"
     static let basketList = "baskets"
     static let basketCount = "baskets/count"
     static let sectionProducts = "section/products"

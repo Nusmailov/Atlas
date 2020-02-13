@@ -172,7 +172,6 @@ extension NewsViewController: UITableViewDelegate, UITableViewDataSource {
         cell.productView.setProducts(products: newsViewModel.productList[newsViewModel.productKeys[indexPath.row]]!)
         cell.productView.label.text = key
         cell.productView.delegate = self
-        
         cell.productView.category_id = newsViewModel.sectionIdList[indexPath.item]
         return cell
     }

@@ -215,13 +215,19 @@ class ProductDescriptionView: UIView {
 extension ProductDescriptionView: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return product.images.count
+        return product.images.count != 0 ? product.images.count : 1
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cellId", for: indexPath) as! BannerCollectionViewCell
-        cell.setImage(image: product.images[indexPath.item])
-        return cell
+        if product.images.count != 0 {
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cellId", for: indexPath) as! BannerCollectionViewCell
+            cell.setImage(image: product.images[indexPath.item])
+            return cell
+        } else {
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cellId", for: indexPath) as! BannerCollectionViewCell
+            cell.imageView.image = #imageLiteral(resourceName: "no-image")
+            return cell
+        }
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
@@ -229,7 +235,9 @@ extension ProductDescriptionView: UICollectionViewDelegate, UICollectionViewData
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        imageDelegate?.openImage(image_url: product.images[indexPath.item].image_path)
+        if product.images.count != 0 {
+            imageDelegate?.openImage(image_url: product.images[indexPath.item].image_path)
+        }
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {

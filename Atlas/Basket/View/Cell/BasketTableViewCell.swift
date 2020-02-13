@@ -13,15 +13,18 @@ protocol DeleteBasketDelegate: class {
     func deleteProductBasket(product_id: Int, index: Int)
 }
 
+protocol ChangedBasketCountDelegate: class {
+    func changedBasketCount(index: Int, count: Int)
+}
+
 class BasketTableViewCell: UITableViewCell {
     
-//    MARK: - Properties
+    //MARK: - Properties
     lazy var backView: UIView = {
         let view = UIView()
         view.backgroundColor = #colorLiteral(red: 0.973, green: 0.98, blue: 0.988, alpha: 1)
         view.layer.cornerRadius = 10
         view.layer.masksToBounds = true
-        
         return view
     }()
     
@@ -29,7 +32,6 @@ class BasketTableViewCell: UITableViewCell {
         let image = UIImageView()
         image.contentMode = .scaleAspectFit
         image.image = #imageLiteral(resourceName: "plitka 1")
-        
         return image
     }()
 
@@ -39,7 +41,6 @@ class BasketTableViewCell: UITableViewCell {
         label.text = "Клинкер «Амстердам» универсальный"
         label.font = .getMullerBoldFont(on: 13)
         label.numberOfLines = 2
-        
         return label
     }()
     
@@ -48,20 +49,16 @@ class BasketTableViewCell: UITableViewCell {
         label.textColor = #colorLiteral(red: 0.667, green: 0.667, blue: 0.667, alpha: 1)
         label.text = "29.8х29.8 см 1.33 м2"
         label.font = .getMullerRegularFont(on: 10)
-        
         return label
     }()
-    
     lazy var descriptionLabel: UILabel = {
         let label = UILabel()
         label.textColor = #colorLiteral(red: 0.173, green: 0.184, blue: 0.2, alpha: 0.8)
         label.text = "Повседневная практика показывает, что постоянный количественный Повседневная практика показывает, что постоянный количественный"
         label.font = .getMullerRegularFont(on: 11)
         label.numberOfLines = 2
-        
         return label
     }()
-    
     lazy var priceView: ProductCharacteristicView = {
         let view = ProductCharacteristicView()
         view.titleLabel.text = "Цена: "
@@ -69,38 +66,33 @@ class BasketTableViewCell: UITableViewCell {
         view.valueTextField.isEnabled = false
         return view
     }()
-    
     lazy var countView: ProductCharacteristicView = {
         let view = ProductCharacteristicView()
         view.titleLabel.text = "Шт: "
         view.valueTextField.text = "2"
         view.valueTextField.keyboardType = .numberPad
+        view.valueTextField.delegate =  self
         return view
     }()
-
     lazy var volumeView: ProductCharacteristicView = {
         let view = ProductCharacteristicView()
         view.titleLabel.text = "м2: "
         view.valueTextField.text = "2,66"
-        view.valueTextField.keyboardType = .decimalPad
+        view.valueTextField.isEnabled = false
         return view
     }()
-    
     lazy var deleteBackView: UIView = {
         let view = UIView()
         view.backgroundColor = #colorLiteral(red: 0.0, green: 0.0, blue: 0.0, alpha: 0.03)
         view.layer.cornerRadius = 4
-        
         return view
     }()
-    
     lazy var deleteButton: UIButton = {
         let button = UIButton()
         button.setImage(#imageLiteral(resourceName: "Trash"), for: .normal)
         button.addTarget(self, action: #selector(deleteBasket), for: .touchUpInside)
         return button
     }()
-    
     var basketProduct: BasketProduct! {
         didSet {
             priceView.valueTextField.text = "\(basketProduct.product.product_price) ₸ м2"
@@ -117,11 +109,14 @@ class BasketTableViewCell: UITableViewCell {
         }
     }
     weak var delegate: DeleteBasketDelegate?
+    weak var coundDelegate: ChangedBasketCountDelegate?
     var index: Int!
     
+    //MARK: - Init
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         self.setupView()
+        selectionStyle = .none
     }
     
     required init?(coder: NSCoder) {
@@ -210,12 +205,20 @@ class BasketTableViewCell: UITableViewCell {
     
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
-
-        // Configure the view for the selected state
     }
     
     @objc func deleteBasket() {
         delegate?.deleteProductBasket(product_id: basketProduct.product.id, index: index)
     }
+}
 
+//MARK: - UITextFieldDelegate
+extension BasketTableViewCell: UITextFieldDelegate {
+    func textFieldDidChangeSelection(_ textField: UITextField) {
+        let res = self.basketProduct.product.area
+        let count = (Double(countView.valueTextField.text!) ?? 0)
+        let area = res * count
+        volumeView.valueTextField.text = String(format:"%.2f", area)
+        coundDelegate?.changedBasketCount(index: self.index, count: Int(count))
+    }
 }

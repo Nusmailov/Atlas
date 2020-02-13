@@ -161,11 +161,13 @@ extension ProductViewController: ProductDelegate {
     
     func addToBasket(product_id: Int) {
         basketAnimate()
+        newsViewModel.getBasketCount()
         basketViewModel.addToBasket(product_id: product_id)
     }
     
     func removeBasket(product_id: Int) {
         basketAnimate()
+        newsViewModel.getBasketCount()
         basketViewModel.removeBasket(product_id: product_id)
     }
     

@@ -39,7 +39,7 @@ class ContactViewModel {
         if MFMailComposeViewController.canSendMail() {
             let mail = MFMailComposeViewController()
             mail.mailComposeDelegate = self as? MFMailComposeViewControllerDelegate
-            mail.setToRecipients([email])
+            mail.setToRecipients(email)
             mail.setMessageBody("", isHTML: true)
             baseViewController?.present(mail, animated: true)
         }
@@ -47,7 +47,7 @@ class ContactViewModel {
     
     func call() {
         guard let phone = contact?.call_phone else { return }
-        let url: NSURL = URL(string: "TEL://" + phone)! as NSURL
+        let url: NSURL = URL(string: "TEL://" + phone[0])! as NSURL
         UIApplication.shared.open(url as URL, options: [:], completionHandler: nil)
     }
 }

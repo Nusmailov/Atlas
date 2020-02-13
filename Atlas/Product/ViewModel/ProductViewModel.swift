@@ -14,8 +14,9 @@ class ProductViewModel {
     var productList = [Product]()
     
     func getByList(product_id: Int) {
-        ParseManager.shared.getRequest(url: ProductApi.bywithit, parameters: ["id" : product_id], success: { (result: [Product]) in
-            self.productList = result
+        ParseManager.shared.getRequest(url: ProductApi.bywithit, parameters: ["id" : product_id], success: {
+            (result: [Product]?) in
+            self.productList = result ?? []
             self.delegate?.updateUI()
         }) { (error) in
             self.delegate?.showErrorMessage(error)

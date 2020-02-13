@@ -28,7 +28,7 @@ class TotalBasketView: UIView {
         let label = UILabel()
         label.textColor = .mainColor
         label.font = .getMullerBoldFont(on: 20)
-        label.text = "20 000 тенге"
+        label.text = "0₸"
         return label
     }()
     

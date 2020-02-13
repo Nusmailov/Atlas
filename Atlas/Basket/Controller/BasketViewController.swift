@@ -49,12 +49,19 @@ class BasketViewController: UIViewController {
         getBasketList()
     }
     
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        viewModel.updateBasket()
+    }
+    
     //MARK: - SetupViews
     private func setupViews() -> Void {
         tableView.refreshControl = refreshControl
         view.backgroundColor = .white
         view.addSubview(tableView)
         view.addSubview(totalView)
+        tableView.keyboardDismissMode = .onDrag
+        
         tableView.snp.makeConstraints { (make) in
             make.bottom.equalTo(-(tabBarController?.tabBar.bounds.height)!-48)
             make.left.top.right.equalToSuperview()
@@ -64,7 +71,7 @@ class BasketViewController: UIViewController {
             make.bottom.equalTo(-(tabBarController?.tabBar.bounds.height)!)
             make.left.right.equalToSuperview()
         }
-        tableView.keyboardDismissMode = .onDrag
+        
     }
     
     //MARK: - Actions
@@ -73,6 +80,7 @@ class BasketViewController: UIViewController {
     }
     
     @objc func checkoutBasket() {
+        viewModel.updateBasket()
         let vc = CheckoutViewController()
         self.navigationController?.pushViewController(vc, animated: true)
     }
@@ -88,10 +96,18 @@ extension BasketViewController: UITableViewDelegate, UITableViewDataSource {
         let cell = tableView.dequeueReusableCell(withIdentifier: BasketTableViewCell.cellIdentifier(),
                                                  for: indexPath) as! BasketTableViewCell
         cell.setBasketProduct(basketProduct: viewModel.productList[indexPath.row])
-        cell.selectionStyle = .none
         cell.delegate = self
+        cell.coundDelegate = self
         cell.index = indexPath.item
         return cell
+    }
+}
+
+//MARK: - ChangedBasketCountDelegate
+extension BasketViewController: ChangedBasketCountDelegate {
+    func changedBasketCount(index: Int, count: Int) {
+        viewModel.productList[index].product_quantity = count
+        totalView.totalCountLabel.text = "\(viewModel.totalPrice())₸"
     }
 }
 

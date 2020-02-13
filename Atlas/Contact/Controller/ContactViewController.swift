@@ -38,8 +38,16 @@ class ContactViewController: ScrollViewController {
     var contact: Contact? {
         didSet {
             addressView.addressLabel.text = contact?.address
-            contactView.phoneView.infoTextLabel.text = contact?.call_phone
-            contactView.emailView.infoTextLabel.text = contact?.email
+            var phone = ""
+            for i in contact!.call_phone {
+                phone += i + " "
+            }
+            var email = ""
+            for i in contact!.email {
+                email += i + " "
+            }
+            contactView.phoneView.infoTextLabel.text = phone
+            contactView.emailView.infoTextLabel.text = email
             contactView.webView.infoTextLabel.text = contact?.site
             guard let lat = contact?.lat, let lng = contact?.lng else { return }
             addressView.mapView.initialLocation = CLLocation(latitude: lat, longitude: lng)

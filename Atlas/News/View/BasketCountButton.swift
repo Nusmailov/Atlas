@@ -14,7 +14,7 @@ class BasketCountButton: UIButton {
         let label = UILabel()
         label.font = .getMullerBoldFont(on: 10)
         label.textColor = .white
-        label.text = "1"
+        label.text = "0"
         label.backgroundColor = .red
         label.layer.cornerRadius = 7.5
         return label

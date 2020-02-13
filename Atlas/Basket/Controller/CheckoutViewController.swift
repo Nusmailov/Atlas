@@ -30,8 +30,16 @@ class CheckoutViewController: ScrollViewController {
     var contact: Contact? {
         didSet {
             checkoutView.addressView.addressLabel.text = contact?.address
-            checkoutView.contactView.phoneView.infoTextLabel.text = contact?.call_phone
-            checkoutView.contactView.emailView.infoTextLabel.text = contact?.email
+            var phone = ""
+            for i in contact!.call_phone {
+                phone += i + "\n"
+            }
+            var email = ""
+            for i in contact!.email {
+                email += i + "\n"
+            }
+            checkoutView.contactView.phoneView.infoTextLabel.text = phone
+            checkoutView.contactView.emailView.infoTextLabel.text = email
             checkoutView.contactView.webView.infoTextLabel.text = contact?.site
             guard let lat = contact?.lat, let lng = contact?.lng else { return }
             checkoutView.addressView.mapView.initialLocation = CLLocation(latitude: lat, longitude: lng)

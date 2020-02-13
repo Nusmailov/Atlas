@@ -8,7 +8,6 @@
 
 import Foundation
 
-
 class BasketViewModel {
     
     //MARK: - Properties
@@ -66,11 +65,24 @@ class BasketViewModel {
         }
     }
     
-    func totalPrice() -> Int {
-        var sum = 0
+    func totalPrice() -> String {
+        var sum = 0.0
         for i in productList {
-            sum += i.product.product_price * i.product_quantity
+            sum += Double(i.product.product_price) * (i.product.area * Double(i.product_quantity))
         }
-        return sum
+        return String(format:"%.2f", sum)
+    }
+    
+    func updateBasket() {
+        var parameters = Parameters()
+        for  i in productList {
+            parameters["arr[\(i.id)]"] = i.product_quantity
+        }
+        ParseManager.shared.multipartFormData(url: ProductApi.updateBasket, parameters: parameters, success: {
+            (result: [BasketProduct]) in
+            self.delegate?.updateUI()
+        }) { (error) in
+            self.delegate?.showErrorMessage(error)
+        }
     }
 }

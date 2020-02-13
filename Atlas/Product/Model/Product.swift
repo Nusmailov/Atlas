@@ -14,8 +14,8 @@ class Product: Codable {
     var section_id: Int
     var product_description: String
     var product_price: Int
-    var product_width: Int
-    var product_length: Int
+    var product_width: Double
+    var product_length: Double
     var in_favorite: Bool
     var in_basket: Bool
     var images: [ImageModel]
