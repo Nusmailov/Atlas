@@ -24,6 +24,19 @@ enum ChechkoutText: String {
         }
     }
     
+    var typeText: String {
+        switch self {
+        case .preOrder:
+            return "Preorder"
+        case .reservation:
+            return "Reservation"
+        case .orderStorage:
+            return "Storage"
+        case .regularOrder:
+            return "Regular"            
+        }
+    }
+    
     var text: String {
         switch self {
         case .preOrder:

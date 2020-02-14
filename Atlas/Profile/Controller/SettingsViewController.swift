@@ -35,6 +35,13 @@ class SettingsViewController: ScrollViewController {
         let view = UIPickerView()
         return view
     }()
+    lazy var backButton: UIButton = {
+        let button = UIButton()
+        button.setImage(UIImage(named: "back"), for: .normal)
+        button.addTarget(self, action: #selector(cancelButton), for: .touchUpInside)
+        button.imageEdgeInsets = UIEdgeInsets(top: 10, left: 20, bottom: 10, right: 10)
+        return button
+    }()
     lazy var refreshControl = UIRefreshControl()
     
     // MARK: - Lifecycle
@@ -43,21 +50,17 @@ class SettingsViewController: ScrollViewController {
         navigationItem.title = "Настройки"
         self.navigationController?.navigationBar.tintColor = #colorLiteral(red: 1, green: 0.4117647059, blue: 0.4117647059, alpha: 1)
         self.navigationItem.setHidesBackButton(true, animated: true)
-        var image = #imageLiteral(resourceName: "back")
-        image = image.withRenderingMode(.alwaysOriginal)
-        self.navigationItem.rightBarButtonItem = UIBarButtonItem(image: image, style:.plain,
-                                                                target: self, action: #selector(cancelButton))
+        let barButton = UIBarButtonItem(customView: backButton)
+        self.navigationItem.rightBarButtonItem = barButton
         navigationController?.setNavigationBarHidden(false, animated: animated)
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         setupViews()
-        
     }
     
     // MARK: - Setupviews
-    
     func setupViews() {
         let leftSwipe = UISwipeGestureRecognizer(target: self, action:#selector(handleSwipes))
         leftSwipe.direction = .left
@@ -67,26 +70,16 @@ class SettingsViewController: ScrollViewController {
         contentView.addSubview(mainSettingsView)
         contentView.addSubview(changeAccountButton)
         
-        pickerCityView.delegate = self
-        pickerLanguageView.delegate = self
-        
         mainSettingsView.snp.makeConstraints { (make) in
             make.top.left.equalToSuperview().offset(16)
             make.right.equalToSuperview().offset(-16)
         }
         
-        mainSettingsView.cityTextField.inputView =  pickerCityView
-        mainSettingsView.chooseLanguageTextField.inputView =  pickerLanguageView
-        
-        mainSettingsView.cityTextField.isUserInteractionEnabled = true
-        mainSettingsView.chooseLanguageTextField.isUserInteractionEnabled = true
-        
-//        changeAccountButton.isHidden = !appStoreBool
         changeAccountButton.snp.makeConstraints { (make) in
             make.top.equalTo(mainSettingsView.snp.bottom).offset(16)
             make.left.equalToSuperview().offset(16)
             make.right.equalToSuperview().offset(-16)
-            make.height.equalTo(60)
+            make.height.equalTo(50)
             make.bottom.equalTo(contentView.snp.bottom).offset(-16)
         }
     }
@@ -107,25 +100,4 @@ class SettingsViewController: ScrollViewController {
         self.navigationController?.popViewController(animated: true)
     }
     
-}
-
-// MARK: - PickerViewDelegate
-extension SettingsViewController: UIPickerViewDelegate, UIPickerViewDataSource {
-    
-    func numberOfComponents(in pickerView: UIPickerView) -> Int {
-        return 1
-    }
-    
-    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-        return 0
-    }
-    
-    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-        
-        return ""
-    }
-    
-    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-
-    }
 }

@@ -34,11 +34,13 @@ class BasketViewController: UIViewController {
         refresh.addTarget(self, action: #selector(getBasketList), for: .valueChanged)
         return refresh
     }()
+    private var bottomConstraint: NSLayoutConstraint?
     
     //MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
         setupViews()
+        keyboardHeight()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -46,7 +48,7 @@ class BasketViewController: UIViewController {
         self.navigationItem.title = "Корзина"
         tabBarController?.tabBar.isHidden = false
         showLoader()
-        getBasketList()
+        getBasketList()   
     }
     
     override func viewDidDisappear(_ animated: Bool) {
@@ -71,7 +73,6 @@ class BasketViewController: UIViewController {
             make.bottom.equalTo(-(tabBarController?.tabBar.bounds.height)!)
             make.left.right.equalToSuperview()
         }
-        
     }
     
     //MARK: - Actions
@@ -82,7 +83,26 @@ class BasketViewController: UIViewController {
     @objc func checkoutBasket() {
         viewModel.updateBasket()
         let vc = CheckoutViewController()
+        vc.setTotalPrice(totalPrice: viewModel.totalPrice())
         self.navigationController?.pushViewController(vc, animated: true)
+    }
+    
+    @objc func handleKeyboard(notification: NSNotification) {
+        if let userInfo = notification.userInfo {
+            let keyboardFrame = (userInfo[UIResponder.keyboardFrameEndUserInfoKey] as AnyObject).cgRectValue
+            let isKeyboardShowing = notification.name == UIResponder.keyboardWillShowNotification
+            bottomConstraint?.constant = isKeyboardShowing ? -keyboardFrame!.height : 0
+            UIView.animate(withDuration: 0.3, delay: 0, options: UIView.AnimationOptions.curveEaseOut, animations: {
+                self.view.layoutIfNeeded()
+            }, completion: { (completed) in })
+        }
+    }
+    
+    fileprivate func keyboardHeight() {
+        bottomConstraint = NSLayoutConstraint(item: totalView, attribute: .bottom, relatedBy: .equal, toItem: view, attribute: .bottom, multiplier: 1, constant: 0)
+        view.addConstraint(bottomConstraint!)
+        NotificationCenter.default.addObserver(self, selector: #selector(handleKeyboard), name: UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(handleKeyboard), name: UIResponder.keyboardWillHideNotification, object: nil)
     }
 }
 
@@ -114,6 +134,13 @@ extension BasketViewController: ChangedBasketCountDelegate {
 //MARK: - ProductBasketDelegate
 extension BasketViewController: ProcessViewDelegate {
     func updateUI() {
+        if viewModel.productList.count == 0 {
+            totalView.getButton.backgroundColor = UIColor(white: 0.5, alpha: 0.5)
+            totalView.getButton.isEnabled = false
+        }else {
+            totalView.getButton.backgroundColor = .mainColor
+            totalView.getButton.isEnabled = true
+        }
         totalView.totalCountLabel.text = "\(viewModel.totalPrice())₸"
         refreshControl.endRefreshing()
         tableView.reloadData()

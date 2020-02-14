@@ -90,8 +90,9 @@ class ProductDescriptionView: UIView {
     lazy var quantityView: ProductCharacteristicView = {
         let view = ProductCharacteristicView()
         view.titleLabel.text = "шт:"
-        view.valueTextField.text = "2"
+        view.valueTextField.text = "1"
         view.valueTextField.keyboardType = .numberPad
+        view.valueTextField.delegate = self
         return view
     }()
     lazy var areaView: ProductCharacteristicView = {
@@ -118,7 +119,11 @@ class ProductDescriptionView: UIView {
         return button
     }()
     weak var imageDelegate: OpenImageDelegate?
-    var product: Product!
+    var product: Product! {
+        didSet {
+            areaView.valueTextField.text = "\(product.area)"
+        }
+    }
     
     // MARK: - Lifecycle
     override init(frame: CGRect) {
@@ -251,5 +256,15 @@ extension ProductDescriptionView: UICollectionViewDelegate, UICollectionViewData
     func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
         guard let indexPath = collectionView.indexPathsForVisibleItems.first else {return}
         pageControl.currentPage = indexPath.item
+    }
+}
+
+extension ProductDescriptionView: UITextFieldDelegate {
+    func textFieldDidChangeSelection(_ textField: UITextField) {
+        let res = self.product.area
+        let count = (Double(quantityView.valueTextField.text!) ?? 0)
+        let area = res * count
+        areaView.valueTextField.text = String(format:"%.2f", area)
+//        coundDelegate?.changedBasketCount(index: self.index, count: Int(count))
     }
 }

@@ -139,7 +139,6 @@ class FilterViewController: ViewController {
     }
     
     @objc func updateByCategory() {
-        
         if category_id == -2 {
             viewModel.getPopularProducts()
         }

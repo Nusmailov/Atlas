@@ -19,11 +19,20 @@ class CheckoutViewController: ScrollViewController {
         view.contactView.emailView.addTarget(self, action: #selector(writeToEmail), for: .touchUpInside)
         view.contactView.phoneView.addTarget(self, action: #selector(call), for: .touchUpInside)
         view.contactView.webView.addTarget(self, action: #selector(openWebsite), for: .touchUpInside)
+        view.realizeButton.addTarget(self, action: #selector(buyBasket), for: .touchUpInside)
+        view.calendarDelegate = self
+        view.typeOrderView.sendDelegate = self
         return view
     }()
+    var isCalendarHidden = true
     var parameters = Parameters()
     lazy var contactViewModel: ContactViewModel = {
         let viewModel = ContactViewModel()
+        viewModel.delegate = self
+        return viewModel
+    }()
+    lazy var checkoutViewModel: CheckoutViewModel = {
+        let viewModel = CheckoutViewModel()
         viewModel.delegate = self
         return viewModel
     }()
@@ -47,7 +56,6 @@ class CheckoutViewController: ScrollViewController {
         }
     }
     
-    
     //MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -58,6 +66,10 @@ class CheckoutViewController: ScrollViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         tabBarController?.tabBar.isHidden = false
+    }
+    
+    func setTotalPrice(totalPrice: String) {
+        checkoutView.totalPriceLabel.text = "\(totalPrice)₸"
     }
     
     //MARK: - SetupViews
@@ -91,10 +103,41 @@ class CheckoutViewController: ScrollViewController {
     func mailComposeController(_ controller: MFMailComposeViewController, didFinishWith result: MFMailComposeResult, error: Error?) {
         controller.dismiss(animated: true)
     }
+    
+    @objc func buyBasket() {
+        if !isCalendarHidden { parameters.removeValue(forKey: "order_date") }
+        else if isCalendarHidden && parameters["order_date"] == nil {
+            showErrorMessage("Выберите дату")
+            return
+        }
+        checkoutViewModel.doOrder(parameters: parameters)
+    }
 }
 
+//MARK: - ProcessViewDelegate
 extension CheckoutViewController: ProcessViewDelegate {
     func updateUI() {
         self.contact = contactViewModel.contact
+    }
+}
+
+//MARK: - CheckoutDelegate
+extension CheckoutViewController: CheckoutDelegate {
+    func orderDone() {
+        tabBarController?.selectedIndex = 2
+        self.navigationController?.popToRootViewController(animated: true)
+    }
+}
+
+//MARK: - CheckoutDelegate
+extension CheckoutViewController: CalendarDoOrderDelegate {
+    func isHidden(state: Bool) {
+        isCalendarHidden = state
+    }
+}
+//MARK: - SelectDataSendDelegate
+extension CheckoutViewController: SelectDataSendDelegate {
+    func sendData(text: String) {
+        parameters["order_type"] = text
     }
 }

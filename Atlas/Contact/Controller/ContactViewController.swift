@@ -40,11 +40,11 @@ class ContactViewController: ScrollViewController {
             addressView.addressLabel.text = contact?.address
             var phone = ""
             for i in contact!.call_phone {
-                phone += i + " "
+                phone += i + "\n"
             }
             var email = ""
             for i in contact!.email {
-                email += i + " "
+                email += i + "\n"
             }
             contactView.phoneView.infoTextLabel.text = phone
             contactView.emailView.infoTextLabel.text = email

@@ -13,6 +13,9 @@ protocol SelectTypeOrderDelegate: class {
     func showHide(state: Bool)
     func changeText(text: String)
 }
+protocol SelectDataSendDelegate: class {
+    func sendData(text: String)
+}
 
 class CheckoutInfoView: UIView {
     
@@ -47,6 +50,7 @@ class CheckoutInfoView: UIView {
         return image
     }()
     weak var delegate: SelectTypeOrderDelegate?
+    weak var sendDelegate: SelectDataSendDelegate?
     
     //MARK: - init
     override init(frame: CGRect) {
@@ -80,6 +84,7 @@ class CheckoutInfoView: UIView {
             let checking = ChechkoutText.init(rawValue: item)
             self?.delegate?.showHide(state: checking!.showHide)
             self?.delegate?.changeText(text: checking!.text)
+            self?.sendDelegate?.sendData(text: checking!.typeText)
         }
         
         button.addSubview(nextImage)

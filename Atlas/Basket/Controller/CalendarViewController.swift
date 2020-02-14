@@ -76,7 +76,7 @@ class CalendarViewController: ViewController {
         let size = self.navigationController?.viewControllers.count
         let vc = self.navigationController!.viewControllers[size! - 2] as! CheckoutViewController
         let execution_date = String(date.iso8601).prefix(10)
-        vc.parameters["execution_date"] = date.iso8601
+        vc.parameters["order_date"] = date.iso8601.prefix(10)
         vc.checkoutView.dateSelectView.button.setTitle("   \(execution_date)", for: .normal)
         vc.checkoutView.dateSelectView.button.setTitleColor(UIColor(red: 0.173, green: 0.184, blue: 0.2, alpha: 0.8), for: .normal)
         self.navigationController?.popToViewController(vc, animated: true)

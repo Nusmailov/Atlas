@@ -35,9 +35,13 @@ class BasketViewModel {
         }
     }
     
-    func addToBasket(product_id: Int) {
+    func addToBasket(product_id: Int, count: Int = 0) {
         var parameters = Parameters()
         parameters["product_id"] = product_id
+        if count != 0 {
+            parameters["product_quantity"] = count
+        }
+        
         ParseManager.shared.postRequest(url: ProductApi.basket, parameters: parameters,
             success: { (result: BasketProduct) in
                 BasketModel.shared.basketList[product_id] = true

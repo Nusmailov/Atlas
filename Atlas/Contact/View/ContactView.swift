@@ -20,6 +20,7 @@ class ContactView: UIView {
     lazy var phoneView: ContactButton = {
         let button = ContactButton()
         button.image.image = #imageLiteral(resourceName: "Contact")
+        button.titleTextLabel.text = "Наш колл-центр"
         return button
     }()
     lazy var emailView: ContactButton = {

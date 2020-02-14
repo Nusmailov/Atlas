@@ -78,4 +78,5 @@ enum OrderStatus: String {
 class OrderApi {
     static let orderList = "order/list"
     static let order = "order"
+    static let doOrder = "order"
 }

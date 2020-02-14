@@ -8,19 +8,24 @@
 
 import UIKit
 
+protocol CalendarDoOrderDelegate: class {
+    func isHidden(state: Bool)
+}
+
 class CheckoutView: UIView {
     
     //MARK: - Properties
     lazy var paymentType: CheckoutInfoView = {
         let view = CheckoutInfoView()
         view.dropView.dataSource = ["Самовывоз"]
+        view.button.setTitle("    Самовывоз", for: .normal)
         return view
     }()
     lazy var typeOrderView: CheckoutInfoView = {
         let view = CheckoutInfoView()
         view.dropView.dataSource = ["Предзаказ", "Бронирование", "Заказ с хранением", "Обычный заказ"]
         view.titleLabel.text = "Тип заказа"
-        view.button.setTitle("    Обычный заказ", for: .normal)
+//        view.button.setTitle("    Обычный заказ", for: .normal)
         view.delegate = self
         return view
     }()
@@ -54,16 +59,18 @@ class CheckoutView: UIView {
     }()
     lazy var totalPriceLabel: UILabel = {
         let label = UILabel()
-        label.text = "20 000 тенге"
+        label.text = "0₸"
         label.textColor = UIColor(red: 0.318, green: 0.361, blue: 0.435, alpha: 1)
         label.font = .getMontserraBoldFont(on: 18)
         return label
     }()
     lazy var realizeButton: ContinueButton = {
         let button = ContinueButton()
+        button.setTitle("Заказать", for: .normal)
         button.layer.cornerRadius = 10
         return button
     }()
+    weak var calendarDelegate: CalendarDoOrderDelegate?
     
     //MARK: - Init
     override init(frame: CGRect) {
@@ -125,7 +132,6 @@ class CheckoutView: UIView {
             make.height.equalTo(60)
             make.right.bottom.equalTo(-16)
         }
-        
     }
 }
 
@@ -156,6 +162,7 @@ extension CheckoutView: SelectTypeOrderDelegate {
                 }
             }
         }
+        calendarDelegate?.isHidden(state: state)
     }
     
     func changeText(text: String) {

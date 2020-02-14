@@ -103,25 +103,26 @@ class SelectSettingsView: UIView {
             make.top.equalTo(logoAppImageView.snp.bottom).offset(16)
         }
         
-        languageLabel.snp.makeConstraints { (make) in
-            make.top.equalTo(deliveryGroupLabel.snp.bottom).offset(16)
-            make.left.equalToSuperview().offset(16)
-        }
-        chooseLanguageTextField.snp.makeConstraints { (make) in
-            make.top.equalTo(languageLabel.snp.bottom).offset(16)
-            make.left.equalToSuperview().offset(16)
-            make.right.equalToSuperview().offset(-16)
-            make.height.equalTo(40)
-        }
-        
-        chooseLanguageTextField.leftView = paddingView
-        chooseLanguageTextField.leftViewMode = .always
+//        languageLabel.snp.makeConstraints { (make) in
+//            make.top.equalTo(deliveryGroupLabel.snp.bottom).offset(16)
+//            make.left.equalToSuperview().offset(16)
+//        }
+//        chooseLanguageTextField.snp.makeConstraints { (make) in
+//            make.top.equalTo(languageLabel.snp.bottom).offset(16)
+//            make.left.equalToSuperview().offset(16)
+//            make.right.equalToSuperview().offset(-16)
+//            make.height.equalTo(40)
+//        }
+//
+//        chooseLanguageTextField.leftView = paddingView
+//        chooseLanguageTextField.leftViewMode = .always
         
         pushLabel.snp.makeConstraints { (make) in
-            make.top.equalTo(chooseLanguageTextField.snp.bottom).offset(16)
+            make.top.equalTo(deliveryGroupLabel.snp.bottom).offset(16)
             make.left.equalToSuperview().offset(16)
             make.right.equalToSuperview().offset(-16)
         }
+        
         soundView.snp.makeConstraints { (make) in
             make.top.equalTo(pushLabel.snp.bottom).offset(16)
             make.left.equalToSuperview().offset(16)
@@ -136,18 +137,18 @@ class SelectSettingsView: UIView {
             make.height.equalTo(40)
         }
     
-        cityTextField.snp.makeConstraints { (make) in
-            make.top.equalTo(pushView.snp.bottom).offset(16)
-            make.left.equalToSuperview().offset(16)
-            make.right.equalToSuperview().offset(-16)
-            make.height.equalTo(40)
-        }
-        
-        cityTextField.leftView = cityPaddingView
-        cityTextField.leftViewMode = .always
+//        cityTextField.snp.makeConstraints { (make) in
+//            make.top.equalTo(pushView.snp.bottom).offset(16)
+//            make.left.equalToSuperview().offset(16)
+//            make.right.equalToSuperview().offset(-16)
+//            make.height.equalTo(40)
+//        }
+//
+//        cityTextField.leftView = cityPaddingView
+//        cityTextField.leftViewMode = .always
         
         thousandLabel.snp.makeConstraints { (make) in
-            make.top.equalTo(cityTextField.snp.bottom).offset(16)
+            make.top.equalTo(pushView.snp.bottom).offset(16)
             make.left.equalToSuperview().offset(16)
             make.bottom.right.equalToSuperview().offset(-16)
         }

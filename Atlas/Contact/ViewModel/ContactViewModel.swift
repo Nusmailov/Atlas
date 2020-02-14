@@ -46,8 +46,8 @@ class ContactViewModel {
     }
     
     func call() {
-        guard let phone = contact?.call_phone else { return }
-        let url: NSURL = URL(string: "TEL://" + phone[0])! as NSURL
+        guard let phone = contact?.call_phone[0] else { return }
+        let url: NSURL = URL(string: "TEL://" + phone)! as NSURL
         UIApplication.shared.open(url as URL, options: [:], completionHandler: nil)
     }
 }

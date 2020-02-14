@@ -16,6 +16,7 @@ class ProductViewController: ScrollViewController {
         let view = ProductDescriptionView()
         view.imageDelegate = self
         view.heartButton.addTarget(self, action: #selector(addToFavourite), for: .touchUpInside)
+        view.buyButton.addTarget(self, action: #selector(addToBasketByCount), for: .touchUpInside)
         return view
     }()
     lazy var rightButton: BasketCountButton = {
@@ -59,7 +60,7 @@ class ProductViewController: ScrollViewController {
         didSet {
             imageCollectionView.descriptionLabel.text = product.product_description
             imageCollectionView.nameLabel.text = product.product_name
-            imageCollectionView.priceLabel.text = "\(product.product_price) ₸"
+            imageCollectionView.priceLabel.text = "\(product.product_price) ₸ м2"
             imageCollectionView.sizeLabel.text = "\(product.product_length)x\(product.product_width) м2"
             let heart = FavoriteModel.shared.favoriteList[product.id] == true ? UIImage(named: "Path 8890.1") : UIImage(named: "emptyHeart")
             imageCollectionView.heartButton.setImage(heart, for: .normal)
@@ -138,11 +139,22 @@ class ProductViewController: ScrollViewController {
             favouriteViewModel.addToFavorite(product_id: product.id)
         }
     }
+    
+    @objc func addToBasketByCount() {
+        guard imageCollectionView.quantityView.valueTextField.text != "" else {
+            showErrorMessage("Укажите количество")
+            return
+        }
+        basketAnimate()
+        let count = Int(imageCollectionView.quantityView.valueTextField.text!)
+        basketViewModel.addToBasket(product_id: product.id, count: count!)
+    }
 }
 
 //MARK: - ProcessViewDelegate
 extension ProductViewController: ProcessViewDelegate {
     func updateUI() {
+        newsViewModel.getBasketCount()
         productListView.setProducts(products: productViewModel.productList)
         imageCollectionView.collectionView.reloadData()
         productListView.collectionView.reloadData()
