@@ -103,6 +103,11 @@ class FilterViewController: ViewController {
         newsViewModel.getBasketCount()
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        self.navigationController?.hidesBarsOnSwipe = true
+    }
+    
     //MARK: - setupViews
     func setupViews() {
         view.addSubviews(views: [collectionView, searchFilterView, sortingCollectionView])
@@ -153,10 +158,8 @@ class FilterViewController: ViewController {
             viewModel.getSearch(parameters: ["text" : text])
         }
     }
-    
-    
 }
-
+    
 //MARK: - UICollectionViewDelegate
 extension FilterViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {

@@ -86,7 +86,8 @@ class SettingsViewController: ScrollViewController {
     
     // MARK: - Actions
     @objc func closeApp() {
-
+        UserManager.deleteCurrentSession()
+        AppCenter.shared.start()
     }
     
     @objc override func handleSwipes(sender: UISwipeGestureRecognizer) {

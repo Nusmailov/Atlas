@@ -45,6 +45,6 @@ class TabBarViewController: UITabBarController {
         mainNavController.tabBarItem.image = #imageLiteral(resourceName: "Home")
         mainNavController.tabBarItem.imageInsets = UIEdgeInsets(top: 35, left: 35, bottom: 35, right: 35)
         
-        viewControllers = [favorite, profile, orders, contactsNavController, mainNavController]
+        viewControllers = [mainNavController, favorite, orders, contactsNavController, profile]
     }
 }

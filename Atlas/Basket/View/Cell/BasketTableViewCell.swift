@@ -31,7 +31,7 @@ class BasketTableViewCell: UITableViewCell {
     lazy var productImage: UIImageView = {
         let image = UIImageView()
         image.contentMode = .scaleAspectFit
-        image.image = #imageLiteral(resourceName: "plitka 1")
+        image.image = #imageLiteral(resourceName: "no-image")
         return image
     }()
 
@@ -105,6 +105,8 @@ class BasketTableViewCell: UITableViewCell {
             if !basketProduct.product.images.isEmpty {
                 productImage.sd_imageIndicator = SDWebImageActivityIndicator.gray
                 productImage.sd_setImage(with: Product.getImageUrl(url: basketProduct.product.images[0].image_path))
+            } else {
+                productImage.image = #imageLiteral(resourceName: "no-image")
             }
         }
     }
