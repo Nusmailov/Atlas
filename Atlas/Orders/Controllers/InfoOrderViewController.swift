@@ -25,6 +25,11 @@ class InfoOrderViewController: UIViewController {
         setupViews()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        navigationController?.navigationBar.prefersLargeTitles = false
+    }
+    
     //MARK: - SetupViews
     func setupViews() {
         view.addSubview(webView)

@@ -7,13 +7,14 @@
 //
 
 import UIKit
-//import SDWebImage
+import SDWebImage
 
 class ProfileViewController: ScrollViewController {
     
     // MARK: - Properties
     lazy var profileView: ProfileView = {
         let view = ProfileView()
+        view.userImageView.isUserInteractionEnabled = true
         return view
     }()
     lazy var mainView: UIView = {
@@ -48,6 +49,8 @@ class ProfileViewController: ScrollViewController {
         viewModel.basketCountDelegate = self
         return viewModel
     }()
+    var imagePicker: ImagePicker!
+    let imageAction = UITapGestureRecognizer()
     var user: User? {
         didSet {
             profileView.userNameLabel.text = user?.name
@@ -65,6 +68,10 @@ class ProfileViewController: ScrollViewController {
             }
             if let requisites = user?.requisites {
                 profileView.propsView.textLabel.text = requisites
+            }
+            if let image_path = user?.image_path {
+                profileView.userImageView.sd_imageIndicator = SDWebImageActivityIndicator.gray
+                profileView.userImageView.sd_setImage(with: Product.getImageUrl(url: image_path))
             }
         }
     }
@@ -102,7 +109,7 @@ class ProfileViewController: ScrollViewController {
         
         mainView.addSubviews(views: [profileView])
         profileView.snp.makeConstraints { (make) in
-            make.top.right.left.equalToSuperview()
+            make.top.right.left.bottom.equalToSuperview()
         }
     }
     
@@ -111,6 +118,9 @@ class ProfileViewController: ScrollViewController {
         let leftSwipe = UISwipeGestureRecognizer(target: self, action: #selector(handleSwipes))
         let rightSwipe = UISwipeGestureRecognizer(target: self, action: #selector(handleSwipes))
         
+        imageAction.addTarget(self, action: #selector(imagePick))
+        profileView.userImageView.addGestureRecognizer(imageAction)
+        self.imagePicker = ImagePicker(presentationController: self, delegate: self)
         leftSwipe.direction = .left
         rightSwipe.direction = .right
         
@@ -125,7 +135,7 @@ class ProfileViewController: ScrollViewController {
     }
     
     // MARK: - Actions
-    @objc override func handleSwipes(sender:UISwipeGestureRecognizer) {
+    @objc override func handleSwipes(sender: UISwipeGestureRecognizer) {
         if (sender.direction == .left) {
             goToBusketView()
         } else if (sender.direction == .right) {
@@ -153,7 +163,12 @@ class ProfileViewController: ScrollViewController {
     func getBasketCount() {
         newsViewModel.getBasketCount()
     }
+    
+    @objc func imagePick(_ sender: UIButton) {
+        self.imagePicker.present(from: sender)
+    }
 }
+
 // MARK: - ProcessViewDelegate
 extension ProfileViewController: ProcessViewDelegate {
     func updateUI() {
@@ -166,5 +181,14 @@ extension ProfileViewController: ProcessViewDelegate {
 extension ProfileViewController: BasketCountDelegate {
     func updateCount(count: Int) {
         self.rightButton.countLabel.text = "\(count)"
+    }
+}
+
+// MARK: - ImagePickerDelegate
+extension ProfileViewController: ImagePickerDelegate {
+    func didSelect(image: UIImage?) {
+        guard let image = image else { return }
+        guard let dataImage = image.jpegData(compressionQuality: 0.8) else { return }
+        viewModel.userPhoto(parameters: ["image": dataImage])
     }
 }

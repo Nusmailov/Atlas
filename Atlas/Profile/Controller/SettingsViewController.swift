@@ -15,6 +15,8 @@ class SettingsViewController: ScrollViewController {
         let view = SelectSettingsView()
         view.layer.cornerRadius = 10
         view.backgroundColor = .white
+        view.soundView.switchView.addTarget(self, action: #selector(soundOnOff), for: .valueChanged)
+        view.pushView.switchView.addTarget(self, action: #selector(pushOnOff), for: .valueChanged)
         return view
     }()
     lazy var changeAccountButton: UIButton = {
@@ -39,10 +41,17 @@ class SettingsViewController: ScrollViewController {
         let button = UIButton()
         button.setImage(UIImage(named: "back"), for: .normal)
         button.addTarget(self, action: #selector(cancelButton), for: .touchUpInside)
-        button.imageEdgeInsets = UIEdgeInsets(top: 10, left: 20, bottom: 10, right: 10)
+        button.imageEdgeInsets = UIEdgeInsets(top: 10, left: 0, bottom: 10, right: 30)
+        button.transform = CGAffineTransform(scaleX: -1, y: 1)
         return button
     }()
+    lazy var profileViewModel: ProfileViewModel = {
+        let viewModel = ProfileViewModel()
+        viewModel.delegate = self
+        return viewModel
+    }()
     lazy var refreshControl = UIRefreshControl()
+    var parameters = Parameters()
     
     // MARK: - Lifecycle
     override func viewWillAppear(_ animated: Bool) {
@@ -101,4 +110,21 @@ class SettingsViewController: ScrollViewController {
         self.navigationController?.popViewController(animated: true)
     }
     
+    @objc func pushOnOff(switcher: UISwitch) {
+        let onOff = switcher.isOn ? 1 : 0
+        parameters["push"] = onOff
+        profileViewModel.editUser(parameters: parameters)
+    }
+    
+    @objc func soundOnOff(switcher: UISwitch) {
+        let onOff = switcher.isOn ? 1 : 0
+        parameters["sound"] = onOff
+        profileViewModel.editUser(parameters: parameters)
+    }
+}
+
+extension SettingsViewController: ProcessViewDelegate {
+    func updateUI() {
+        try? UserManager.createSessionWithUser(UserModel.init(user: profileViewModel.user!))
+    }
 }

@@ -14,10 +14,9 @@ class ProfileView: UIView {
     lazy var userImageView: UIImageView = {
         let view = UIImageView()
         view.image = #imageLiteral(resourceName: "Ellipse 2.5")
-        view.contentMode = .scaleAspectFit
+        view.contentMode = .scaleAspectFill
         view.layer.cornerRadius = 40
         view.layer.masksToBounds = true
-        
         return view
     }()
     lazy var userNameLabel: UILabel = {

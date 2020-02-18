@@ -11,4 +11,6 @@ import Foundation
 
 class ProfileApi {
     static let auth = "user"
+    static let editUser = "edit"
+    static let photo = "photo"
 }

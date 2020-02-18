@@ -51,6 +51,7 @@ class ContactInfoViewController: ScrollViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.title = state.title
+        navigationController?.navigationBar.prefersLargeTitles = false
     }
     
     // MARK: - SetupViews

@@ -28,6 +28,5 @@ class SecureViewController: UIViewController {
         }
         webView.loadHTMLString(html, baseURL: nil)
         webView.backgroundColor = .white
-
     }
 }

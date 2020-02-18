@@ -100,19 +100,18 @@ public class Router: NetworkManager {
                         body.append(Data("\r\n".utf8))
                     }
                 }
+            }
+            else if let data = value as? Data {
+                let mimeTypeLocal = mimeType(for: data)
+                body.append(Data("--\(boundary)\r\n".utf8))
+                body.append(Data("Content-Disposition: form-data; name=\"\(key)\"; filename=\"\(value)\"\r\n".utf8))
+                body.append(Data("Content-Type: \(mimeTypeLocal)\r\n\r\n".utf8))
+                body.append(data)
+                body.append(Data("\r\n".utf8))
             } else {
-                if let data = value as? Data {
-                    let mimeTypeLocal = mimeType(for: data)
-                    body.append(Data("--\(boundary)\r\n".utf8))
-                    body.append(Data("Content-Disposition: form-data; name=\"\(key)\"; filename=\"\(value)\"\r\n".utf8))
-                    body.append(Data("Content-Type: \(mimeTypeLocal)\r\n\r\n".utf8))
-                    body.append(data)
-                    body.append(Data("\r\n".utf8))
-                } else {
-                    body.append(Data("--\(boundary)\r\n".utf8))
-                    body.append(Data("Content-Disposition: form-data; name=\"\(key)\"\r\n\r\n".utf8))
-                    body.append(Data("\(value)\r\n".utf8))
-                }
+                body.append(Data("--\(boundary)\r\n".utf8))
+                body.append(Data("Content-Disposition: form-data; name=\"\(key)\"\r\n\r\n".utf8))
+                body.append(Data("\(value)\r\n".utf8))
             }
         }
         body.append(Data("--\(boundary)--\r\n".utf8))

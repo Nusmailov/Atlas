@@ -26,4 +26,23 @@ class ProfileViewModel {
             self.delegate?.showErrorMessage(error)
         }
     }
+    
+    func editUser(parameters: Parameters) {
+        ParseManager.shared.postRequest(url: ProfileApi.editUser, parameters: parameters, success: {
+            (result: User) in
+            self.user = result
+            self.delegate?.updateUI()
+        }) { (error) in
+            self.delegate?.showErrorMessage(error)
+        }
+    }
+    
+    func userPhoto(parameters: Parameters) {
+        ParseManager.shared.multipartFormData(url: ProfileApi.photo, parameters: parameters, success: { (result: User) in
+            self.user = result
+            self.delegate?.updateUI()
+        }) { (error) in
+            self.delegate?.showErrorMessage(error)
+        }
+    }
 }

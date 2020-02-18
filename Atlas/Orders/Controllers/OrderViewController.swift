@@ -46,6 +46,7 @@ class OrderViewController: ViewController {
     // MARK: - Lifecycle
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        navigationController?.navigationBar.prefersLargeTitles = true
         navigationController?.setNavigationBarHidden(false, animated: animated)
         navigationItem.title = "История заказов"
         tabBarController?.tabBar.isHidden = false
@@ -59,6 +60,8 @@ class OrderViewController: ViewController {
     
     //MARK: - SetupViews
     func setupViews() {
+        registerForPreviewing(with: self, sourceView: tableView)
+
         view.addSubview(mainView)
         mainView.snp.makeConstraints { (make) in
             make.top.equalToSuperview().offset(8)
@@ -115,10 +118,27 @@ extension OrderViewController: UITableViewDelegate, UITableViewDataSource {
     }
 }
 
+
 //MARK: - ProcessViewDelegate
 extension OrderViewController: ProcessViewDelegate {
     func updateUI() {
         tableView.reloadData()
         refreshControl.endRefreshing()
+    }
+}
+
+extension OrderViewController: UIViewControllerPreviewingDelegate  {
+    func previewingContext(_ previewingContext: UIViewControllerPreviewing, viewControllerForLocation location: CGPoint) -> UIViewController? {
+        if let indexPath = tableView.indexPathForRow(at: location) {
+            previewingContext.sourceRect = tableView.rectForRow(at: indexPath)
+            let vc = OrderDescriptionViewController(order_id: viewModel.orderList[indexPath.row].id)
+            vc.setOrder(order: viewModel.orderList[indexPath.row])
+            return vc
+        }
+        return nil
+    }
+    
+    func previewingContext(_ previewingContext: UIViewControllerPreviewing, commit viewControllerToCommit: UIViewController) {
+        navigationController?.pushViewController(viewControllerToCommit, animated: true)
     }
 }

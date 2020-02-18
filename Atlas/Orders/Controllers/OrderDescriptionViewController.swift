@@ -62,6 +62,11 @@ class OrderDescriptionViewController: UIViewController {
         viewModel.getById(order_id: order_id)
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        navigationController?.navigationBar.prefersLargeTitles = false
+    }
+    
     func setOrder(order: Order) {
         self.order = order
     }

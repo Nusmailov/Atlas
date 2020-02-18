@@ -55,6 +55,7 @@ class FavoriteViewController: ViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        navigationController?.navigationBar.prefersLargeTitles = true
         viewModel.page = 1
         viewModel.favouriteList.removeAll()
         getList(page: viewModel.page)
@@ -68,8 +69,9 @@ class FavoriteViewController: ViewController {
         }
     }
 
-    //MARK:- SetupViews
+    //MARK: - SetupViews
     func setupViews() -> Void {
+        registerForPreviewing(with: self, sourceView: collectionView)
         view.addSubview(collectionView)
         collectionView.snp.makeConstraints { (make) in
             make.edges.equalToSuperview()
@@ -159,5 +161,25 @@ extension FavoriteViewController: ProductDelegate {
     
     func removeFavorite(product_id: Int) {
         viewModel.removeFavourite(product_id: product_id)
+    }
+}
+
+//MARK: - UIViewControllerPreviewingDelegate
+extension FavoriteViewController: UIViewControllerPreviewingDelegate  {
+    func previewingContext(_ previewingContext: UIViewControllerPreviewing, viewControllerForLocation location: CGPoint) -> UIViewController? {
+        if let indexPath = collectionView.indexPathForItem(at: location) {
+            if viewModel.favouriteList.count > indexPath.item {
+                let vc = ProductViewController(product: viewModel.favouriteList[indexPath.item])
+                vc.setProduct(product: viewModel.favouriteList[indexPath.item])
+                return vc
+            } else {
+                collectionView.reloadData()
+            }
+        }
+        return nil
+    }
+    
+    func previewingContext(_ previewingContext: UIViewControllerPreviewing, commit viewControllerToCommit: UIViewController) {
+        navigationController?.pushViewController(viewControllerToCommit, animated: true)
     }
 }

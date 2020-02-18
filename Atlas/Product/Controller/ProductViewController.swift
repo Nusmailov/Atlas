@@ -93,6 +93,7 @@ class ProductViewController: ScrollViewController {
         super.viewWillAppear(animated)
         tabBarController?.tabBar.isHidden = false
         navigationItem.rightBarButtonItem = UIBarButtonItem(customView: rightButton)
+        navigationController?.navigationBar.prefersLargeTitles = false
     }
     
     //MARK: - SetupViews
