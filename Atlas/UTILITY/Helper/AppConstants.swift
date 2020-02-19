@@ -19,7 +19,6 @@ class AppConstants {
         static let authUrl = "signin"
         static let getBanner = "banners"
         static let getMainPopular = "products/main"
-        static let apiKey = "AIzaSyCDM__JzW1f4-ZelIxYntKr2z8Hrlq9mmM"
     }
 }
 

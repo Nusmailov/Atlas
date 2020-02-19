@@ -90,6 +90,13 @@ class TileView: UIView {
             let basket_state = BasketModel.shared.basketList[product.id]
             let basket = basket_state == true ? UIImage(named: "Cart#2-2") : UIImage(named: "box")
             basketButton.setImage(basket, for: .normal)
+            if basket_state == true {
+                buyButton.isEnabled = false
+                buyButton.backgroundColor = UIColor(white: 0.5, alpha: 0.5)
+            } else {
+                buyButton.isEnabled = true
+                buyButton.backgroundColor = .mainColor
+            }
             if !product.images.isEmpty {
                 image.sd_imageIndicator = SDWebImageActivityIndicator.gray
                 image.contentMode = .scaleAspectFill

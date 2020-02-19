@@ -18,9 +18,9 @@ class ProductCollectionCell: UICollectionViewCell {
     }()
     override var isHighlighted: Bool {
         didSet {
-            tileView.buyButton.backgroundColor = isHighlighted ? .white : .mainColor
+//            tileView.buyButton.backgroundColor = isHighlighted ? .white : .mainColor
             tileView.backgroundColor = isHighlighted ? #colorLiteral(red: 1, green: 0.576224193, blue: 0.6157098481, alpha: 1) : .whiteGray
-            tileView.buyButton.titleLabel?.textColor = isHighlighted ? .mainColor : .white
+//            tileView.buyButton.titleLabel?.textColor = isHighlighted ? .mainColor : .white
         }
     }
     

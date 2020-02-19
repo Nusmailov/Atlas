@@ -52,15 +52,15 @@ class ContactView: UIView {
             make.top.left.right.equalToSuperview()
         }
         phoneView.snp.makeConstraints { (make) in
-            make.top.equalTo(contactTextLabel.snp.bottom).offset(10)
+            make.top.equalTo(contactTextLabel.snp.bottom).offset(16)
             make.left.right.equalToSuperview()
         }
         emailView.snp.makeConstraints { (make) in
-            make.top.equalTo(phoneView.snp.bottom).offset(10)
+            make.top.equalTo(phoneView.snp.bottom).offset(16)
             make.left.right.equalToSuperview()
         }
         webView.snp.makeConstraints { (make) in
-            make.top.equalTo(emailView.snp.bottom).offset(10)
+            make.top.equalTo(emailView.snp.bottom).offset(16)
             make.bottom.left.right.equalToSuperview()
         }
     }

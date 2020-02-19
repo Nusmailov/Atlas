@@ -56,7 +56,7 @@ enum OrderStatus: String {
         switch self {
         case .reject:
             return .red
-        case .acceptedFStock:
+        case .processed:
             return .green
         default:
             return UIColor(red: 1, green: 0.753, blue: 0, alpha: 1)

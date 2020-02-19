@@ -57,7 +57,6 @@ class FavoriteViewController: ViewController {
         super.viewWillAppear(animated)
         navigationController?.navigationBar.prefersLargeTitles = true
         viewModel.page = 1
-        viewModel.favouriteList.removeAll()
         getList(page: viewModel.page)
     }
     
