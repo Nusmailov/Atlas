@@ -28,9 +28,12 @@ class AppCenter {
         window.backgroundColor = .white
     }
     
-    func makeRootController() -> Void {
+    func makeRootController(tabPage: Int? = 0) -> Void {
         if UserManager.getCurrentUser() != nil {
             let vc = TabBarViewController()
+            if let index = tabPage {
+                vc.selectedIndex = index
+            }
             setRootController(controller: vc)
         } else {
             let vc = LoginViewController().inNavigation()

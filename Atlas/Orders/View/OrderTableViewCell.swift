@@ -72,8 +72,8 @@ class OrderTableViewCell: UITableViewCell {
         mainView.snp.makeConstraints { (make) in
             make.top.equalToSuperview().offset(4)
             make.bottom.equalToSuperview().offset(-4)
-            make.left.equalToSuperview().offset(8)
-            make.right.equalToSuperview().offset(-8)
+            make.left.equalToSuperview().offset(16)
+            make.right.equalToSuperview().offset(-16)
         }
         mainView.addSubviews(views: [orderTextLabel, statusOrderLabel, circleView])
         

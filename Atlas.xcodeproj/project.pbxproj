@@ -173,6 +173,7 @@
 		F5C219F323DABAC800AD5416 /* Montserrat-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = F5C219EF23DABAC800AD5416 /* Montserrat-Bold.ttf */; };
 		F5C219F423DABAC800AD5416 /* Montserrat-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = F5C219F023DABAC800AD5416 /* Montserrat-Regular.ttf */; };
 		F5C219F523DABAC800AD5416 /* Montserrat-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = F5C219F123DABAC800AD5416 /* Montserrat-SemiBold.ttf */; };
+		F5D067AF23FD06E1007C4831 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = F5D067AE23FD06E1007C4831 /* GoogleService-Info.plist */; };
 		F5DD1A2523F25BCA004DB812 /* EstimateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5DD1A2423F25BCA004DB812 /* EstimateView.swift */; };
 		F5DD1A2723F25DA0004DB812 /* ContactViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5DD1A2623F25DA0004DB812 /* ContactViewModel.swift */; };
 		F5DD1A2923F2785A004DB812 /* OrderDescription.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5DD1A2823F2785A004DB812 /* OrderDescription.swift */; };
@@ -370,6 +371,8 @@
 		F5C219EF23DABAC800AD5416 /* Montserrat-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Montserrat-Bold.ttf"; sourceTree = "<group>"; };
 		F5C219F023DABAC800AD5416 /* Montserrat-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Montserrat-Regular.ttf"; sourceTree = "<group>"; };
 		F5C219F123DABAC800AD5416 /* Montserrat-SemiBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Montserrat-SemiBold.ttf"; sourceTree = "<group>"; };
+		F5D067AE23FD06E1007C4831 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		F5D067B023FD0A9C007C4831 /* Atlas.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Atlas.entitlements; sourceTree = "<group>"; };
 		F5DD1A2423F25BCA004DB812 /* EstimateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EstimateView.swift; sourceTree = "<group>"; };
 		F5DD1A2623F25DA0004DB812 /* ContactViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactViewModel.swift; sourceTree = "<group>"; };
 		F5DD1A2823F2785A004DB812 /* OrderDescription.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderDescription.swift; sourceTree = "<group>"; };
@@ -536,6 +539,7 @@
 		141826D72384FA8A00857FA9 /* Atlas */ = {
 			isa = PBXGroup;
 			children = (
+				F5D067B023FD0A9C007C4831 /* Atlas.entitlements */,
 				F550644223DE9CFE00DE95EB /* Source */,
 				1418277423850BCD00857FA9 /* View */,
 				1417D8CD23CC4C0B00429C23 /* NetworkManager */,
@@ -552,6 +556,7 @@
 				F550644523DEA02300DE95EB /* Product */,
 				141826DC2384FA8A00857FA9 /* Main.storyboard */,
 				141826E72384FA8B00857FA9 /* Info.plist */,
+				F5D067AE23FD06E1007C4831 /* GoogleService-Info.plist */,
 				141826DF2384FA8A00857FA9 /* Atlas.xcdatamodeld */,
 			);
 			path = Atlas;
@@ -1291,6 +1296,7 @@
 				F5C219F323DABAC800AD5416 /* Montserrat-Bold.ttf in Resources */,
 				14182765238501B500857FA9 /* Fontfabric - MullerBold.otf in Resources */,
 				F5C219F223DABAC800AD5416 /* Montserrat-Medium.ttf in Resources */,
+				F5D067AF23FD06E1007C4831 /* GoogleService-Info.plist in Resources */,
 				F5C219F423DABAC800AD5416 /* Montserrat-Regular.ttf in Resources */,
 				14182767238501BA00857FA9 /* Fontfabric - MullerRegular.otf in Resources */,
 			);
@@ -1689,7 +1695,9 @@
 			baseConfigurationReference = B54F1572D35155CB362341AC /* Pods-Atlas.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = Atlas/Atlas.entitlements;
 				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 0;
 				DEVELOPMENT_TEAM = 8XHSD5YR87;
 				INFOPLIST_FILE = Atlas/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
@@ -1697,7 +1705,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = apple.eldor.Atlas;
+				PRODUCT_BUNDLE_IDENTIFIER = nurzhigit.Atlas;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -1709,15 +1717,17 @@
 			baseConfigurationReference = B0C32476488D2EB9E6D21FD1 /* Pods-Atlas.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = Atlas/Atlas.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 8XD96ZUA34;
+				CURRENT_PROJECT_VERSION = 0;
+				DEVELOPMENT_TEAM = 8XHSD5YR87;
 				INFOPLIST_FILE = Atlas/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = apple.eldor.Atlas;
+				PRODUCT_BUNDLE_IDENTIFIER = nurzhigit.Atlas;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";

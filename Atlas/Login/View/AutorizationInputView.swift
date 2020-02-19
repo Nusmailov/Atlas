@@ -33,7 +33,7 @@ class AutorizationInputView: UIView {
         textField.textField.tag = 0
         textField.layer.cornerRadius = 22.5
         textField.phoneTextField.textColor = .mainColor
-        
+        textField.phoneTextField.keyboardType = .numberPad
         return textField
     }()
     lazy var passwordTextField: InputTextField = {

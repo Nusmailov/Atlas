@@ -15,21 +15,21 @@ class LoginControllerConstaintConfiguration {
     static let shared = LoginControllerConstaintConfiguration()
     
     func setupView(_ controller: LoginViewController) -> Void {
-        controller.scrollView.addSubview(controller.logoView)
+        controller.contentView.addSubview(controller.logoView)
         controller.logoView.snp.makeConstraints { (make) in
             make.top.left.right.equalToSuperview()
         }
-        controller.scrollView.addSubview(controller.autorizationInputView)
+        controller.contentView.addSubview(controller.autorizationInputView)
         controller.autorizationInputView.snp.makeConstraints { (make) in
             make.top.equalTo(controller.logoView.snp.bottom).offset(80)
             make.width.equalToSuperview()
         }
-        controller.scrollView.addSubview(controller.signInEventsView)
+        controller.contentView.addSubview(controller.signInEventsView)
         controller.signInEventsView.snp.makeConstraints { (make) in
             make.top.equalTo(controller.autorizationInputView.snp.bottom).offset(11)
             make.left.right.centerX.equalToSuperview()
         }
-        controller.scrollView.addSubview(controller.confButton)
+        controller.contentView.addSubview(controller.confButton)
         controller.confButton.snp.makeConstraints { (make) in
             make.top.equalTo(controller.signInEventsView.snp.bottom).offset(25)
             make.centerX.equalToSuperview()

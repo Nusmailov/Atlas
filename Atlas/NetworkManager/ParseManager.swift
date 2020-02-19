@@ -15,11 +15,11 @@ class ParseManager {
     let networkManager: NetworkManager = Router(parser: DefaultParserImpl())
     
     private init() {}
-    let token = UserManager.getCurrentToken()
+//    let token = UserManager.getCurrentToken()
     
     func multipartFormData<T: Decodable>(url: String, parameters: Parameters? = nil,
                                          success: @escaping (T) -> (), error: @escaping (String) -> ()) {
-        let endpoint = Endpoints.multipartFormData(url: url, parameters: parameters, token: token)
+        let endpoint = Endpoints.multipartFormData(url: url, parameters: parameters, token: UserManager.getCurrentToken())
         let dispatch = DispatchQueue.global(qos: .utility)
         dispatch.async {
             self.networkManager.request(endpoint) { (result: Result<GeneralResult<T>>) in
@@ -37,7 +37,7 @@ class ParseManager {
     
     func postRequest<T: Decodable>(url: String, parameters: Parameters? = nil,
                                    success: @escaping (T) -> (), error: @escaping (String) -> ()) {
-        let endpoint = Endpoints.post(url: url, parameters: parameters, token: token)
+        let endpoint = Endpoints.post(url: url, parameters: parameters, token: UserManager.getCurrentToken())
         self.networkManager.request(endpoint) { (result: Result<GeneralResult<T>>) in
             DispatchQueue.main.async {
                 switch result {
@@ -52,8 +52,7 @@ class ParseManager {
     
     func getRequest<T: Decodable>(url: String, parameters: Parameters? = nil,
                                   success: @escaping (T) -> (), error: @escaping (String) -> ()) {
-        let endpoint = Endpoints.get(url: url, parameters: parameters, token: token)
-        
+        let endpoint = Endpoints.get(url: url, parameters: parameters, token: UserManager.getCurrentToken())
         self.networkManager.request(endpoint) { (result: Result<GeneralResult<T>>) in
             DispatchQueue.main.async {
                 switch result {
@@ -68,7 +67,7 @@ class ParseManager {
     
     func deleteRequest<T: Decodable>(url: String, parameters: Parameters? = nil, url_parameters: Parameters? = nil,
                                    success: @escaping (T) -> (), error: @escaping (String) -> ()) {
-        let endpoint = Endpoints.delete(url: url, parameters: nil, url_parameters: url_parameters, token: token)
+        let endpoint = Endpoints.delete(url: url, parameters: nil, url_parameters: url_parameters, token: UserManager.getCurrentToken())
         self.networkManager.request(endpoint) { (result: Result<GeneralResult<T>>) in
             DispatchQueue.main.async {
                 switch result {

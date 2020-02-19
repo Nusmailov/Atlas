@@ -96,10 +96,12 @@ class LoginViewController: LoaderBaseViewController {
     }
     
     private func authorize() -> Void {
+        
         viewModel.setPhone(autorizationInputView.phoneTextField.phoneTextField.text!)
         viewModel.setPassword(autorizationInputView.passwordTextField.textField.text!)
         let parameters = viewModel.getParameters()
         showLoader()
+        
         ParseManager.shared.postRequest(url: AppConstants.API.authUrl, parameters: parameters, success: { (result: User?) in
             self.hideLoader()
             do {

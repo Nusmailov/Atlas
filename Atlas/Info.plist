@@ -2,21 +2,6 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-	<key>NSLocationWhenInUseUsageDescription</key>
-	<string>For sending your location to get taxi in client mode or to accept orders in driver mode.</string>
-	<key>UIAppFonts</key>
-	<array>
-		<string>Montserrat-SemiBold.ttf</string>
-		<string>Montserrat-Regular.ttf</string>
-		<string>Montserrat-Medium.ttf</string>
-		<string>Montserrat-Bold.ttf</string>
-		<string>Fontfabric - MullerMedium.otf</string>
-		<string>Fontfabric - MullerRegular.otf</string>
-		<string>Fontfabric - MullerBold.otf</string>
-		<string>Fontfabric - MullerBlack.otf</string>
-	</array>
-	<key>UIUserInterfaceStyle</key>
-	<string>Light</string>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>$(DEVELOPMENT_LANGUAGE)</string>
 	<key>CFBundleExecutable</key>
@@ -32,13 +17,33 @@
 	<key>CFBundleShortVersionString</key>
 	<string>1.0</string>
 	<key>CFBundleVersion</key>
-	<string>1</string>
+	<string>$(CURRENT_PROJECT_VERSION)</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<string>For sending your location to get taxi in client mode or to accept orders in driver mode.</string>
+	<key>UIAppFonts</key>
+	<array>
+		<string>Montserrat-SemiBold.ttf</string>
+		<string>Montserrat-Regular.ttf</string>
+		<string>Montserrat-Medium.ttf</string>
+		<string>Montserrat-Bold.ttf</string>
+		<string>Fontfabric - MullerMedium.otf</string>
+		<string>Fontfabric - MullerRegular.otf</string>
+		<string>Fontfabric - MullerBold.otf</string>
+		<string>Fontfabric - MullerBlack.otf</string>
+	</array>
+	<key>UIBackgroundModes</key>
+	<array>
+		<string>fetch</string>
+		<string>remote-notification</string>
+	</array>
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen</string>
 	<key>UIMainStoryboardFile</key>
 	<string>Main</string>
+	<key>NSCameraUsageDescription</key>
+	<string>&quot;Atlas&quot; требуется доступ к вашей камере, чтобы вы могли добавлять фотографии для публикации в вашей публикации</string>
 	<key>UIRequiredDeviceCapabilities</key>
 	<array>
 		<string>armv7</string>
@@ -56,5 +61,9 @@
 		<string>UIInterfaceOrientationLandscapeLeft</string>
 		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
+	<key>UIUserInterfaceStyle</key>
+	<string>Light</string>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>&quot;Atlas&quot; необходимо получить доступ к вашей камере, чтобы вы могли загружать изображения. Ваши изображения не будут переданы без вашего разрешения.</string>
 </dict>
 </plist>

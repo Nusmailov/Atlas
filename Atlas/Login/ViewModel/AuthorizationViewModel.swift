@@ -34,7 +34,8 @@ class AuthorizationViewModel: ViewModelConfigurable {
         guard isValid() else {return nil}
         parameters["tel"] = phone
         parameters["password"] = password
-
+        parameters["device_type"] = "ios"
+        parameters["device_token"] = AppDelegate.deviceToken
         return parameters
     }
 

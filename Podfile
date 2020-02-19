@@ -13,4 +13,9 @@ target 'Atlas' do
   pod 'DropDown'
   pod 'FSCalendar'
   
+  pod 'Firebase/Messaging'
+  pod 'Firebase/Core'
+  pod 'Firebase/Analytics'
+
+  
 end
