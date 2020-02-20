@@ -14,12 +14,14 @@ protocol UpdateProductDelegate: class {
 }
 
 class FavouriteViewModel {
+    //MARK: - Properties
     weak var delegate: ProcessViewDelegate?
     var favouriteList = [Product]()
     var max_page = 1
     var page = 1
     weak var updateDelegate: UpdateProductDelegate?
     
+    //MARK: - Requests
     func addToFavorite(product_id: Int) {
         var parameters = Parameters()
         parameters["product_id"] = product_id
@@ -55,10 +57,9 @@ class FavouriteViewModel {
     func getFavouriteList(page: Int) {
         var parameters = Parameters()
         parameters["page"] = page
-        if page == 1 { self.favouriteList.removeAll() }
-        
         ParseManager.shared.getRequest(url: ProductApi.favorite, success: { (result: PaginationResult<[Product]>) in
             self.delegate?.hideLoader()
+            if page == 1 { self.favouriteList.removeAll() }
             self.favouriteList.append(contentsOf: result.data)
             self.page = result.current_page
             self.max_page = result.last_page
@@ -68,6 +69,7 @@ class FavouriteViewModel {
             self.basketFill(productList: self.favouriteList)
             self.delegate?.updateUI()
         }) { (error) in
+            
             self.delegate?.showErrorMessage(error)
         }
     }

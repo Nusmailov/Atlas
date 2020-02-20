@@ -41,7 +41,6 @@ class BasketViewModel {
         if count != 0 {
             parameters["product_quantity"] = count
         }
-        
         ParseManager.shared.postRequest(url: ProductApi.basket, parameters: parameters,
             success: { (result: BasketProduct) in
                 BasketModel.shared.basketList[product_id] = true

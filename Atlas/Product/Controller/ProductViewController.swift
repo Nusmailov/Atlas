@@ -12,6 +12,7 @@ import SDWebImage
 class ProductViewController: ScrollViewController {
     
     //MARK: - Properties
+    var basketAddedBlock:  (() ->  ())?
     lazy var imageCollectionView: ProductDescriptionView = {
         let view = ProductDescriptionView()
         view.imageDelegate = self
@@ -103,7 +104,7 @@ class ProductViewController: ScrollViewController {
     
     func setupViews() {
         contentView.addSubviews(views: [imageCollectionView, productListView])
-
+        
         imageCollectionView.snp.makeConstraints { (make) in
             make.top.left.right.equalToSuperview()
         }
@@ -150,11 +151,24 @@ class ProductViewController: ScrollViewController {
         let count = Int(imageCollectionView.quantityView.valueTextField.text!)
         basketViewModel.addToBasket(product_id: product.id, count: count!)
     }
+    
+    override var previewActionItems: [UIPreviewActionItem] {
+        let action = UIPreviewAction(title: "Добавить в корзину", style: .default) {[unowned self] (action, viewController) in
+            
+            self.basketViewModel.addToBasket(product_id: self.product.id)
+            
+        }
+        let action2 = UIPreviewAction(title: "Добавить в избранные", style: .default) {[unowned self] (action, viewController) in
+            self.favouriteViewModel.addToFavorite(product_id: self.product.id)
+        }
+        return [action, action2]
+    }
 }
 
 //MARK: - ProcessViewDelegate
 extension ProductViewController: ProcessViewDelegate {
     func updateUI() {
+        self.basketAddedBlock?()
         newsViewModel.getBasketCount()
         productListView.setProducts(products: productViewModel.productList)
         imageCollectionView.collectionView.reloadData()

@@ -57,7 +57,7 @@ class FavoriteViewController: ViewController {
         super.viewWillAppear(animated)
         navigationController?.navigationBar.prefersLargeTitles = true
         viewModel.page = 1
-        getList(page: viewModel.page)
+        viewModel.getFavouriteList(page: viewModel.page)
     }
     
     override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
@@ -92,6 +92,7 @@ class FavoriteViewController: ViewController {
         viewModel.page = 1
         viewModel.getFavouriteList(page: viewModel.page)
     }
+    
 }
 
 //MARK:- CollectionView Delegate/Datasource
@@ -169,6 +170,9 @@ extension FavoriteViewController: UIViewControllerPreviewingDelegate  {
         if let indexPath = collectionView.indexPathForItem(at: location) {
             if viewModel.favouriteList.count > indexPath.item {
                 let vc = ProductViewController(product: viewModel.favouriteList[indexPath.item])
+                vc.basketAddedBlock = {
+                    self.collectionView.reloadData()
+                }
                 vc.setProduct(product: viewModel.favouriteList[indexPath.item])
                 return vc
             } else {

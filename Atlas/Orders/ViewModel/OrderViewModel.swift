@@ -17,7 +17,6 @@ class OrderViewModel {
     weak var delegate: ProcessViewDelegate?
     
     func getOrderList() {
-        delegate?.showLoader()
         ParseManager.shared.getRequest(url: OrderApi.orderList, success: { (result: PaginationResult<[Order]>) in
             self.max_page = result.last_page
             self.page = result.current_page

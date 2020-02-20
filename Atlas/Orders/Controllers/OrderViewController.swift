@@ -55,6 +55,7 @@ class OrderViewController: ViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupViews()
+        showLoader()
         viewModel.getOrderList()
     }
     
