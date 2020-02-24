@@ -22,7 +22,7 @@ class LoginViewController: LoaderBaseViewController {
         return view
     }()
     
-    //MARK: - Start functions
+    //MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
         setupAction()
@@ -118,7 +118,6 @@ class LoginViewController: LoaderBaseViewController {
 extension LoginViewController: UITextFieldDelegate {
 
     //    MARK: - TextFieldDelegate
-
 //    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
 //
 //        viewModel.setPhone(autorizationInputView.phoneTextField.textField.text.appending(string))

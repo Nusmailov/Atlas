@@ -37,15 +37,17 @@ class LoginLogoView: UIView {
     private func setupView() -> Void {
         addSubview(logoImage)
         logoImage.snp.makeConstraints { (make) in
-            make.top.equalTo(83)
-            make.centerX.equalToSuperview()
-            make.height.width.equalTo(165)
+            make.top.equalTo(20)
+            make.left.equalTo(16)
+            make.right.equalTo(-16)
+            make.height.width.equalTo(250)
+            make.bottom.centerX.equalToSuperview()
         }
-        addSubview(logoTitleImage)
-        logoTitleImage.snp.makeConstraints { (make) in
-            make.bottom.centerX.width.equalToSuperview()
-            make.top.equalTo(logoImage.snp.bottom).offset(15)
-        }
+//        addSubview(logoTitleImage)
+//        logoTitleImage.snp.makeConstraints { (make) in
+//            make.bottom.centerX.width.equalToSuperview()
+//            make.top.equalTo(logoImage.snp.bottom).offset(15)
+//        }
     }
     
     //    MARK: - Simple functions

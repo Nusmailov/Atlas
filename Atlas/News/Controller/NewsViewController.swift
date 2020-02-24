@@ -83,12 +83,6 @@ class NewsViewController: LoaderBaseViewController {
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-//        self.navigationController?.hidesBarsOnSwipe = true
-    }
-    
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(animated)
-//        self.navigationController?.setNavigationBarHidden(false, animated: animated)
     }
     
     // MARK: - SetupViews

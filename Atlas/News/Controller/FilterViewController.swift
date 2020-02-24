@@ -101,11 +101,11 @@ class FilterViewController: ViewController {
         navigationItem.rightBarButtonItem = UIBarButtonItem(customView: rightButton)
         title = "Результат поиска"
         newsViewModel.getBasketCount()
+        navigationController?.setNavigationBarHidden(false, animated: animated)
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        self.navigationController?.hidesBarsOnSwipe = true
     }
     
     //MARK: - setupViews

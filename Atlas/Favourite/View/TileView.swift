@@ -61,7 +61,7 @@ class TileView: UIView {
     }()
     lazy var buyButton: UIButton = {
         let button = UIButton()
-        button.setTitle("Купить", for: .normal)
+        button.setTitle("В корзину", for: .normal)
         button.setTitleColor(#colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0), for: .normal)
         button.titleLabel?.font = .getMullerBoldFont(on: 12)
         button.backgroundColor = #colorLiteral(red: 0.7843137255, green: 0.2039215686, blue: 0.2784313725, alpha: 1)

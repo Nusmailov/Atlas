@@ -30,7 +30,7 @@ class CheckoutViewController: ScrollViewController {
         let viewModel = ContactViewModel()
         viewModel.delegate = self
         return viewModel
-    }()
+    }() 
     lazy var checkoutViewModel: CheckoutViewModel = {
         let viewModel = CheckoutViewModel()
         viewModel.delegate = self

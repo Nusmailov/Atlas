@@ -118,8 +118,6 @@ extension OrderViewController: UITableViewDelegate, UITableViewDataSource {
         self.navigationController?.pushViewController(vc, animated: true)
     }
 }
-
-
 //MARK: - ProcessViewDelegate
 extension OrderViewController: ProcessViewDelegate {
     func updateUI() {
@@ -127,7 +125,7 @@ extension OrderViewController: ProcessViewDelegate {
         refreshControl.endRefreshing()
     }
 }
-
+//MARK: - UIViewControllerPreviewingDelegate
 extension OrderViewController: UIViewControllerPreviewingDelegate  {
     func previewingContext(_ previewingContext: UIViewControllerPreviewing, viewControllerForLocation location: CGPoint) -> UIViewController? {
         if let indexPath = tableView.indexPathForRow(at: location) {

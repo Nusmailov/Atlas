@@ -13,4 +13,5 @@ class ProfileApi {
     static let auth = "user"
     static let editUser = "edit"
     static let photo = "photo"
+    static let signOut = "signout"
 }

@@ -47,6 +47,7 @@ class BasketViewController: UIViewController {
         super.viewWillAppear(animated)
         self.navigationItem.title = "Корзина"
         tabBarController?.tabBar.isHidden = false
+        navigationController?.setNavigationBarHidden(false, animated: animated)
         showLoader()
         getBasketList()   
     }

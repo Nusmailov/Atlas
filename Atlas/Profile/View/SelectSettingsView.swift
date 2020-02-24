@@ -85,23 +85,23 @@ class SelectSettingsView: UIView {
     
     // MARK: - SetupViews
     func setupViews() {
-        let deliveryGroupLabel = labelBold("Atlas Concorde")
+//        let deliveryGroupLabel = labelBold("Atlas Concorde")
         let languageLabel = labelBold("Язык")
         let pushLabel = labelBold("Звук")
-        addSubviews(views: [deliveryGroupLabel, languageLabel, pushLabel])
+        addSubviews(views: [ languageLabel, pushLabel])
         
         addSubviews(views: [logoAppImageView, chooseLanguageTextField, soundView,
                             pushView, cityTextField, thousandLabel])
         logoAppImageView.snp.makeConstraints { (make) in
             make.top.equalToSuperview().offset(16)
             make.centerX.equalToSuperview()
-            make.width.height.equalTo(150)
+            make.width.height.equalTo(250)
         }
         
-        deliveryGroupLabel.snp.makeConstraints { (make) in
-            make.centerX.equalToSuperview()
-            make.top.equalTo(logoAppImageView.snp.bottom).offset(16)
-        }
+//        deliveryGroupLabel.snp.makeConstraints { (make) in
+//            make.centerX.equalToSuperview()
+//            make.top.equalTo(logoAppImageView.snp.bottom).offset(16)
+//        }
         
 //        languageLabel.snp.makeConstraints { (make) in
 //            make.top.equalTo(deliveryGroupLabel.snp.bottom).offset(16)
@@ -118,7 +118,7 @@ class SelectSettingsView: UIView {
 //        chooseLanguageTextField.leftViewMode = .always
         
         pushLabel.snp.makeConstraints { (make) in
-            make.top.equalTo(deliveryGroupLabel.snp.bottom).offset(16)
+            make.top.equalTo(logoAppImageView.snp.bottom)
             make.left.equalToSuperview().offset(16)
             make.right.equalToSuperview().offset(-16)
         }

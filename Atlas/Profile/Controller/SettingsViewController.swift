@@ -48,6 +48,7 @@ class SettingsViewController: ScrollViewController {
     lazy var profileViewModel: ProfileViewModel = {
         let viewModel = ProfileViewModel()
         viewModel.delegate = self
+        viewModel.signOutDelegate = self
         return viewModel
     }()
     lazy var refreshControl = UIRefreshControl()
@@ -62,6 +63,12 @@ class SettingsViewController: ScrollViewController {
         let barButton = UIBarButtonItem(customView: backButton)
         self.navigationItem.rightBarButtonItem = barButton
         navigationController?.setNavigationBarHidden(false, animated: animated)
+        
+        let push = UserManager.getCurrentUser()?.result.push ==  1 ? true : false
+        let sound = UserManager.getCurrentUser()?.result.sound ==  1 ? true : false
+        
+        mainSettingsView.soundView.switchView.setOn(sound, animated: true)
+        mainSettingsView.pushView.switchView.setOn(push, animated: true)
     }
     
     override func viewDidLoad() {
@@ -95,8 +102,7 @@ class SettingsViewController: ScrollViewController {
     
     // MARK: - Actions
     @objc func closeApp() {
-        UserManager.deleteCurrentSession()
-        AppCenter.shared.start()
+        profileViewModel.signOut()
     }
     
     @objc override func handleSwipes(sender: UISwipeGestureRecognizer) {
@@ -111,20 +117,31 @@ class SettingsViewController: ScrollViewController {
     }
     
     @objc func pushOnOff(switcher: UISwitch) {
-        let onOff = switcher.isOn ? 1 : 0
+        let onOff = switcher.isOn ? "1" : "0"
+        parameters.removeValue(forKey: "sound")
         parameters["push"] = onOff
         profileViewModel.editUser(parameters: parameters)
     }
     
     @objc func soundOnOff(switcher: UISwitch) {
-        let onOff = switcher.isOn ? 1 : 0
+        let onOff = switcher.isOn ? "1" : "0"
+        parameters.removeValue(forKey: "push")
         parameters["sound"] = onOff
         profileViewModel.editUser(parameters: parameters)
     }
 }
 
+// MARK: - ProcessViewDelegate
 extension SettingsViewController: ProcessViewDelegate {
     func updateUI() {
         try? UserManager.createSessionWithUser(UserModel.init(user: profileViewModel.user!))
+    }
+}
+
+// MARK: - SignOutDelegate
+extension SettingsViewController: SignOutDelegate {
+    func signOut() {
+        UserManager.deleteCurrentSession()
+        AppCenter.shared.start()
     }
 }

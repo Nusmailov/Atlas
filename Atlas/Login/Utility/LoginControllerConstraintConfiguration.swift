@@ -21,7 +21,7 @@ class LoginControllerConstaintConfiguration {
         }
         controller.contentView.addSubview(controller.autorizationInputView)
         controller.autorizationInputView.snp.makeConstraints { (make) in
-            make.top.equalTo(controller.logoView.snp.bottom).offset(80)
+            make.top.equalTo(controller.logoView.snp.bottom).offset(20)
             make.width.equalToSuperview()
         }
         controller.contentView.addSubview(controller.signInEventsView)

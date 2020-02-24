@@ -20,8 +20,12 @@
 	<string>$(CURRENT_PROJECT_VERSION)</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
+	<key>NSCameraUsageDescription</key>
+	<string>"Atlas" требуется доступ к вашей камере, чтобы вы могли добавлять фотографии для публикации в вашей публикации</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
 	<string>For sending your location to get taxi in client mode or to accept orders in driver mode.</string>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>"Atlas" необходимо получить доступ к вашей камере, чтобы вы могли загружать изображения. Ваши изображения не будут переданы без вашего разрешения.</string>
 	<key>UIAppFonts</key>
 	<array>
 		<string>Montserrat-SemiBold.ttf</string>
@@ -42,8 +46,6 @@
 	<string>LaunchScreen</string>
 	<key>UIMainStoryboardFile</key>
 	<string>Main</string>
-	<key>NSCameraUsageDescription</key>
-	<string>&quot;Atlas&quot; требуется доступ к вашей камере, чтобы вы могли добавлять фотографии для публикации в вашей публикации</string>
 	<key>UIRequiredDeviceCapabilities</key>
 	<array>
 		<string>armv7</string>
@@ -51,8 +53,6 @@
 	<key>UISupportedInterfaceOrientations</key>
 	<array>
 		<string>UIInterfaceOrientationPortrait</string>
-		<string>UIInterfaceOrientationLandscapeLeft</string>
-		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
 	<key>UISupportedInterfaceOrientations~ipad</key>
 	<array>
@@ -63,7 +63,5 @@
 	</array>
 	<key>UIUserInterfaceStyle</key>
 	<string>Light</string>
-	<key>NSPhotoLibraryUsageDescription</key>
-	<string>&quot;Atlas&quot; необходимо получить доступ к вашей камере, чтобы вы могли загружать изображения. Ваши изображения не будут переданы без вашего разрешения.</string>
 </dict>
 </plist>

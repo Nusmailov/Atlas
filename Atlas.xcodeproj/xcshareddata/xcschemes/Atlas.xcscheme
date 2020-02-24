@@ -15,7 +15,7 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "141826D42384FA8A00857FA9"
-               BuildableName = "Atlas.app"
+               BuildableName = "Atlas Concorde.app"
                BlueprintName = "Atlas"
                ReferencedContainer = "container:Atlas.xcodeproj">
             </BuildableReference>
@@ -65,7 +65,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "141826D42384FA8A00857FA9"
-            BuildableName = "Atlas.app"
+            BuildableName = "Atlas Concorde.app"
             BlueprintName = "Atlas"
             ReferencedContainer = "container:Atlas.xcodeproj">
          </BuildableReference>
@@ -82,7 +82,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "141826D42384FA8A00857FA9"
-            BuildableName = "Atlas.app"
+            BuildableName = "Atlas Concorde.app"
             BlueprintName = "Atlas"
             ReferencedContainer = "container:Atlas.xcodeproj">
          </BuildableReference>
