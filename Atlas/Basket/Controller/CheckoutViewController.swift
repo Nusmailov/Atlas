@@ -36,6 +36,13 @@ class CheckoutViewController: ScrollViewController {
         viewModel.delegate = self
         return viewModel
     }()
+    lazy var paymentInfoButton: UIButton = {
+        let button = UIButton(frame: CGRect(x: 0, y: 0, width: 32, height: 32))
+        button.imageEdgeInsets = UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10)
+        button.setImage(UIImage(named: "payment"), for: .normal)
+        button.addTarget(self, action: #selector(paymentInfo), for: .touchUpInside)
+        return button
+    }()
     var contact: Contact? {
         didSet {
             checkoutView.addressView.addressLabel.text = contact?.address
@@ -66,6 +73,8 @@ class CheckoutViewController: ScrollViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         tabBarController?.tabBar.isHidden = false
+        navigationItem.rightBarButtonItem = UIBarButtonItem(customView: paymentInfoButton)
+        title = "Оформление заказа"
     }
     
     func setTotalPrice(totalPrice: String) {
@@ -98,6 +107,11 @@ class CheckoutViewController: ScrollViewController {
     
     @objc func writeToEmail() {
         contactViewModel.writeEmail(on: self)
+    }
+    
+    @objc func paymentInfo() {
+        let vc = ContactInfoViewController(state: ContactInfoText.payment)
+        self.navigationController?.pushViewController(vc, animated: true)
     }
     
     func mailComposeController(_ controller: MFMailComposeViewController, didFinishWith result: MFMailComposeResult, error: Error?) {

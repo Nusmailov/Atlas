@@ -91,7 +91,7 @@ class LoginViewController: LoaderBaseViewController {
     }
     
     @objc func privacy() {
-        let vc = PoliticalViewController()
+        let vc = ContactInfoViewController(state: ContactInfoText.privacy)
         self.navigationController?.pushViewController(vc, animated: true)
     }
     

@@ -15,8 +15,11 @@ class ImageCoordinator {
     
     func routeImageViewContoller(image_path: String, on baseVC: UIViewController){
         baseViewController = baseVC
-        let vc = ImageViewController()
-        vc.path = image_path
+//        let vc = ImageViewController()
+//        vc.path = image_path
+//        self.baseViewController?.navigationController?.pushViewController(vc, animated: true)
+        let vc = ImageScrollViewController()
+        vc.image_path = image_path
         self.baseViewController?.navigationController?.pushViewController(vc, animated: true)
     }
 }

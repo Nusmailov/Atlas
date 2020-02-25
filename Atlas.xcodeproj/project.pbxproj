@@ -124,6 +124,7 @@
 		F509D1E423E16187004AF7E5 /* ProductTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F509D1E323E16187004AF7E5 /* ProductTableViewCell.swift */; };
 		F509D1E623E16344004AF7E5 /* FavouriteViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F509D1E523E16344004AF7E5 /* FavouriteViewModel.swift */; };
 		F520CFD423F2A78D009FB7C8 /* ContactInfoText.swift in Sources */ = {isa = PBXBuildFile; fileRef = F520CFD323F2A78D009FB7C8 /* ContactInfoText.swift */; };
+		F5259131240522C8002CB46C /* ImageScrollViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5259130240522C8002CB46C /* ImageScrollViewController.swift */; };
 		F534DA1023E7DB9600D0E61B /* FilterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F534DA0F23E7DB9600D0E61B /* FilterViewController.swift */; };
 		F534DA1423E81BC500D0E61B /* FilterViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F534DA1323E81BC500D0E61B /* FilterViewModel.swift */; };
 		F534DA1623E81E3D00D0E61B /* FilterModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F534DA1523E81E3D00D0E61B /* FilterModel.swift */; };
@@ -177,6 +178,7 @@
 		F5DD1A2523F25BCA004DB812 /* EstimateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5DD1A2423F25BCA004DB812 /* EstimateView.swift */; };
 		F5DD1A2723F25DA0004DB812 /* ContactViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5DD1A2623F25DA0004DB812 /* ContactViewModel.swift */; };
 		F5DD1A2923F2785A004DB812 /* OrderDescription.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5DD1A2823F2785A004DB812 /* OrderDescription.swift */; };
+		F5EF72A924051C1E00048E34 /* ImageScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5EF72A824051C1E00048E34 /* ImageScrollView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -322,6 +324,7 @@
 		F509D1E323E16187004AF7E5 /* ProductTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductTableViewCell.swift; sourceTree = "<group>"; };
 		F509D1E523E16344004AF7E5 /* FavouriteViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavouriteViewModel.swift; sourceTree = "<group>"; };
 		F520CFD323F2A78D009FB7C8 /* ContactInfoText.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactInfoText.swift; sourceTree = "<group>"; };
+		F5259130240522C8002CB46C /* ImageScrollViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageScrollViewController.swift; sourceTree = "<group>"; };
 		F534DA0F23E7DB9600D0E61B /* FilterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterViewController.swift; sourceTree = "<group>"; };
 		F534DA1323E81BC500D0E61B /* FilterViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterViewModel.swift; sourceTree = "<group>"; };
 		F534DA1523E81E3D00D0E61B /* FilterModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterModel.swift; sourceTree = "<group>"; };
@@ -376,6 +379,7 @@
 		F5DD1A2423F25BCA004DB812 /* EstimateView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EstimateView.swift; sourceTree = "<group>"; };
 		F5DD1A2623F25DA0004DB812 /* ContactViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactViewModel.swift; sourceTree = "<group>"; };
 		F5DD1A2823F2785A004DB812 /* OrderDescription.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderDescription.swift; sourceTree = "<group>"; };
+		F5EF72A824051C1E00048E34 /* ImageScrollView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageScrollView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -853,9 +857,9 @@
 			isa = PBXGroup;
 			children = (
 				145A30FE23C4B0B1008962FF /* Model */,
+				145A30FC23C4B099008962FF /* Controller */,
 				145A30FD23C4B0A0008962FF /* View */,
 				F54CBB0F23E7C2A40012CA36 /* ViewModel */,
-				145A30FC23C4B099008962FF /* Controller */,
 			);
 			path = Basket;
 			sourceTree = "<group>";
@@ -923,6 +927,7 @@
 			children = (
 				14A82A3323C71C3E0057A47A /* NewsViewController.swift */,
 				F534DA0F23E7DB9600D0E61B /* FilterViewController.swift */,
+				F5259130240522C8002CB46C /* ImageScrollViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -937,6 +942,7 @@
 				14C3559323C8398A00782282 /* SpecialOrderView.swift */,
 				F55407B523DEE05B002875F5 /* BasketCountButton.swift */,
 				F58ECDD823E9246800B7BB2F /* SearchFilterView.swift */,
+				F5EF72A824051C1E00048E34 /* ImageScrollView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -1458,6 +1464,7 @@
 				1417D8C823CC37A800429C23 /* ContactInfoViewController.swift in Sources */,
 				F5DD1A2723F25DA0004DB812 /* ContactViewModel.swift in Sources */,
 				F59A152123ED6A1600D0B672 /* ContactView.swift in Sources */,
+				F5EF72A924051C1E00048E34 /* ImageScrollView.swift in Sources */,
 				1417D8C723CC37A800429C23 /* OrderDescriptionViewController.swift in Sources */,
 				F562B05A23E4418E00E31AAD /* FavoriteModel.swift in Sources */,
 				1417D8EF23CC83C500429C23 /* ViewModelConfigurable.swift in Sources */,
@@ -1491,6 +1498,7 @@
 				F596E2C123E00EB700B15CA3 /* PoliticalViewController.swift in Sources */,
 				1418277623850BD600857FA9 /* MainButton.swift in Sources */,
 				F550644B23DEA05B00DE95EB /* ProductDescriptionView.swift in Sources */,
+				F5259131240522C8002CB46C /* ImageScrollViewController.swift in Sources */,
 				141827942385590C00857FA9 /* SwitcherView.swift in Sources */,
 				141826DB2384FA8A00857FA9 /* ViewController.swift in Sources */,
 				1418275E2384FFA400857FA9 /* TabBarViewController.swift in Sources */,
