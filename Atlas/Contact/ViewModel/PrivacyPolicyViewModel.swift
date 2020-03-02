@@ -16,8 +16,8 @@ class PrivacyPolicyViewModel {
     
     func getInfo(column: String) {
         self.delegate?.showLoader()
-        ParseManager.shared.getRequest(url: ContactApi.views,parameters: ["column": column],
-            success: { (result: String) in
+        ParseManager.shared.getRequest(url: ContactApi.views,parameters: ["column": column], success: {
+            (result: String) in
             self.text = result
             self.delegate?.hideLoader()
             self.delegate?.updateUI()

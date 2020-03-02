@@ -37,7 +37,8 @@ class FilterViewModel {
     }
     
     func getSearch(parameters: Parameters) {
-        ParseManager.shared.postRequest(url: ProductApi.search, parameters: parameters, success: { (result: PaginationResult<[Product]>) in
+        ParseManager.shared.postRequest(url: ProductApi.search, parameters: parameters, success: {
+            (result: PaginationResult<[Product]>) in
             self.productList = result.data
             self.max_page = result.last_page
             self.page = result.current_page

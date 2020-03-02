@@ -44,7 +44,7 @@ class FavoriteViewController: ViewController {
     }()
     let coordinator = NewsCoordinator()
     
-    //MARK:- Lifecycle
+    //MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
         showLoader()

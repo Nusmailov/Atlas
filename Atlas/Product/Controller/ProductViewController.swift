@@ -18,6 +18,7 @@ class ProductViewController: ScrollViewController {
         view.imageDelegate = self
         view.heartButton.addTarget(self, action: #selector(addToFavourite), for: .touchUpInside)
         view.buyButton.addTarget(self, action: #selector(addToBasketByCount), for: .touchUpInside)
+        view.checkButton.addTarget(self, action: #selector(checkPrimary), for: .touchUpInside)
         return view
     }()
     lazy var rightButton: BasketCountButton = {
@@ -155,14 +156,16 @@ class ProductViewController: ScrollViewController {
     
     override var previewActionItems: [UIPreviewActionItem] {
         let action = UIPreviewAction(title: "Добавить в корзину", style: .default) {[unowned self] (action, viewController) in
-            
             self.basketViewModel.addToBasket(product_id: self.product.id)
-            
         }
         let action2 = UIPreviewAction(title: "Добавить в избранные", style: .default) {[unowned self] (action, viewController) in
             self.favouriteViewModel.addToFavorite(product_id: self.product.id)
         }
         return [action, action2]
+    }
+    
+    @objc func checkPrimary() {
+        
     }
 }
 

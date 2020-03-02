@@ -141,7 +141,7 @@ class ProductDescriptionView: UIView {
         pageControl.numberOfPages = product.images.count
     }
     
-    // MARK: - SetupViews
+    //MARK: - SetupViews
     func setupViews() {
         addSubviews(views: [collectionView, nameLabel, descriptionLabel, priceLabel, pageControl,
                             sizeLabel, heartButton, quantityView, areaView, buyButton, descriptionTextLabel,
@@ -259,6 +259,7 @@ extension ProductDescriptionView: UICollectionViewDelegate, UICollectionViewData
     }
 }
 
+//MARK: - UITextFieldDelegate
 extension ProductDescriptionView: UITextFieldDelegate {
     func textFieldDidChangeSelection(_ textField: UITextField) {
         let res = self.product.area

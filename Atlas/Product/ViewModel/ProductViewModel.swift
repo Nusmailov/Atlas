@@ -10,9 +10,12 @@ import Foundation
 
 
 class ProductViewModel {
+    //MARK: - Properties
     weak var delegate: ProcessViewDelegate?
     var productList = [Product]()
     
+    
+    //MARK: - Functions
     func getByList(product_id: Int) {
         ParseManager.shared.getRequest(url: ProductApi.bywithit, parameters: ["id" : product_id], success: {
             (result: [Product]?) in
@@ -21,5 +24,9 @@ class ProductViewModel {
         }) { (error) in
             self.delegate?.showErrorMessage(error)
         }
+    }
+    
+    func checkPrimary() {
+        
     }
 }

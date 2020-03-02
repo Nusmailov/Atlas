@@ -21,7 +21,8 @@ class CheckoutViewModel {
     //MARK: - Functions
     func doOrder(parameters: Parameters) {
         guard isValid(parameters: parameters) else { return }
-        ParseManager.shared.postRequest(url: OrderApi.doOrder, parameters: parameters, success: { (result: Order) in
+        ParseManager.shared.postRequest(url: OrderApi.doOrder, parameters: parameters, success: {
+            (result: Order) in
             self.delegate?.orderDone()
         }) { (error) in
             self.delegate?.showErrorMessage(error)

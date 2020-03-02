@@ -57,7 +57,8 @@ class FavouriteViewModel {
     func getFavouriteList(page: Int) {
         var parameters = Parameters()
         parameters["page"] = page
-        ParseManager.shared.getRequest(url: ProductApi.favorite, success: { (result: PaginationResult<[Product]>) in
+        ParseManager.shared.getRequest(url: ProductApi.favorite, success: {
+            (result: PaginationResult<[Product]>) in
             self.delegate?.hideLoader()
             if page == 1 { self.favouriteList.removeAll() }
             self.favouriteList.append(contentsOf: result.data)

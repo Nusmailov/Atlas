@@ -114,7 +114,9 @@ class ContactViewController: ScrollViewController {
     }
     
     @objc func privacy() {
-        let vc = ContactInfoViewController(state: ContactInfoText.privacy)
+//        let vc = ContactInfoViewController(state: ContactInfoText.privacy)
+//        self.navigationController?.pushViewController(vc, animated: true)
+        let vc = ReservationViewController()
         self.navigationController?.pushViewController(vc, animated: true)
     }
 }

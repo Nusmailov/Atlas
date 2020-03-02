@@ -79,19 +79,17 @@ class ProfileViewController: ScrollViewController {
     // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        scrollView.backgroundColor = .white
         actionSwipeGestures()
+        setupNavBar()
         setupViews()
         viewModel.auth()
     }
-    
+        
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         tabBarController?.tabBar.isHidden = false
         navigationController?.setNavigationBarHidden(false, animated: animated)
         navigationItem.title = "Профиль"
-        navigationItem.rightBarButtonItem = UIBarButtonItem(customView: rightButton)
-        navigationItem.leftBarButtonItem = UIBarButtonItem(customView: leftButton)
         getBasketCount()
     }
     
@@ -101,6 +99,7 @@ class ProfileViewController: ScrollViewController {
     
     // MARK: - SetupViews
     private func setupViews() {
+        scrollView.backgroundColor = .white
         contentView.addSubview(mainView)
         
         mainView.snp.makeConstraints { (make) in
@@ -113,6 +112,10 @@ class ProfileViewController: ScrollViewController {
         }
     }
     
+    fileprivate func setupNavBar() {
+        navigationItem.rightBarButtonItem = UIBarButtonItem(customView: rightButton)
+        navigationItem.leftBarButtonItem = UIBarButtonItem(customView: leftButton)
+    }
 
     func actionSwipeGestures() {
         let leftSwipe = UISwipeGestureRecognizer(target: self, action: #selector(handleSwipes))

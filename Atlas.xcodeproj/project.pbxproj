@@ -121,6 +121,8 @@
 		14C3559C23C839C600782282 /* Product.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14C3559923C839C600782282 /* Product.swift */; };
 		14EB5C9F2386593900AE4910 /* ConfirmationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14EB5C9E2386593900AE4910 /* ConfirmationView.swift */; };
 		AD93390C44BFB52B511808DA /* Pods_Atlas.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0636DCD93F3F426A799B9625 /* Pods_Atlas.framework */; };
+		F500202A240796590014CF35 /* ReservationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5002029240796590014CF35 /* ReservationViewController.swift */; };
+		F500202E240796FC0014CF35 /* ReservationStatusBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F500202D240796FC0014CF35 /* ReservationStatusBarView.swift */; };
 		F509D1E423E16187004AF7E5 /* ProductTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F509D1E323E16187004AF7E5 /* ProductTableViewCell.swift */; };
 		F509D1E623E16344004AF7E5 /* FavouriteViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F509D1E523E16344004AF7E5 /* FavouriteViewModel.swift */; };
 		F520CFD423F2A78D009FB7C8 /* ContactInfoText.swift in Sources */ = {isa = PBXBuildFile; fileRef = F520CFD323F2A78D009FB7C8 /* ContactInfoText.swift */; };
@@ -321,6 +323,8 @@
 		14EB5C9E2386593900AE4910 /* ConfirmationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfirmationView.swift; sourceTree = "<group>"; };
 		B0C32476488D2EB9E6D21FD1 /* Pods-Atlas.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Atlas.release.xcconfig"; path = "Target Support Files/Pods-Atlas/Pods-Atlas.release.xcconfig"; sourceTree = "<group>"; };
 		B54F1572D35155CB362341AC /* Pods-Atlas.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Atlas.debug.xcconfig"; path = "Target Support Files/Pods-Atlas/Pods-Atlas.debug.xcconfig"; sourceTree = "<group>"; };
+		F5002029240796590014CF35 /* ReservationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReservationViewController.swift; sourceTree = "<group>"; };
+		F500202D240796FC0014CF35 /* ReservationStatusBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReservationStatusBarView.swift; sourceTree = "<group>"; };
 		F509D1E323E16187004AF7E5 /* ProductTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductTableViewCell.swift; sourceTree = "<group>"; };
 		F509D1E523E16344004AF7E5 /* FavouriteViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavouriteViewModel.swift; sourceTree = "<group>"; };
 		F520CFD323F2A78D009FB7C8 /* ContactInfoText.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactInfoText.swift; sourceTree = "<group>"; };
@@ -558,6 +562,7 @@
 				1417D8AB23CC37A800429C23 /* Orders */,
 				145A30FB23C4B092008962FF /* Basket */,
 				F550644523DEA02300DE95EB /* Product */,
+				F500202B240796D00014CF35 /* Reservation */,
 				141826DC2384FA8A00857FA9 /* Main.storyboard */,
 				141826E72384FA8B00857FA9 /* Info.plist */,
 				F5D067AE23FD06E1007C4831 /* GoogleService-Info.plist */,
@@ -844,6 +849,7 @@
 		145A30F023C4524D008962FF /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				F5943D5423F40A1500DCE2A3 /* ProfileApi.swift */,
 				145A30F123C4525B008962FF /* CardResult.swift */,
 				145A30F423C4525C008962FF /* City.swift */,
 				145A30F323C4525C008962FF /* CloudCard.swift */,
@@ -995,6 +1001,23 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		F500202B240796D00014CF35 /* Reservation */ = {
+			isa = PBXGroup;
+			children = (
+				F500202C240796DF0014CF35 /* View */,
+				F5002029240796590014CF35 /* ReservationViewController.swift */,
+			);
+			path = Reservation;
+			sourceTree = "<group>";
+		};
+		F500202C240796DF0014CF35 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				F500202D240796FC0014CF35 /* ReservationStatusBarView.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
 		F509D1E723E16499004AF7E5 /* CollectionView */ = {
 			isa = PBXGroup;
 			children = (
@@ -1076,7 +1099,6 @@
 			isa = PBXGroup;
 			children = (
 				F5943D5223F409DD00DCE2A3 /* ProfileViewModel.swift */,
-				F5943D5423F40A1500DCE2A3 /* ProfileApi.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -1494,6 +1516,7 @@
 				F5608C4C23F2588B00DEDFE5 /* ContactViewController.swift in Sources */,
 				145A310523C4BB21008962FF /* BasketTableViewCell.swift in Sources */,
 				145A30E423C45111008962FF /* ProfileView.swift in Sources */,
+				F500202A240796590014CF35 /* ReservationViewController.swift in Sources */,
 				1417D8C423CC37A800429C23 /* OrderProductTableViewCell.swift in Sources */,
 				F596E2C123E00EB700B15CA3 /* PoliticalViewController.swift in Sources */,
 				1418277623850BD600857FA9 /* MainButton.swift in Sources */,
@@ -1521,6 +1544,7 @@
 				F555D49623DB03B300117029 /* InfoTitleView.swift in Sources */,
 				145A30EB23C45111008962FF /* AddressTextView.swift in Sources */,
 				F5608C4523F2558500DEDFE5 /* Contact.swift in Sources */,
+				F500202E240796FC0014CF35 /* ReservationStatusBarView.swift in Sources */,
 				F59A151F23ED67B100D0B672 /* AddressView.swift in Sources */,
 				F534DA1023E7DB9600D0E61B /* FilterViewController.swift in Sources */,
 				14C3558823C8389300782282 /* ProductCollectionView.swift in Sources */,

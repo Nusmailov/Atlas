@@ -17,7 +17,8 @@ class ContactViewModel {
     
     func getContactDetail() {
         delegate?.showLoader()
-        ParseManager.shared.getRequest(url: ContactApi.info, success: { (result: Contact) in
+        ParseManager.shared.getRequest(url: ContactApi.info, success: {
+            (result: Contact) in
             self.contact = result
             self.delegate?.hideLoader()
             self.delegate?.updateUI()

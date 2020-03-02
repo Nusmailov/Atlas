@@ -17,7 +17,8 @@ class OrderViewModel {
     weak var delegate: ProcessViewDelegate?
     
     func getOrderList() {
-        ParseManager.shared.getRequest(url: OrderApi.orderList, success: { (result: PaginationResult<[Order]>) in
+        ParseManager.shared.getRequest(url: OrderApi.orderList, success: {
+            (result: PaginationResult<[Order]>) in
             self.max_page = result.last_page
             self.page = result.current_page
             self.orderList = result.data
@@ -30,8 +31,8 @@ class OrderViewModel {
     
     func getById(order_id: Int) {
         delegate?.showLoader()
-        ParseManager.shared.getRequest(url: OrderApi.order, parameters: ["id" : order_id],
-        success: { (result: OrderDescription) in
+        ParseManager.shared.getRequest(url: OrderApi.order, parameters: ["id" : order_id], success: {
+            (result: OrderDescription) in
             self.basketList = result.baskets
             self.delegate?.hideLoader()
             self.delegate?.updateUI()
@@ -39,5 +40,4 @@ class OrderViewModel {
             self.delegate?.showErrorMessage(error)
         }
     }
-    
 }

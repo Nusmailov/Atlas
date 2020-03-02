@@ -12,10 +12,11 @@ class ParseManager {
     
     static let shared = ParseManager()
     
-    let networkManager: NetworkManager = Router(parser: DefaultParserImpl())
+    let networkManager: NetworkManager
     
-    private init() {}
-//    let token = UserManager.getCurrentToken()
+    private init() {
+        self.networkManager = Router(parser: DefaultParserImpl())
+    }
     
     func multipartFormData<T: Decodable>(url: String, parameters: Parameters? = nil,
                                          success: @escaping (T) -> (), error: @escaping (String) -> ()) {
